@@ -75,7 +75,7 @@ execute() {
     popd
 }
 pushd opencl
-# execute 0-helloworld
+execute 0-helloworld
 execute 1-platform
 execute 2-context
 execute 3-math
