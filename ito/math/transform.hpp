@@ -22,10 +22,10 @@ template<typename T>
 ito_inline mat4<T> translate(const vec3<T> d)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
-    return {1.0, 0.0, 0.0, d.x,
-            0.0, 1.0, 0.0, d.y,
-            0.0, 0.0, 1.0, d.z,
-            0.0, 0.0, 0.0, 1.0};
+    return {(T) 1, (T) 0, (T) 0, d.x,
+            (T) 0, (T) 1, (T) 0, d.y,
+            (T) 0, (T) 0, (T) 1, d.z,
+            (T) 0, (T) 0, (T) 0, (T) 1};
 }
 
 template<typename T>
@@ -41,10 +41,10 @@ template<typename T>
 ito_inline mat4<T> scale(const vec3<T> s)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
-    return {s.x, 0.0, 0.0, 0.0,
-            0.0, s.y, 0.0, 0.0,
-            0.0, 0.0, s.z, 0.0,
-            0.0, 0.0, 0.0, 1.0};
+    return {  s.x, (T) 0, (T) 0, (T) 0,
+            (T) 0,   s.y, (T) 0, (T) 0,
+            (T) 0, (T) 0,   s.z, (T) 0,
+            (T) 0, (T) 0, (T ) 0, (T) 1};
 }
 
 template<typename T>
@@ -63,15 +63,15 @@ ito_inline mat4<T> rotate(vec3<T> n, const T theta)
 
     /* Compute cross product matrix */
     n = normalize(n);
-    mat4<T> R = { 0.0, -n.z,  n.y, 0.0,
-                  n.z,  0.0, -n.x, 0.0,
-                 -n.y,  n.x,  0.0, 0.0,
-                  0.0,  0.0,  0.0, 0.0};
+    mat4<T> R = { (T) 0,   -n.z,    n.y, (T) 0,
+                    n.z,  (T) 0,   -n.x, (T) 0,
+                   -n.y,    n.x,  (T) 0, (T) 0,
+                  (T) 0,  (T) 0,  (T) 0, (T) 0};
 
     /* Compute rotation matrix */
     mat4<T> result = mat4<T>::eye;
     result += R * std::sin(theta);
-    result += dot(R, R) * (1.0 - std::cos(theta));
+    result += dot(R, R) * ((T) 1 - std::cos(theta));
     return result;
 }
 
@@ -96,11 +96,11 @@ ito_inline mat4<T> align(vec3<T> a, vec3<T> b)
     vec3<T> n = cross(a, b);
 
     /* Return identity if the direction vectors are already aligned. */
-    if (iseq(cos_theta, -1.0)) {
-        return mat4<T>::eye * (-1.0);
+    if (iseq(cos_theta, -(T) 1)) {
+        return mat4<T>::eye * (-(T) 1);
     }
 
-    if (iseq(cos_theta, 1.0)) {
+    if (iseq(cos_theta, (T) 1)) {
         return mat4<T>::eye;
     }
 
@@ -137,10 +137,10 @@ ito_inline mat4<T> lookat(
     vec3<T> u = normalize(cross(f, s));     /* u = s x f */
 
     /* Compute the lookat projection matrix with eye translation. */
-    mat4<T> M{ s.x,  s.y,  s.z, -eye.x,
-               u.x,  u.y,  u.z, -eye.y,
-               f.x,  f.y,  f.z, -eye.z,
-               0.0,  0.0,  0.0,    1.0};
+    mat4<T> M{   s.x,    s.y,    s.z,   -eye.x,
+                 u.x,    u.y,    u.z,   -eye.y,
+                 f.x,    f.y,    f.z,   -eye.z,
+               (T) 0,  (T) 0,  (T) 0,    (T) 1};
     return M;
 }
 
@@ -167,28 +167,28 @@ ito_inline mat4<T> perspective(
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
 
-    const T tan_half_fovy = std::tan(fovy / 2.0);
+    const T tan_half_fovy = std::tan(fovy / (T) 2);
 
     mat4<T> result{};
-    result.xx =  1.0 / (tan_half_fovy * aspect);
-    result.xy =  0.0;
-    result.xz =  0.0;
-    result.xw =  0.0;
+    result.xx =  (T) 1 / (tan_half_fovy * aspect);
+    result.xy =  (T) 0;
+    result.xz =  (T) 0;
+    result.xw =  (T) 0;
 
-    result.yx =  0.0;
-    result.yy =  1.0 / tan_half_fovy;
-    result.yz =  0.0;
-    result.yw =  0.0;
+    result.yx =  (T) 0;
+    result.yy =  (T) 1 / tan_half_fovy;
+    result.yz =  (T) 0;
+    result.yw =  (T) 0;
 
-    result.zx =  0.0;
-    result.zy =  0.0;
+    result.zx =  (T) 0;
+    result.zy =  (T) 0;
     result.zz = -(zfar + znear) / (zfar - znear);
-    result.zw = -(2.0 * zfar * znear) / (zfar - znear);
+    result.zw = -((T) 2 * zfar * znear) / (zfar - znear);
 
-    result.wx =  0.0;
-    result.wy =  0.0;
-    result.wz = -1.0;
-    result.ww =  0.0;
+    result.wx =  (T) 0;
+    result.wy =  (T) 0;
+    result.wz = -(T) 1;
+    result.ww =  (T) 0;
     return result;
 }
 
@@ -217,25 +217,25 @@ ito_inline mat4<T> ortho(
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     mat4<T> result{};
-    result.xx =  2.0 / (right - left);
-    result.xy =  0.0;
-    result.xz =  0.0;
+    result.xx =  (T) 2 / (right - left);
+    result.xy =  (T) 0;
+    result.xz =  (T) 0;
     result.xw =  -(right + left) / (right - left);
 
-    result.yx =  0.0;
-    result.yy =  2.0 / (top - bottom);
-    result.yz =  0.0;
+    result.yx =  (T) 0;
+    result.yy =  (T) 2 / (top - bottom);
+    result.yz =  (T) 0;
     result.yw =  -(top + bottom) / (top - bottom);
 
-    result.zx =  0.0;
-    result.zy =  0.0;
-    result.zz = -2.0 / (zfar - znear);
+    result.zx =  (T) 0;
+    result.zy =  (T) 0;
+    result.zz = -(T) 2 / (zfar - znear);
     result.zw = -(zfar + znear) / (zfar - znear);
 
-    result.wx =  0.0;
-    result.wy =  0.0;
-    result.wz =  0.0;
-    result.ww =  1.0;
+    result.wx =  (T) 0;
+    result.wy =  (T) 0;
+    result.wz =  (T) 0;
+    result.ww =  (T) 1;
     return result;
 }
 

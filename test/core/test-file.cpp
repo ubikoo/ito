@@ -14,7 +14,7 @@
 
 /** ---- File utilities -------------------------------------------------------
  */
-static bool check_file(ito::File &file)
+static bool check_file(ito::file_ptr &file)
 {
     auto boolchar = [] (bool v) -> char { return v ? 'T' : 'F'; };
     std::cout << ito::str::format(
@@ -27,7 +27,7 @@ static bool check_file(ito::File &file)
 
 /**
  * test_core_file
- * @brief test ito::File api.
+ * @brief test ito::file_ptr api.
  */
 void test_core_file(void)
 {
@@ -37,7 +37,7 @@ void test_core_file(void)
 
     std::cout << "\n>>> Test 1 readlines\n";
     {
-        ito::File fin = ito::make_file(stdin);
+        ito::file_ptr fin = ito::make_file(stdin);
         ito_assert(fin, "FAIL");
         ito_assert(check_file(fin), "FAIL");
 
@@ -46,7 +46,7 @@ void test_core_file(void)
 
     std::cout << "\n>>> Test 1 writeline/writelines, sep='\\n'\n";
     {
-        ito::File fout = ito::make_file(stdout);
+        ito::file_ptr fout = ito::make_file(stdout);
         ito_assert(fout, "FAIL");
         ito_assert(check_file(fout), "FAIL");
 
@@ -58,7 +58,7 @@ void test_core_file(void)
 
     std::cout << "\n>>> Test 1 writeline/writelines, sep='(@)'\n";
     {
-        ito::File fout = ito::make_file(stdout);
+        ito::file_ptr fout = ito::make_file(stdout);
         ito_assert(fout, "FAIL");
         ito_assert(check_file(fout), "FAIL");
 
@@ -70,7 +70,7 @@ void test_core_file(void)
 
     std::cout << "\n>>> Test 1 printf\n";
     {
-        ito::File fout = ito::make_file(stdout);
+        ito::file_ptr fout = ito::make_file(stdout);
         ito_assert(fout, "FAIL");
         ito_assert(check_file(fout), "FAIL");
 
@@ -85,14 +85,14 @@ void test_core_file(void)
 
     std::cout << "\n>>> Test 2 open filename\n";
     {
-        ito::File fin = ito::make_file("data/in.lorem_ipsum.txt", "r");
+        ito::file_ptr fin = ito::make_file("data/in.lorem_ipsum.txt", "r");
         ito_assert(fin, "FAIL");
         ito_assert(check_file(fin), "FAIL");
     }
 
     std::cout << "\n>>> Test 2 readlines filename\n";
     {
-        ito::File fin = ito::make_file("data/in.lorem_ipsum.txt", "r");
+        ito::file_ptr fin = ito::make_file("data/in.lorem_ipsum.txt", "r");
         ito_assert(fin, "FAIL");
         ito_assert(check_file(fin), "FAIL");
 
@@ -109,7 +109,7 @@ void test_core_file(void)
 
     std::cout << "\n>>> Test 2 readline filename\n";
     {
-        ito::File fin = ito::make_file("data/in.lorem_ipsum.txt", "r");
+        ito::file_ptr fin = ito::make_file("data/in.lorem_ipsum.txt", "r");
         ito_assert(fin, "FAIL");
         ito_assert(check_file(fin), "FAIL");
 
@@ -121,15 +121,15 @@ void test_core_file(void)
 
     std::cout << "\n>>> Test 2 readline / writeline\n";
     {
-        ito::File fin = ito::make_file("data/in.lorem_ipsum.txt", "r");
+        ito::file_ptr fin = ito::make_file("data/in.lorem_ipsum.txt", "r");
         ito_assert(fin, "FAIL");
         ito_assert(check_file(fin), "FAIL");
 
-        ito::File fout_new = ito::make_file("data/out.lorem_ipsum_new.txt", "w");
+        ito::file_ptr fout_new = ito::make_file("data/out.lorem_ipsum_new.txt", "w");
         ito_assert(fout_new, "FAIL");
         ito_assert(check_file(fout_new), "FAIL");
 
-        ito::File fout_csv = ito::make_file("data/out.lorem_ipsum_csv.txt", "w");
+        ito::file_ptr fout_csv = ito::make_file("data/out.lorem_ipsum_csv.txt", "w");
         ito_assert(fout_csv, "FAIL");
         ito_assert(check_file(fout_csv), "FAIL");
 
@@ -142,15 +142,15 @@ void test_core_file(void)
 
     std::cout << "\n>>> Test 2 readline / writeline 1, size=4096\n";
     {
-        ito::File fin = ito::make_file("data/in.lorem_ipsum.txt", "r");
+        ito::file_ptr fin = ito::make_file("data/in.lorem_ipsum.txt", "r");
         ito_assert(fin, "FAIL");
         ito_assert(check_file(fin), "FAIL");
 
-        ito::File fout_new = ito::make_file("data/out.lorem_ipsum_new_1.txt", "w");
+        ito::file_ptr fout_new = ito::make_file("data/out.lorem_ipsum_new_1.txt", "w");
         ito_assert(fout_new, "FAIL");
         ito_assert(check_file(fout_new), "FAIL");
 
-        ito::File fout_csv = ito::make_file("data/out.lorem_ipsum_csv_1.txt", "w");
+        ito::file_ptr fout_csv = ito::make_file("data/out.lorem_ipsum_csv_1.txt", "w");
         ito_assert(fout_csv, "FAIL");
         ito_assert(check_file(fout_csv), "FAIL");
 
@@ -163,15 +163,15 @@ void test_core_file(void)
 
     std::cout << "\n>>> Test 2 readlines / writelines 2, size=4096\n";
     {
-        ito::File fin = ito::make_file("data/in.lorem_ipsum.txt", "r");
+        ito::file_ptr fin = ito::make_file("data/in.lorem_ipsum.txt", "r");
         ito_assert(fin, "FAIL");
         ito_assert(check_file(fin), "FAIL");
 
-        ito::File fout_new = ito::make_file("data/out.lorem_ipsum_new_2.txt", "w");
+        ito::file_ptr fout_new = ito::make_file("data/out.lorem_ipsum_new_2.txt", "w");
         ito_assert(fout_new, "FAIL");
         ito_assert(check_file(fout_new), "FAIL");
 
-        ito::File fout_csv = ito::make_file("data/out.lorem_ipsum_csv_2.txt", "w");
+        ito::file_ptr fout_csv = ito::make_file("data/out.lorem_ipsum_csv_2.txt", "w");
         ito_assert(fout_csv, "FAIL");
         ito_assert(check_file(fout_csv), "FAIL");
 
@@ -186,7 +186,7 @@ void test_core_file(void)
     std::cout << "\n>>> Test 3 read txt / write bin\n";
     {
         /* Read text file into character buffer. */
-        ito::File fin = ito::make_file("data/in.lorem_ipsum.txt", "rb");
+        ito::file_ptr fin = ito::make_file("data/in.lorem_ipsum.txt", "rb");
         ito_assert(fin, "FAIL");
         ito_assert(check_file(fin), "FAIL");
 
@@ -204,7 +204,7 @@ void test_core_file(void)
         std::cout << "\n";
 
         /* Write binary file. */
-        ito::File fout = ito::make_file("data/out.lorem_ipsum_1.bin", "wb");
+        ito::file_ptr fout = ito::make_file("data/out.lorem_ipsum_1.bin", "wb");
         ito_assert(fout, "FAIL");
         ito_assert(check_file(fout), "FAIL");
 
@@ -215,7 +215,7 @@ void test_core_file(void)
     std::cout << "\n>>> Test 3 read bin/write bin\n";
     {
         /* Read text file into character buffer. */
-        ito::File fin = ito::make_file("data/out.lorem_ipsum_1.bin", "rb");
+        ito::file_ptr fin = ito::make_file("data/out.lorem_ipsum_1.bin", "rb");
         ito_assert(fin, "FAIL");
         ito_assert(check_file(fin), "FAIL");
 
@@ -233,7 +233,7 @@ void test_core_file(void)
         std::cout << "\n";
 
         /* Write binary file. */
-        ito::File fout = ito::make_file("data/out.lorem_ipsum_2.bin", "wb");
+        ito::file_ptr fout = ito::make_file("data/out.lorem_ipsum_2.bin", "wb");
         ito_assert(fout, "FAIL");
         ito_assert(check_file(fout), "FAIL");
 

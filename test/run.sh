@@ -65,7 +65,7 @@ popd
 popd
 
 # -----------------------------------------------------------------------------
-# Test opencl examples
+# Test opencl/opengl examples
 execute() {
     pushd "${1}"
     run make -f ../Makefile clean
@@ -75,10 +75,26 @@ execute() {
     popd
 }
 pushd opencl
-execute 0-helloworld
+# execute 0-helloworld
 execute 1-platform
 execute 2-context
 execute 3-math
 execute 4-vector
 execute 5-matrix
+popd
+
+pushd opengl
+execute 0-image
+execute 1-glfw
+execute 2-triangle
+execute 2-triangle-instance-a
+execute 2-triangle-instance-b
+execute 2-triangle-instance-c
+execute 3-quad
+execute 4-quad-image
+execute 5-sphere-image
+execute 6-bunny
+execute 7-panorama
+execute 8-framebuffer
+execute 9-iobuffer
 popd

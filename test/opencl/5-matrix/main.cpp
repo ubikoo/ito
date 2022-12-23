@@ -41,9 +41,9 @@ __kernel void matmul(
 });
 
 /** ---------------------------------------------------------------------------
- * Setup OpenCL context.
+ * Create OpenCL context.
  */
-void Setup(
+void Create(
     cl_context &context,
     cl_device_id &device,
     cl_command_queue &queue,
@@ -69,9 +69,9 @@ void Setup(
 }
 
 /** ---------------------------------------------------------------------------
- * Teardown OpenCL data.
+ * Destroy OpenCL context.
  */
-void Teardown(
+void Destroy(
     cl_context &context,
     cl_device_id &device,
     cl_command_queue &queue,
@@ -107,9 +107,9 @@ int main(int argc, char const *argv[])
     std::vector<cl_mem> images;
 
     /*
-     * Setup OpenCL context.
+     * Create OpenCL context.
      */
-    Setup(context, device, queue, program, kernel, buffers, images);
+    Create(context, device, queue, program, kernel, buffers, images);
 
     /*
      * Create memory objects for the kernel arguments. First create host memory
@@ -317,9 +317,9 @@ int main(int argc, char const *argv[])
     }
 
     /*
-     * Teardown OpenCL data.
+     * Destroy OpenCL context.
      */
-    Teardown(context, device, queue, program, kernel, buffers, images);
+    Destroy(context, device, queue, program, kernel, buffers, images);
 
     exit(EXIT_SUCCESS);
 }

@@ -63,8 +63,8 @@ template<typename T>
 ito_inline onb<T> onb<T>::create_from_u(const vec3<T> &e_u)
 {
     static const T eps = std::sqrt(std::numeric_limits<T>::epsilon());
-    static const vec3<T> e_1{1.0, 0.0, 0.0};
-    static const vec3<T> e_2{0.0, 1.0, 0.0};
+    static const vec3<T> e_1{(T) 1, (T) 0, (T) 0};
+    static const vec3<T> e_2{(T) 0, (T) 1, (T) 0};
 
     onb<T> o;
     o.u = normalize(e_u);               /* u = u / |u| */
@@ -85,8 +85,8 @@ template<typename T>
 ito_inline onb<T> onb<T>::create_from_v(const vec3<T> &e_v)
 {
     static const T eps = std::sqrt(std::numeric_limits<T>::epsilon());
-    static const vec3<T> e_1{1.0, 0.0, 0.0};
-    static const vec3<T> e_2{0.0, 1.0, 0.0};
+    static const vec3<T> e_1{(T) 1, (T) 0, (T) 0};
+    static const vec3<T> e_2{(T) 0, (T) 1, (T) 0};
 
     onb<T> o;
     o.v = normalize(e_v);               /* v = v / |v| */
@@ -107,8 +107,8 @@ template<typename T>
 ito_inline onb<T> onb<T>::create_from_w(const vec3<T> &e_w)
 {
     static const T eps = std::sqrt(std::numeric_limits<T>::epsilon());
-    static const vec3<T> e_1{1.0, 0.0, 0.0};
-    static const vec3<T> e_2{0.0, 1.0, 0.0};
+    static const vec3<T> e_1{(T) 1, (T) 0, (T) 0};
+    static const vec3<T> e_2{(T) 0, (T) 1, (T) 0};
 
     onb<T> o;
     o.w = normalize(e_w);               /* w = w / |w| */

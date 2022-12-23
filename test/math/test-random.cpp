@@ -60,7 +60,7 @@ TEST_CASE("Random")
 
             /* Write the data to output file */
             std::string filename("/tmp/out.random32." + std::to_string(ir));
-            ito::File fp = ito::make_file(filename, "wb");
+            ito::file_ptr fp = ito::make_file(filename, "wb");
             REQUIRE(fp);
 
             int64_t ret = ito::file::write(fp,
@@ -83,7 +83,7 @@ TEST_CASE("Random")
 
             /* Write the data to output file */
             std::string filename("/tmp/out.random32.long");
-            ito::File fp = ito::make_file(filename, "wb");
+            ito::file_ptr fp = ito::make_file(filename, "wb");
             REQUIRE(fp);
 
             int64_t ret = ito::file::write(fp,
@@ -130,7 +130,7 @@ TEST_CASE("Random")
 
             /* Write the data to output file */
             std::string filename("/tmp/out.random64." + std::to_string(ir));
-            ito::File fp = ito::make_file(filename, "wb");
+            ito::file_ptr fp = ito::make_file(filename, "wb");
             REQUIRE(fp);
 
             int64_t ret = ito::file::write(fp,
@@ -153,7 +153,7 @@ TEST_CASE("Random")
 
             /* Write the data to output file */
             std::string filename("/tmp/out.random64.long");
-            ito::File fp = ito::make_file(filename, "wb");
+            ito::file_ptr fp = ito::make_file(filename, "wb");
             REQUIRE(fp);
 
             int64_t ret = ito::file::write(fp,

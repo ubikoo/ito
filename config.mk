@@ -29,23 +29,23 @@ INCLUDES += $(wildcard $(ROOTDIR)/ito/opencl/*.hpp) \
 
 # -----------------------------------------------------------------------------
 # opengl module
-# SOURCES  += $(filter-out $(wildcard $(ROOTDIR)/ito/opengl/_*.cpp), \
-#                          $(wildcard $(ROOTDIR)/ito/opengl/*.cpp)) \
-# 			$(filter-out $(wildcard $(ROOTDIR)/ito/opengl/_*.c), \
-#                          $(wildcard $(ROOTDIR)/ito/opengl/*.c))
-# INCLUDES += $(wildcard $(ROOTDIR)/ito/opengl/*.hpp) \
-# 			$(wildcard $(ROOTDIR)/ito/opengl/*.h)
+SOURCES  += $(filter-out $(wildcard $(ROOTDIR)/ito/opengl/_*.cpp), \
+                         $(wildcard $(ROOTDIR)/ito/opengl/*.cpp)) \
+			$(filter-out $(wildcard $(ROOTDIR)/ito/opengl/_*.c), \
+                         $(wildcard $(ROOTDIR)/ito/opengl/*.c))
+INCLUDES += $(wildcard $(ROOTDIR)/ito/opengl/*.hpp) \
+			$(wildcard $(ROOTDIR)/ito/opengl/*.h)
 
-# SOURCES  += $(filter-out $(wildcard $(ROOTDIR)/ito/opengl/glsl/_*.cpp), \
-#                          $(wildcard $(ROOTDIR)/ito/opengl/glsl/*.cpp)) \
-#             $(filter-out $(wildcard $(ROOTDIR)/ito/opengl/glsl/_*.c), \
-#                          $(wildcard $(ROOTDIR)/ito/opengl/glsl/*.c))
-# INCLUDES += $(wildcard $(ROOTDIR)/ito/opengl/glsl/*.hpp) \
-#             $(wildcard $(ROOTDIR)/ito/opengl/glsl/*.h)
+SOURCES  += $(filter-out $(wildcard $(ROOTDIR)/ito/opengl/glsl/_*.cpp), \
+                         $(wildcard $(ROOTDIR)/ito/opengl/glsl/*.cpp)) \
+            $(filter-out $(wildcard $(ROOTDIR)/ito/opengl/glsl/_*.c), \
+                         $(wildcard $(ROOTDIR)/ito/opengl/glsl/*.c))
+INCLUDES += $(wildcard $(ROOTDIR)/ito/opengl/glsl/*.hpp) \
+            $(wildcard $(ROOTDIR)/ito/opengl/glsl/*.h)
 
-# SOURCES  += $(filter-out $(wildcard $(ROOTDIR)/ito/opengl/graphics/_*.cpp), \
-#                          $(wildcard $(ROOTDIR)/ito/opengl/graphics/*.cpp)) \
-#             $(filter-out $(wildcard $(ROOTDIR)/ito/opengl/graphics/_*.c), \
-#                          $(wildcard $(ROOTDIR)/ito/opengl/graphics/*.c))
-# INCLUDES += $(wildcard $(ROOTDIR)/ito/opengl/graphics/*.hpp) \
-#             $(wildcard $(ROOTDIR)/ito/opengl/graphics/*.h)
+SOURCES  += $(filter-out $(wildcard $(ROOTDIR)/ito/opengl/graphics/_*.cpp), \
+                         $(wildcard $(ROOTDIR)/ito/opengl/graphics/*.cpp)) \
+            $(filter-out $(wildcard $(ROOTDIR)/ito/opengl/graphics/_*.c), \
+                         $(wildcard $(ROOTDIR)/ito/opengl/graphics/*.c))
+INCLUDES += $(wildcard $(ROOTDIR)/ito/opengl/graphics/*.hpp) \
+            $(wildcard $(ROOTDIR)/ito/opengl/graphics/*.h)

@@ -157,6 +157,7 @@ cl_program CreateProgram(
     oss << kernelFile.rdbuf();
 
     std::string srcStdStr = oss.str();
+    std::cout << srcStdStr << "\n";
     const char *srcStr = srcStdStr.c_str();
     program = clCreateProgramWithSource(
         context, 1, (const char**)&srcStr, NULL, NULL);

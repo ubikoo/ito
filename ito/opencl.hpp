@@ -14,11 +14,11 @@
 
 /**
  * @brief OpenCL interface
- * - Platform layer:
+ *  - Platform layer:
  *      Query platform
  *      Query devices
  *      Create command queue
- * - Runtime layer:
+ *  - Runtime layer:
  *      Create buffers
  *      Compile program
  *

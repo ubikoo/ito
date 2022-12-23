@@ -619,7 +619,7 @@ ito_inline __m256d simd256_normalize_(__m256d a)
  *  dst[63:0]   := (mask[0] == 0) ? a[63:0] : a[127:64]
  *  dst[127:64] := (mask[1] == 0) ? b[63:0] : b[127:64]
  *
- * @note Operation:
+ * @par Operation:
  * row0 = {a1, a0} -> {a2, a0}
  * row1 = {a3, a2} -> {a3, a1}
  */
@@ -674,7 +674,7 @@ ito_inline void simd128_transpose_(__m128d(&row)[2])
  *  dst[191:128] := a[191:128]
  *  dst[255:192] := b[191:128]
  *
- * @note Operation:
+ * @par Operation:
  * row0 = { a3,  a2,  a1,  a0} -> {a12, a8,  a4, a0}
  * row1 = { a7,  a6,  a5,  a4} -> {a13, a9,  a5, a1}
  * row2 = {a11, a10,  a9,  a8} -> {a14, a10, a6, a2}

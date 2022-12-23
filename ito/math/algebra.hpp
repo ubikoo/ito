@@ -421,7 +421,7 @@ ito_inline mat2<T> inverse(const mat2<T> &a)
 
     /* Compute determinant from Laplace's expansion */
     T det = a.xx * adj.xx + a.xy * adj.yx;
-    det = std::fabs(det) > 0.0 ? 1.0 / det : 0.0;
+    det = std::fabs(det) > (T) 0 ? (T) 1 / det : (T) 0;
 
     return (adj *= det);
 }
@@ -459,7 +459,7 @@ ito_inline mat3<T> inverse(const mat3<T> &a)
     T det = a.xx * adj.xx +
             a.xy * adj.yx +
             a.xz * adj.zx;
-    det = std::fabs(det) > 0.0 ? 1.0 / det : 0.0;
+    det = std::fabs(det) > (T) 0 ? (T) 1 / det : (T) 0;
 
     return (adj *= det);
 }
@@ -589,7 +589,7 @@ ito_inline mat4<T> inverse(const mat4<T> &a)
             a.xy * adj.yx +
             a.xz * adj.zx +
             a.xw * adj.wx;
-    det = std::fabs(det) > 0.0 ? 1.0 / det : 0.0;
+    det = std::fabs(det) > (T) 0 ? (T) 1 / det : (T) 0;
 
     return (adj *= det);
 }

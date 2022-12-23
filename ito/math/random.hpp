@@ -19,7 +19,7 @@ namespace math {
  * @brief Function object providing an interface to /dev/urandom.
  */
 struct random_device {
-    File fp;
+    file_ptr fp;
     uint64_t operator()() {
         uint64_t n;
         ito_assert(file::read(fp, &n, sizeof(uint64_t)), "I/O error");

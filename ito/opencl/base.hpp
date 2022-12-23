@@ -16,11 +16,6 @@
 #include "ito/math.hpp"
 
 #ifdef __APPLE__
-// #include <OpenCL/cl.h>
-// #include <OpenCL/cl_gl.h>
-// #include <OpenCL/cl_gl_ext.h>
-// #include <OpenCL/cl_ext.h>
-// #include <OpenCL/gcl.h>
 #include <OpenCL/opencl.h>
 #else
 #include <CL/cl.h>
