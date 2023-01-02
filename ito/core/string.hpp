@@ -32,10 +32,10 @@ namespace str {
  *      https://stackoverflow.com/questions/54744252
  */
 template<typename... Args>
-ito_inline std::string to_string(Args&&... args);
+inline std::string to_string(Args&&... args);
 
 template<typename T, typename... Args>
-ito_inline std::string to_string(T t, Args&&... args)
+inline std::string to_string(T t, Args&&... args)
 {
     std::ostringstream ss;
     ss << t << to_string(static_cast<Args&&>(args)...);
@@ -43,7 +43,7 @@ ito_inline std::string to_string(T t, Args&&... args)
 }
 
 template<>
-ito_inline std::string to_string()
+inline std::string to_string()
 {
     return std::string();
 }
@@ -68,9 +68,8 @@ ito_inline std::string to_string()
  * (or until end of the string if either size() is too short or if count is
  * string::npos).
  */
-ito_inline std::string &left_trim(
-    std::string &str,
-    const std::string &chars = "\t\n\v\f\r ")
+inline std::string &left_trim(
+    std::string &str, const std::string &chars = "\t\n\v\f\r ")
 {
     str.erase(0, str.find_first_not_of(chars));
     return str;
@@ -98,9 +97,8 @@ ito_inline std::string &left_trim(
  * (or until end of the string if either size() is too short or if count is
  * string::npos).
  */
-ito_inline std::string &right_trim(
-    std::string &str,
-    const std::string &chars = "\t\n\v\f\r ")
+inline std::string &right_trim(
+    std::string &str, const std::string &chars = "\t\n\v\f\r ")
 {
     str.erase(str.find_last_not_of(chars) + 1);
     return str;
@@ -121,7 +119,7 @@ ito_inline std::string &right_trim(
  * The trim functions return a reference to the operated string,
  * thereby allowing these to be chained together.
  */
-ito_inline std::string &trim(
+inline std::string &trim(
     std::string &str, const std::string &chars = "\t\n\v\f\r ")
 {
     return left_trim(right_trim(str, chars), chars);
@@ -132,7 +130,7 @@ ito_inline std::string &trim(
  * @brief Scan the string and replace any characters given by search by the
  * characters given by replace.
  */
-ito_inline std::string &replace(
+inline std::string &replace(
     std::string &str, const char search, const char replace)
 {
     /* Check the trivial case */
@@ -159,7 +157,7 @@ ito_inline std::string &replace(
  * terminator, end='\0'. For a full stream buffer with newline characters,
  * end='\n' should be used instead.
  */
-ito_inline std::string &uncomment(std::string &str, const char end)
+inline std::string &uncomment(std::string &str, const char end)
 {
     /*
      * Find the first character that matches comment '#' and replace all
@@ -182,7 +180,7 @@ ito_inline std::string &uncomment(std::string &str, const char end)
  * Find the first non space character or stop at the end.
  * Ensure the value isspace takes is of type unsigned char.
  */
-ito_inline char *left_trim(char *str)
+inline char *left_trim(char *str)
 {
     /* Scan from beginning and find the first non space character */
     char *beg = str;
@@ -207,7 +205,7 @@ ito_inline char *left_trim(char *str)
  * by a null terminator. Stop at beginning or at the first non space character.
  * Ensure the value isspace takes is of type unsigned char.
  */
-ito_inline char *right_trim(char *str)
+inline char *right_trim(char *str)
 {
     /* Scan from end to beg and replace space by null terminator */
     char *beg = str;
@@ -223,7 +221,7 @@ ito_inline char *right_trim(char *str)
  * trim
  * @brief Trim off left and right spaces from the string.
  */
-ito_inline char *trim(char *str)
+inline char *trim(char *str)
 {
     return left_trim(right_trim(str));
 }
@@ -233,7 +231,7 @@ ito_inline char *trim(char *str)
  * @brief Scan the string and replace any characters given by search by the
  * characters given by replace.
  */
-ito_inline char *replace(char *str, const char search, const char replace)
+inline char *replace(char *str, const char search, const char replace)
 {
     /* Check the trivial case */
     if (search == replace) {
@@ -260,7 +258,7 @@ ito_inline char *replace(char *str, const char search, const char replace)
  * For a full stream buffer with newline characters, end='\n' should be used
  * instead.
  */
-ito_inline char *uncomment(char *str, const char end)
+inline char *uncomment(char *str, const char end)
 {
     /*
      * Find the first character that matches comment '#' and replace all
@@ -286,7 +284,7 @@ ito_inline char *uncomment(char *str, const char end)
  * Unlike strncpy, a null character is implicitly appended at the end of
  * destination if source is shorter than num.
  */
-ito_inline char *numcpy(char *str, const char *word, long num)
+inline char *numcpy(char *str, const char *word, long num)
 {
     /*
      * Copy the first num-1 characters of the source string to the destination.
@@ -335,7 +333,7 @@ ito_inline char *numcpy(char *str, const char *word, long num)
  * The function returns a pointer to the next token. A null pointer is returned
  * if there are no tokens left in the substring or an EOF is reached.
  */
-ito_inline char *next_token(const char *str)
+inline char *next_token(const char *str)
 {
     /* Token of the first non space character */
     char *beg = (char *) str;
@@ -359,7 +357,7 @@ ito_inline char *next_token(const char *str)
  * count_tokens
  * @brief Count the number of tokens delimited by white space in a string.
  */
-ito_inline size_t count_tokens(char *str)
+inline size_t count_tokens(char *str)
 {
     size_t count = 0;
     char *cur = str;
@@ -378,7 +376,7 @@ ito_inline size_t count_tokens(char *str)
  * Scan the string again and store all the tokens found into the newly created
  * object.
  */
-ito_inline char **split_tokens(char *str, size_t *n_tokens)
+inline char **split_tokens(char *str, size_t *n_tokens)
 {
     /* Do not split a null string */
     if (str == nullptr) {
@@ -431,7 +429,7 @@ ito_inline char **split_tokens(char *str, size_t *n_tokens)
  * If the string has no tokens, do not clear the current token set.
  * Otherwise, rescan the string and store each token sequentially.
  */
-ito_inline std::vector<std::string> split_tokens(char *str)
+inline std::vector<std::string> split_tokens(char *str)
 {
     std::vector<std::string> tokens;
 
@@ -475,7 +473,7 @@ ito_inline std::vector<std::string> split_tokens(char *str)
 /**
  * castld
  */
-ito_inline long double castld(const char *str)
+inline long double castld(const char *str)
 {
     errno = 0;
     char *endptr;
@@ -490,7 +488,7 @@ ito_inline long double castld(const char *str)
 /**
  * castd
  */
-ito_inline double castd(const char *str)
+inline double castd(const char *str)
 {
     errno = 0;
     char *endptr;
@@ -505,7 +503,7 @@ ito_inline double castd(const char *str)
 /**
  * castf
  */
-ito_inline float castf(const char *str)
+inline float castf(const char *str)
 {
     errno = 0;
     char *endptr;
@@ -520,7 +518,7 @@ ito_inline float castf(const char *str)
 /**
  * castll
  */
-ito_inline long long castll(const char *str)
+inline long long castll(const char *str)
 {
     errno = 0;
     char *endptr;
@@ -536,7 +534,7 @@ ito_inline long long castll(const char *str)
  * castl
  * @brief Parse the string as a long integer.
  */
-ito_inline long castl(const char *str)
+inline long castl(const char *str)
 {
     errno = 0;
     char *endptr;
@@ -552,7 +550,7 @@ ito_inline long castl(const char *str)
  * casti
  * @brief Parse the string as an integer.
  */
-ito_inline int casti(const char *str)
+inline int casti(const char *str)
 {
     errno = 0;
     char *endptr;
@@ -577,7 +575,7 @@ ito_inline int casti(const char *str)
  * casts
  * @brief Parse the string as a short integer.
  */
-ito_inline short casts(const char *str)
+inline short casts(const char *str)
 {
     errno = 0;
     char *endptr;
@@ -602,7 +600,7 @@ ito_inline short casts(const char *str)
  * castull
  * @brief Parse the string as a unsigned long long integer.
  */
-ito_inline unsigned long long castull(const char *str)
+inline unsigned long long castull(const char *str)
 {
     errno = 0;
     char *endptr;
@@ -618,7 +616,7 @@ ito_inline unsigned long long castull(const char *str)
  * castul
  * @brief Parse the string as a unsigned long integer.
  */
-ito_inline unsigned long castul(const char *str)
+inline unsigned long castul(const char *str)
 {
     errno = 0;
     char *endptr;
@@ -634,7 +632,7 @@ ito_inline unsigned long castul(const char *str)
  * castui
  * @brief Parse the string as a usigned integer.
  */
-ito_inline unsigned int castui(const char *str)
+inline unsigned int castui(const char *str)
 {
     errno = 0;
     char *endptr;
@@ -659,7 +657,7 @@ ito_inline unsigned int castui(const char *str)
  * castus
  * @brief Parse the string as a unsigned sort integer.
  */
-ito_inline unsigned short castus(const char *str)
+inline unsigned short castus(const char *str)
 {
     errno = 0;
     char *endptr;
@@ -690,7 +688,7 @@ ito_inline unsigned short castus(const char *str)
  *      https://en.cppreference.com/w/cpp/string/byte/strto[ll,l,ull,ul]
  */
 template<typename T>
-ito_inline T cast(const char *str)
+inline T cast(const char *str)
 {
     ito_assert(str != nullptr, "invalid string");
 
@@ -743,7 +741,7 @@ ito_inline T cast(const char *str)
  * Overloaded function using std::string signature.
  */
 template<typename T>
-ito_inline T cast(const std::string &str)
+inline T cast(const std::string &str)
 {
     return cast<T>(str.c_str());
 }
@@ -754,7 +752,7 @@ ito_inline T cast(const std::string &str)
  *      https://stackoverflow.com/questions/2342162
  */
 template<typename... Args>
-ito_inline std::string format(const std::string& fmt, const Args&... args)
+inline std::string format(const std::string& fmt, const Args&... args)
 {
     /*
      * Calling std::snprintf with zero size and nullptr for buffer is useful to

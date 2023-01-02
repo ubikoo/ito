@@ -66,7 +66,7 @@ namespace math {
  *  dst[63:0]   := (mask[0] == 0) ? a[63:0] : a[127:64]
  *  dst[127:64] := (mask[1] == 0) ? a[63:0] : a[127:64]
  */
-ito_inline double simd256_extract_(__m256d a, int ix)
+inline double simd256_extract_(__m256d a, int ix)
 {
     /*
      * v = (ix == 0 || ix == 1) ? {a1, a0}
@@ -88,7 +88,7 @@ ito_inline double simd256_extract_(__m256d a, int ix)
  * v = (ix == 0) ? {a1, a0}
  * v = (ix == 1) ? {a0, a1}
  */
-ito_inline double simd128_extract_(__m128d a, int ix)
+inline double simd128_extract_(__m128d a, int ix)
 {
     int control = (ix%2 == 0) ? ito_extension(0b10) : ito_extension(0b01);
     __m128d v = _mm_permute_pd(a, control);
@@ -214,7 +214,7 @@ ito_inline double simd128_extract_(__m128d a, int ix)
  *  dst[63:0]   := (mask[0] == 0) ? a[63:0] : a[127:64]
  *  dst[127:64] := (mask[1] == 0) ? b[63:0] : b[127:64]
  */
-ito_inline __m128d simd128_shuffle_(__m128d a, __m128d b, const int mask)
+inline __m128d simd128_shuffle_(__m128d a, __m128d b, const int mask)
 {
     return _mm_shuffle_pd(a, b, mask);
 }
@@ -229,7 +229,7 @@ ito_inline __m128d simd128_shuffle_(__m128d a, __m128d b, const int mask)
  *  dst[191:128] := (mask[2] == 0) ? a[191:128] : a[255:192]
  *  dst[255:192] := (mask[3] == 0) ? b[191:128] : b[255:192]
  */
-ito_inline __m256d simd256_shuffle_(__m256d a, __m256d b, const int mask)
+inline __m256d simd256_shuffle_(__m256d a, __m256d b, const int mask)
 {
     return _mm256_shuffle_pd(a, b, mask);
 }
@@ -248,7 +248,7 @@ ito_inline __m256d simd256_shuffle_(__m256d a, __m256d b, const int mask)
  *  dst[127:0]   := (masklo[0] == 0) ? a[127:0] : a[255:128]
  *  dst[255:128] := (maskhi[0] == 0) ? b[127:0] : b[255:128]
  */
-ito_inline __m256d simd256_shuffle2f_(
+inline __m256d simd256_shuffle2f_(
     __m256d a,
     const int masklo,
     __m256d b,
@@ -266,7 +266,7 @@ ito_inline __m256d simd256_shuffle2f_(
  *  dst[63:0]    := (mask[0] == 0) ? a[63:0] : a[127:64]
  *  dst[127:64]  := (mask[1] == 0) ? a[63:0] : a[127:64]
  */
-ito_inline __m128d simd128_permute_(__m128d a, int mask)
+inline __m128d simd128_permute_(__m128d a, int mask)
 {
     return _mm_permute_pd(a, mask);
 }
@@ -281,7 +281,7 @@ ito_inline __m128d simd128_permute_(__m128d a, int mask)
  *  dst[191:128] := (mask[2] == 0) ? a[191:128] : a[255:192]
  *  dst[255:192] := (mask[3] == 0) ? a[191:128] : a[255:192]
  */
-ito_inline __m256d simd256_permute_(__m256d a, int mask)
+inline __m256d simd256_permute_(__m256d a, int mask)
 {
     return _mm256_permute_pd(a, mask);
 }
@@ -306,7 +306,7 @@ ito_inline __m256d simd256_permute_(__m256d a, int mask)
  *  dst[127:0]   := SELECT4(a[255:0], b[255:0], mask[3:0])
  *  dst[255:128] := SELECT4(a[255:0], b[255:0], mask[7:4])
  */
-ito_inline __m256d simd256_permute2f_(__m256d a, __m256d b, int mask)
+inline __m256d simd256_permute2f_(__m256d a, __m256d b, int mask)
 {
     return _mm256_permute2f128_pd(a, b, mask);
 }
@@ -319,7 +319,7 @@ ito_inline __m256d simd256_permute2f_(__m256d a, __m256d b, int mask)
  *  dst[63:0]    := (mask[0] == 0) ? a[63:0] : a[127:64]
  *  dst[127:64]  := (mask[1] == 0) ? a[63:0] : a[127:64]
  */
-ito_inline __m128d simd128_reverse_(__m128d a)
+inline __m128d simd128_reverse_(__m128d a)
 {
     /*
      * {a1, a0} -> {a0, a1}
@@ -341,7 +341,7 @@ ito_inline __m128d simd128_reverse_(__m128d a)
  *  dst[127:0]   := a[255:128]  (mask[1:0] = 1, mask[3] = 0)
  *  dst[255:128] := a[127:0]    (mask[5:4] = 0, mask[7] = 0)
  */
-ito_inline __m256d simd256_reverse_(__m256d a)
+inline __m256d simd256_reverse_(__m256d a)
 {
     /*
      * {a3, a2, a1, a0} -> {a2, a3, a0, a1}
@@ -357,7 +357,7 @@ ito_inline __m256d simd256_reverse_(__m256d a)
  *  dst[63:0]    := 1.0 / (SQRT(a[63:0])
  *  dst[127:64]  := 1.0 / (SQRT(a[127:64])
  */
-ito_inline __m128d _mm_rsqrt_pd(__m128d a)
+inline __m128d _mm_rsqrt_pd(__m128d a)
 {
     return _mm_div_pd(_mm_set1_pd(1.0), _mm_sqrt_pd(a));
 }
@@ -370,7 +370,7 @@ ito_inline __m128d _mm_rsqrt_pd(__m128d a)
  *  dst[191:128] := 1.0 / (SQRT(a[191:128])
  *  dst[255:192] := 1.0 / (SQRT(a[255:192])
  */
-ito_inline __m256d _mm256_rsqrt_pd(__m256d a)
+inline __m256d _mm256_rsqrt_pd(__m256d a)
 {
     return _mm256_div_pd(_mm256_set1_pd(1.0), _mm256_sqrt_pd(a));
 }
@@ -391,7 +391,7 @@ ito_inline __m256d _mm256_rsqrt_pd(__m256d a)
  *  dst[63:0]   := Convert_FP32_To_FP64(a[31:0])
  *  dst[127:64] := Convert_FP32_To_FP64(a[63:32])
  */
-ito_inline __m128d simd128_rsqrt_(__m128d x)
+inline __m128d simd128_rsqrt_(__m128d x)
 {
     const __m128d half = _mm_set1_pd(0.5);
     const __m128d one_half = _mm_set1_pd(1.5);
@@ -445,7 +445,7 @@ ito_inline __m128d simd128_rsqrt_(__m128d x)
  *  dst[191:128] := Convert_FP32_To_FP64(a[95:64])
  *  dst[255:192] := Convert_FP32_To_FP64(a[127:96])
  */
-ito_inline __m256d simd256_rsqrt_(__m256d x)
+inline __m256d simd256_rsqrt_(__m256d x)
 {
     const __m256d half = _mm256_set1_pd(0.5);
     const __m256d one_half = _mm256_set1_pd(1.5);
@@ -489,7 +489,7 @@ ito_inline __m256d simd256_rsqrt_(__m256d x)
  *  dst[63:0]   := a[127:64] + a[63:0]
  *  dst[127:64] := b[127:64] + b[63:0]
  */
-ito_inline __m128d simd128_dot_(__m128d a, __m128d b)
+inline __m128d simd128_dot_(__m128d a, __m128d b)
 {
     /*
      * {a1*b1, a0*b0}
@@ -523,7 +523,7 @@ ito_inline __m128d simd128_dot_(__m128d a, __m128d b)
  *  dst[191:128] := b[191:128] + b[191:128]
  *  dst[255:192] := b[255:192] + b[255:192]
  */
-ito_inline __m256d simd256_dot_(__m256d a, __m256d b)
+inline __m256d simd256_dot_(__m256d a, __m256d b)
 {
     /*
      * {a3*b3, a2*b2, a1*b1, a0*b0}
@@ -557,7 +557,7 @@ ito_inline __m256d simd256_dot_(__m256d a, __m256d b)
 /**
  * @brief Euclidean norm of two double-precision (64-bit) elements.
  */
-ito_inline __m128d simd128_norm_(__m128d a)
+inline __m128d simd128_norm_(__m128d a)
 {
     /*
      * sqrt{a1*a1 + a0*a0,
@@ -569,7 +569,7 @@ ito_inline __m128d simd128_norm_(__m128d a)
 /**
  * @brief Euclidean norm of four double-precision (64-bit) elements.
  */
-ito_inline __m256d simd256_norm_(__m256d a)
+inline __m256d simd256_norm_(__m256d a)
 {
     /*
      * sqrt{a3*a3 + a2*a2 + a1*a1 + a0*a0,
@@ -583,7 +583,7 @@ ito_inline __m256d simd256_norm_(__m256d a)
 /**
  * @brief Normalize two double precision (64-bit) elements.
  */
-ito_inline __m128d simd128_normalize_(__m128d a)
+inline __m128d simd128_normalize_(__m128d a)
 {
     /*
      * a / sqrt{a1*b1 + a0*b0,
@@ -597,7 +597,7 @@ ito_inline __m128d simd128_normalize_(__m128d a)
 /**
  * @brief Normalize four double precision (64-bit) elements.
  */
-ito_inline __m256d simd256_normalize_(__m256d a)
+inline __m256d simd256_normalize_(__m256d a)
 {
     /*
      * a / sqrt{a3*b3 + a2*b2 + a1*b1 + a0*b0,
@@ -623,7 +623,7 @@ ito_inline __m256d simd256_normalize_(__m256d a)
  * row0 = {a1, a0} -> {a2, a0}
  * row1 = {a3, a2} -> {a3, a1}
  */
-ito_inline void simd128_transpose_(__m128d(&row)[2])
+inline void simd128_transpose_(__m128d(&row)[2])
 {
     /*
      * r0 = {a1, a0}
@@ -680,7 +680,7 @@ ito_inline void simd128_transpose_(__m128d(&row)[2])
  * row2 = {a11, a10,  a9,  a8} -> {a14, a10, a6, a2}
  * row3 = {a15, a14, a13, a12} -> {a15, a11, a7, a3}
  */
-ito_inline void simd256_transpose_(__m256d (&row)[4])
+inline void simd256_transpose_(__m256d (&row)[4])
 {
     /*
      * r0 = { a3,  a2,  a1,  a0}
@@ -748,7 +748,7 @@ ito_inline void simd256_transpose_(__m256d (&row)[4])
  *  dst[191:128] := a[191:128] - a[255:192]
  *  dst[255:192] := b[191:128] - b[255:192]
  */
-ito_inline __m256d simd256_det_(__m256d a)
+inline __m256d simd256_det_(__m256d a)
 {
     /*
      * r0 = {a3, a2, a1, a0}

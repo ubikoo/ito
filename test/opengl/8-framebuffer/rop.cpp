@@ -60,10 +60,10 @@ Rop Rop::Create()
             kMeshNodes,                 /* n1 vertices */
             kMeshNodes,                 /* n2 vertices */
             1.0,                        /* radius */
-            0.0,                        /* phi_lo */
-            M_PI,                       /* phi_hi */
-            -M_PI,                      /* theta_lo */
-            M_PI);                      /* theta_hi */
+            0.0,                        /* theta_lo */
+            M_PI,                       /* theta_hi */
+            -M_PI,                      /* phi_lo */
+            M_PI);                      /* phi_hi */
 
         /* Initialize sphere view matrix. */
         rop.sphere.mvp = math::mat4f::eye;

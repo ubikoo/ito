@@ -31,19 +31,19 @@ struct file_deleter {
 
 using file_ptr = std::unique_ptr<std::FILE, file_deleter>;
 
-ito_inline file_ptr make_file(std::FILE *file)
+inline file_ptr make_file(std::FILE *file)
 {
     file_deleter file_deleter{false};
     return file_ptr(file, file_deleter);
 }
 
-ito_inline file_ptr make_file(const char *filename, const char *filemode)
+inline file_ptr make_file(const char *filename, const char *filemode)
 {
     file_deleter file_deleter{true};
     return file_ptr(std::fopen(filename, filemode), file_deleter);
 }
 
-ito_inline file_ptr make_file(const std::string &filename,
+inline file_ptr make_file(const std::string &filename,
     const std::string &filemode)
 {
     return make_file(filename.c_str(), filemode.c_str());
@@ -55,7 +55,7 @@ namespace file {
  * @brief Return the length of the binary stream in bytes from the beginning of
  * the file. Return -1L if failure occurs.
  */
-ito_inline int64_t length(file_ptr &file)
+inline int64_t length(file_ptr &file)
 {
     std::fseek(file.get(), 0, SEEK_END);   /* go to end of file */
     int64_t len = std::ftell(file.get());  /* get length in bytes */
@@ -67,7 +67,7 @@ ito_inline int64_t length(file_ptr &file)
  * @brief Templated scanf function.
  */
 template<typename... Args>
-ito_inline int64_t scanf(file_ptr &file, const char *format, Args&&... args)
+inline int64_t scanf(file_ptr &file, const char *format, Args&&... args)
 {
     return std::fscanf(file.get(), format, static_cast<Args&&>(args)...);
 }
@@ -77,7 +77,7 @@ ito_inline int64_t scanf(file_ptr &file, const char *format, Args&&... args)
  * Return the number of characters successfuly read (or less than 1 if
  * an error or eof condition occurs).
  */
-ito_inline int64_t read(file_ptr &file, void *ptr, size_t size)
+inline int64_t read(file_ptr &file, void *ptr, size_t size)
 {
     return std::fread(ptr, size, 1, file.get());
 }
@@ -106,7 +106,7 @@ ito_inline int64_t read(file_ptr &file, void *ptr, size_t size)
  *
  * @see https://stackoverflow.com/questions/8558907
  */
-ito_inline bool readline(
+inline bool readline(
     file_ptr &file,
     std::string &line,
     const size_t count = std::numeric_limits<size_t>::max(),
@@ -132,7 +132,7 @@ ito_inline bool readline(
  * @brief Read all lines from an input stream into a vector. Each line reads
  * characters from the stream until a delim character is read (default '\n').
  */
-ito_inline bool readlines(
+inline bool readlines(
     file_ptr &file,
     std::vector<std::string> &lines,
     const size_t count = std::numeric_limits<size_t>::max(),
@@ -151,7 +151,7 @@ ito_inline bool readlines(
  * @brief Templated printf function.
  */
 template<typename... Args>
-ito_inline int64_t printf(file_ptr &file, const char *format, Args&&... args)
+inline int64_t printf(file_ptr &file, const char *format, Args&&... args)
 {
     return std::fprintf(file.get(), format, static_cast<Args&&>(args)...);
 }
@@ -161,7 +161,7 @@ ito_inline int64_t printf(file_ptr &file, const char *format, Args&&... args)
  * Return the number of characters successfuly written (or less than 1 if
  * an error or eof condition occurs).
  */
-ito_inline int64_t write(file_ptr &file, void *ptr, size_t size)
+inline int64_t write(file_ptr &file, void *ptr, size_t size)
 {
     return std::fwrite(ptr, size, 1, file.get());
 }
@@ -169,7 +169,7 @@ ito_inline int64_t write(file_ptr &file, void *ptr, size_t size)
 /**
  * @brief Write the line string to the output stream. Return EOF on failure.
  */
-ito_inline bool writeline(
+inline bool writeline(
     file_ptr &file,
     const std::string &line,
     const std::string &sep = "\n")
@@ -184,7 +184,7 @@ ito_inline bool writeline(
 /**
  * @brief Write lines to the stream using writeline. Return EOF on failure.
  */
-ito_inline bool writelines(
+inline bool writelines(
     file_ptr &file,
     const std::vector<std::string> &lines,
     const std::string &sep = "\n")

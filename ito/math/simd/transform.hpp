@@ -21,7 +21,7 @@ namespace math {
  * @brief Rotate the matrix around n-axis by using Rodrigues formula.
  */
 template<>
-ito_inline mat4<double> rotate(vec3<double> n, const double theta)
+inline mat4<double> rotate(vec3<double> n, const double theta)
 {
     /* Identity matrix */
     const __m256d one0 = _mm256_set_pd(0.0, 0.0, 0.0, 1.0);

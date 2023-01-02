@@ -19,7 +19,7 @@ namespace math {
  * @brief Translate the matrix by d.
  */
 template<typename T>
-ito_inline mat4<T> translate(const vec3<T> d)
+inline mat4<T> translate(const vec3<T> d)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return {(T) 1, (T) 0, (T) 0, d.x,
@@ -29,7 +29,7 @@ ito_inline mat4<T> translate(const vec3<T> d)
 }
 
 template<typename T>
-ito_inline mat4<T> translate(const mat4<T> m, const vec3<T> d)
+inline mat4<T> translate(const mat4<T> m, const vec3<T> d)
 {
     return dot(translate(d), m);
 }
@@ -38,7 +38,7 @@ ito_inline mat4<T> translate(const mat4<T> m, const vec3<T> d)
  * @brief Scale the matrix by s.
  */
 template<typename T>
-ito_inline mat4<T> scale(const vec3<T> s)
+inline mat4<T> scale(const vec3<T> s)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return {  s.x, (T) 0, (T) 0, (T) 0,
@@ -48,16 +48,16 @@ ito_inline mat4<T> scale(const vec3<T> s)
 }
 
 template<typename T>
-ito_inline mat4<T> scale(const mat4<T> m, const vec3<T> s)
+inline mat4<T> scale(const mat4<T> m, const vec3<T> s)
 {
     return dot(scale(s), m);
 }
 
 /** ---------------------------------------------------------------------------
- * @brief Rotate the matrix around n-axis by using Rodrigues formula.
+ * @brief Rotate the matrix around n-axis using Rodrigues formula.
  */
 template<typename T>
-ito_inline mat4<T> rotate(vec3<T> n, const T theta)
+inline mat4<T> rotate(vec3<T> n, const T theta)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
 
@@ -76,7 +76,7 @@ ito_inline mat4<T> rotate(vec3<T> n, const T theta)
 }
 
 template<typename T>
-ito_inline mat4<T> rotate(const mat4<T> m, vec3<T> n, const T theta)
+inline mat4<T> rotate(const mat4<T> m, vec3<T> n, const T theta)
 {
     return dot(rotate(n, theta), m);
 }
@@ -85,7 +85,7 @@ ito_inline mat4<T> rotate(const mat4<T> m, vec3<T> n, const T theta)
  * @brief Return the matrix that maps direction vector-a to vector-b.
  */
 template<typename T>
-ito_inline mat4<T> align(vec3<T> a, vec3<T> b)
+inline mat4<T> align(vec3<T> a, vec3<T> b)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
 
@@ -109,7 +109,7 @@ ito_inline mat4<T> align(vec3<T> a, vec3<T> b)
 }
 
 template<typename T>
-ito_inline mat4<T> align(const mat4<T> m, vec3<T> a, vec3<T> b)
+inline mat4<T> align(const mat4<T> m, vec3<T> a, vec3<T> b)
 {
     return dot(align(a, b), m);
 }
@@ -124,10 +124,7 @@ ito_inline mat4<T> align(const mat4<T> m, vec3<T> a, vec3<T> b)
  * reference frame.
  */
 template<typename T>
-ito_inline mat4<T> lookat(
-    const vec3<T> &eye,
-    const vec3<T> &ctr,
-    const vec3<T> &up)
+inline mat4<T> lookat(const vec3<T> &eye, const vec3<T> &ctr, const vec3<T> &up)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
 
@@ -137,15 +134,15 @@ ito_inline mat4<T> lookat(
     vec3<T> u = normalize(cross(f, s));     /* u = s x f */
 
     /* Compute the lookat projection matrix with eye translation. */
-    mat4<T> M{   s.x,    s.y,    s.z,   -eye.x,
-                 u.x,    u.y,    u.z,   -eye.y,
-                 f.x,    f.y,    f.z,   -eye.z,
+    mat4<T> M{   s.x,    s.y,    s.z,   -dot(s,eye),
+                 u.x,    u.y,    u.z,   -dot(u,eye),
+                 f.x,    f.y,    f.z,   -dot(f,eye),
                (T) 0,  (T) 0,  (T) 0,    (T) 1};
     return M;
 }
 
 template<typename T>
-ito_inline mat4<T> lookat(
+inline mat4<T> lookat(
     const mat4<T> m,
     const vec3<T> &eye,
     const vec3<T> &ctr,
@@ -155,11 +152,10 @@ ito_inline mat4<T> lookat(
 }
 
 /** ---------------------------------------------------------------------------
- * perspective
  * @brief Compute the perspective projection matrix.
  */
 template<typename T>
-ito_inline mat4<T> perspective(
+inline mat4<T> perspective(
     const T fovy,
     const T aspect,
     const T znear,
@@ -193,7 +189,7 @@ ito_inline mat4<T> perspective(
 }
 
 template<typename T>
-ito_inline mat4<T> perspective(
+inline mat4<T> perspective(
     const mat4<T> m,
     const T fovy,
     const T aspect,
@@ -207,7 +203,7 @@ ito_inline mat4<T> perspective(
  * @brief Compute the orthographic projection matrix.
  */
 template<typename T>
-ito_inline mat4<T> ortho(
+inline mat4<T> ortho(
     const T left,
     const T right,
     const T bottom,
@@ -240,7 +236,7 @@ ito_inline mat4<T> ortho(
 }
 
 template<typename T>
-ito_inline mat4<T> ortho(
+inline mat4<T> ortho(
     const mat4<T> m,
     const T left,
     const T right,

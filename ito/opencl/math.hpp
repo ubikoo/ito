@@ -19,7 +19,7 @@
  * @brief Unary arithmetic vector operators.
  */
 #define ITO_OPENCL_VEC2_OPERATOR_COMPOUND_VECTOR(T) \
-ito_inline \
+inline \
 cl_ ## T ## 2 &operator+=(cl_ ## T ## 2 &lhs, const cl_ ## T ## 2 &rhs) \
 { \
     lhs.s[0] += rhs.s[0]; \
@@ -27,7 +27,7 @@ cl_ ## T ## 2 &operator+=(cl_ ## T ## 2 &lhs, const cl_ ## T ## 2 &rhs) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 2 &operator-=(cl_ ## T ## 2 &lhs, const cl_ ## T ## 2 &rhs) \
 { \
     lhs.s[0] -= rhs.s[0]; \
@@ -35,7 +35,7 @@ cl_ ## T ## 2 &operator-=(cl_ ## T ## 2 &lhs, const cl_ ## T ## 2 &rhs) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 2 &operator*=(cl_ ## T ## 2 &lhs, const cl_ ## T ## 2 &rhs) \
 { \
     lhs.s[0] *= rhs.s[0]; \
@@ -43,7 +43,7 @@ cl_ ## T ## 2 &operator*=(cl_ ## T ## 2 &lhs, const cl_ ## T ## 2 &rhs) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 2 &operator/=(cl_ ## T ## 2 &lhs, const cl_ ## T ## 2 &rhs) \
 { \
     lhs.s[0] /= rhs.s[0]; \
@@ -55,7 +55,7 @@ cl_ ## T ## 2 &operator/=(cl_ ## T ## 2 &lhs, const cl_ ## T ## 2 &rhs) \
  * @brief Unary arithmetic scalar operators.
  */
 #define ITO_OPENCL_VEC2_OPERATOR_COMPOUND_SCALAR(T) \
-ito_inline \
+inline \
 cl_ ## T ## 2 &operator+=(cl_ ## T ## 2 &lhs, const cl_ ## T scalar) \
 { \
     lhs.s[0] += scalar; \
@@ -63,7 +63,7 @@ cl_ ## T ## 2 &operator+=(cl_ ## T ## 2 &lhs, const cl_ ## T scalar) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 2 &operator-=(cl_ ## T ## 2 &lhs, const cl_ ## T scalar) \
 { \
     lhs.s[0] -= scalar; \
@@ -71,7 +71,7 @@ cl_ ## T ## 2 &operator-=(cl_ ## T ## 2 &lhs, const cl_ ## T scalar) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 2 &operator*=(cl_ ## T ## 2 &lhs, const cl_ ## T scalar) \
 { \
     lhs.s[0] *= scalar; \
@@ -79,7 +79,7 @@ cl_ ## T ## 2 &operator*=(cl_ ## T ## 2 &lhs, const cl_ ## T scalar) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 2 &operator/=(cl_ ## T ## 2 &lhs, const cl_ ## T scalar) \
 { \
     lhs.s[0] /= scalar; \
@@ -91,14 +91,14 @@ cl_ ## T ## 2 &operator/=(cl_ ## T ## 2 &lhs, const cl_ ## T scalar) \
  * @brief Unary plus/negation operators.
  */
 #define ITO_OPENCL_VEC2_OPERATOR_NEGATION(T) \
-ito_inline \
+inline \
 cl_ ## T ## 2 operator+(const cl_ ## T ## 2 &lhs) \
 { \
     cl_ ## T ## 2 result = lhs; \
     return result; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 2 operator-(const cl_ ## T ## 2 &lhs) \
 { \
     constexpr cl_ ## T minus_one = (cl_ ## T) (-1); \
@@ -111,7 +111,7 @@ cl_ ## T ## 2 operator-(const cl_ ## T ## 2 &lhs) \
  * @brief Increment operators.
  */
 #define ITO_OPENCL_VEC2_OPERATOR_INCREMENT(T) \
-ito_inline \
+inline \
 cl_ ## T ## 2 &operator++(cl_ ## T ## 2 &lhs) \
 { \
     constexpr cl_ ## T one = (cl_ ## T) 1; \
@@ -119,7 +119,7 @@ cl_ ## T ## 2 &operator++(cl_ ## T ## 2 &lhs) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 2 &operator--(cl_ ## T ## 2 &lhs) \
 { \
     constexpr cl_ ## T one = (cl_ ## T) 1; \
@@ -127,7 +127,7 @@ cl_ ## T ## 2 &operator--(cl_ ## T ## 2 &lhs) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 2 operator++(cl_ ## T ## 2 &lhs, int) \
 { \
     cl_ ## T ## 2 result = lhs; \
@@ -135,7 +135,7 @@ cl_ ## T ## 2 operator++(cl_ ## T ## 2 &lhs, int) \
     return result; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 2 operator--(cl_ ## T ## 2 &lhs, int) \
 { \
     cl_ ## T ## 2 result = lhs; \
@@ -147,28 +147,28 @@ cl_ ## T ## 2 operator--(cl_ ## T ## 2 &lhs, int) \
  * @brief Binary arithmetic operators between two vectors.
  */
 #define ITO_OPENCL_VEC2_OPERATOR_BINARY_VECTOR(T) \
-ito_inline \
+inline \
 cl_ ## T ## 2 operator+(cl_ ## T ## 2 lhs, const cl_ ## T ## 2 &rhs) \
 { \
     lhs += rhs; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 2 operator-(cl_ ## T ## 2 lhs, const cl_ ## T ## 2 &rhs) \
 { \
     lhs -= rhs; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 2 operator*(cl_ ## T ## 2 lhs, const cl_ ## T ## 2 &rhs) \
 { \
     lhs *= rhs; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 2 operator/(cl_ ## T ## 2 lhs, const cl_ ## T ## 2 &rhs) \
 { \
     lhs /= rhs; \
@@ -179,28 +179,28 @@ cl_ ## T ## 2 operator/(cl_ ## T ## 2 lhs, const cl_ ## T ## 2 &rhs) \
  * @brief Binary arithmetic operators between a vector and a scalar.
  */
 #define ITO_OPENCL_VEC2_OPERATOR_BINARY_SCALAR(T) \
-ito_inline \
+inline \
 cl_ ## T ## 2 operator+(cl_ ## T ## 2 lhs, const cl_ ## T scalar) \
 { \
     lhs += scalar; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 2 operator-(cl_ ## T ## 2 lhs, const cl_ ## T scalar) \
 { \
     lhs -= scalar; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 2 operator*(cl_ ## T ## 2 lhs, const cl_ ## T scalar) \
 { \
     lhs *= scalar; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 2 operator/(cl_ ## T ## 2 lhs, const cl_ ## T scalar) \
 { \
     lhs /= scalar; \
@@ -282,7 +282,7 @@ ITO_OPENCL_VEC2_OPERATOR_BINARY_SCALAR(double)
  * @brief Unary arithmetic vector operators.
  */
 #define ITO_OPENCL_VEC4_OPERATOR_COMPOUND_VECTOR(T) \
-ito_inline \
+inline \
 cl_ ## T ## 4 &operator+=(cl_ ## T ## 4 &lhs, const cl_ ## T ## 4 &rhs) \
 { \
     lhs.s[0] += rhs.s[0]; \
@@ -292,7 +292,7 @@ cl_ ## T ## 4 &operator+=(cl_ ## T ## 4 &lhs, const cl_ ## T ## 4 &rhs) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 4 &operator-=(cl_ ## T ## 4 &lhs, const cl_ ## T ## 4 &rhs) \
 { \
     lhs.s[0] -= rhs.s[0]; \
@@ -302,7 +302,7 @@ cl_ ## T ## 4 &operator-=(cl_ ## T ## 4 &lhs, const cl_ ## T ## 4 &rhs) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 4 &operator*=(cl_ ## T ## 4 &lhs, const cl_ ## T ## 4 &rhs) \
 { \
     lhs.s[0] *= rhs.s[0]; \
@@ -312,7 +312,7 @@ cl_ ## T ## 4 &operator*=(cl_ ## T ## 4 &lhs, const cl_ ## T ## 4 &rhs) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 4 &operator/=(cl_ ## T ## 4 &lhs, const cl_ ## T ## 4 &rhs) \
 { \
     lhs.s[0] /= rhs.s[0]; \
@@ -326,7 +326,7 @@ cl_ ## T ## 4 &operator/=(cl_ ## T ## 4 &lhs, const cl_ ## T ## 4 &rhs) \
  * @brief Unary arithmetic scalar operators.
  */
 #define ITO_OPENCL_VEC4_OPERATOR_COMPOUND_SCALAR(T) \
-ito_inline \
+inline \
 cl_ ## T ## 4 &operator+=(cl_ ## T ## 4 &lhs, const cl_ ## T scalar) \
 { \
     lhs.s[0] += scalar; \
@@ -336,7 +336,7 @@ cl_ ## T ## 4 &operator+=(cl_ ## T ## 4 &lhs, const cl_ ## T scalar) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 4 &operator-=(cl_ ## T ## 4 &lhs, const cl_ ## T scalar) \
 { \
     lhs.s[0] -= scalar; \
@@ -346,7 +346,7 @@ cl_ ## T ## 4 &operator-=(cl_ ## T ## 4 &lhs, const cl_ ## T scalar) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 4 &operator*=(cl_ ## T ## 4 &lhs, const cl_ ## T scalar) \
 { \
     lhs.s[0] *= scalar; \
@@ -356,7 +356,7 @@ cl_ ## T ## 4 &operator*=(cl_ ## T ## 4 &lhs, const cl_ ## T scalar) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 4 &operator/=(cl_ ## T ## 4 &lhs, const cl_ ## T scalar) \
 { \
     lhs.s[0] /= scalar; \
@@ -370,14 +370,14 @@ cl_ ## T ## 4 &operator/=(cl_ ## T ## 4 &lhs, const cl_ ## T scalar) \
  * @brief Unary plus/negation operators.
  */
 #define ITO_OPENCL_VEC4_OPERATOR_NEGATION(T) \
-ito_inline \
+inline \
 cl_ ## T ## 4 operator+(const cl_ ## T ## 4 &lhs) \
 { \
     cl_ ## T ## 4 result = lhs; \
     return result; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 4 operator-(const cl_ ## T ## 4 &lhs) \
 { \
     constexpr cl_ ## T minus_one = (cl_ ## T) (-1); \
@@ -390,7 +390,7 @@ cl_ ## T ## 4 operator-(const cl_ ## T ## 4 &lhs) \
  * @brief Increment operators.
  */
 #define ITO_OPENCL_VEC4_OPERATOR_INCREMENT(T) \
-ito_inline \
+inline \
 cl_ ## T ## 4 &operator++(cl_ ## T ## 4 &lhs) \
 { \
     constexpr cl_ ## T one = (cl_ ## T) 1; \
@@ -398,7 +398,7 @@ cl_ ## T ## 4 &operator++(cl_ ## T ## 4 &lhs) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 4 &operator--(cl_ ## T ## 4 &lhs) \
 { \
     constexpr cl_ ## T one = (cl_ ## T) 1; \
@@ -406,7 +406,7 @@ cl_ ## T ## 4 &operator--(cl_ ## T ## 4 &lhs) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 4 operator++(cl_ ## T ## 4 &lhs, int) \
 { \
     cl_ ## T ## 4 result = lhs; \
@@ -414,7 +414,7 @@ cl_ ## T ## 4 operator++(cl_ ## T ## 4 &lhs, int) \
     return result; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 4 operator--(cl_ ## T ## 4 &lhs, int) \
 { \
     cl_ ## T ## 4 result = lhs; \
@@ -426,28 +426,28 @@ cl_ ## T ## 4 operator--(cl_ ## T ## 4 &lhs, int) \
  * @brief Binary arithmetic operators between two vectors.
  */
 #define ITO_OPENCL_VEC4_OPERATOR_BINARY_VECTOR(T) \
-ito_inline \
+inline \
 cl_ ## T ## 4 operator+(cl_ ## T ## 4 lhs, const cl_ ## T ## 4 &rhs) \
 { \
     lhs += rhs; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 4 operator-(cl_ ## T ## 4 lhs, const cl_ ## T ## 4 &rhs) \
 { \
     lhs -= rhs; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 4 operator*(cl_ ## T ## 4 lhs, const cl_ ## T ## 4 &rhs) \
 { \
     lhs *= rhs; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 4 operator/(cl_ ## T ## 4 lhs, const cl_ ## T ## 4 &rhs) \
 { \
     lhs /= rhs; \
@@ -458,28 +458,28 @@ cl_ ## T ## 4 operator/(cl_ ## T ## 4 lhs, const cl_ ## T ## 4 &rhs) \
  * @brief Binary arithmetic operators between a vector and a scalar.
  */
 #define ITO_OPENCL_VEC4_OPERATOR_BINARY_SCALAR(T) \
-ito_inline \
+inline \
 cl_ ## T ## 4 operator+(cl_ ## T ## 4 lhs, const cl_ ## T scalar) \
 { \
     lhs += scalar; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 4 operator-(cl_ ## T ## 4 lhs, const cl_ ## T scalar) \
 { \
     lhs -= scalar; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 4 operator*(cl_ ## T ## 4 lhs, const cl_ ## T scalar) \
 { \
     lhs *= scalar; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 4 operator/(cl_ ## T ## 4 lhs, const cl_ ## T scalar) \
 { \
     lhs /= scalar; \
@@ -561,7 +561,7 @@ ITO_OPENCL_VEC4_OPERATOR_BINARY_SCALAR(double)
  * @brief Unary arithmetic vector operators.
  */
 #define ITO_OPENCL_VEC8_OPERATOR_COMPOUND_VECTOR(T) \
-ito_inline \
+inline \
 cl_ ## T ## 8 &operator+=(cl_ ## T ## 8 &lhs, const cl_ ## T ## 8 &rhs) \
 { \
     lhs.s[0] += rhs.s[0]; \
@@ -575,7 +575,7 @@ cl_ ## T ## 8 &operator+=(cl_ ## T ## 8 &lhs, const cl_ ## T ## 8 &rhs) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 8 &operator-=(cl_ ## T ## 8 &lhs, const cl_ ## T ## 8 &rhs) \
 { \
     lhs.s[0] -= rhs.s[0]; \
@@ -589,7 +589,7 @@ cl_ ## T ## 8 &operator-=(cl_ ## T ## 8 &lhs, const cl_ ## T ## 8 &rhs) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 8 &operator*=(cl_ ## T ## 8 &lhs, const cl_ ## T ## 8 &rhs) \
 { \
     lhs.s[0] *= rhs.s[0]; \
@@ -603,7 +603,7 @@ cl_ ## T ## 8 &operator*=(cl_ ## T ## 8 &lhs, const cl_ ## T ## 8 &rhs) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 8 &operator/=(cl_ ## T ## 8 &lhs, const cl_ ## T ## 8 &rhs) \
 { \
     lhs.s[0] /= rhs.s[0]; \
@@ -621,7 +621,7 @@ cl_ ## T ## 8 &operator/=(cl_ ## T ## 8 &lhs, const cl_ ## T ## 8 &rhs) \
  * @brief Unary arithmetic scalar operators.
  */
 #define ITO_OPENCL_VEC8_OPERATOR_COMPOUND_SCALAR(T) \
-ito_inline \
+inline \
 cl_ ## T ## 8 &operator+=(cl_ ## T ## 8 &lhs, const cl_ ## T scalar) \
 { \
     lhs.s[0] += scalar; \
@@ -635,7 +635,7 @@ cl_ ## T ## 8 &operator+=(cl_ ## T ## 8 &lhs, const cl_ ## T scalar) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 8 &operator-=(cl_ ## T ## 8 &lhs, const cl_ ## T scalar) \
 { \
     lhs.s[0] -= scalar; \
@@ -649,7 +649,7 @@ cl_ ## T ## 8 &operator-=(cl_ ## T ## 8 &lhs, const cl_ ## T scalar) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 8 &operator*=(cl_ ## T ## 8 &lhs, const cl_ ## T scalar) \
 { \
     lhs.s[0] *= scalar; \
@@ -663,7 +663,7 @@ cl_ ## T ## 8 &operator*=(cl_ ## T ## 8 &lhs, const cl_ ## T scalar) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 8 &operator/=(cl_ ## T ## 8 &lhs, const cl_ ## T scalar) \
 { \
     lhs.s[0] /= scalar; \
@@ -681,14 +681,14 @@ cl_ ## T ## 8 &operator/=(cl_ ## T ## 8 &lhs, const cl_ ## T scalar) \
  * @brief Unary plus/negation operators.
  */
 #define ITO_OPENCL_VEC8_OPERATOR_NEGATION(T) \
-ito_inline \
+inline \
 cl_ ## T ## 8 operator+(const cl_ ## T ## 8 &lhs) \
 { \
     cl_ ## T ## 8 result = lhs; \
     return result; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 8 operator-(const cl_ ## T ## 8 &lhs) \
 { \
     constexpr cl_ ## T minus_one = (cl_ ## T) (-1); \
@@ -701,7 +701,7 @@ cl_ ## T ## 8 operator-(const cl_ ## T ## 8 &lhs) \
  * @brief Increment operators.
  */
 #define ITO_OPENCL_VEC8_OPERATOR_INCREMENT(T) \
-ito_inline \
+inline \
 cl_ ## T ## 8 &operator++(cl_ ## T ## 8 &lhs) \
 { \
     constexpr cl_ ## T one = (cl_ ## T) 1; \
@@ -709,7 +709,7 @@ cl_ ## T ## 8 &operator++(cl_ ## T ## 8 &lhs) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 8 &operator--(cl_ ## T ## 8 &lhs) \
 { \
     constexpr cl_ ## T one = (cl_ ## T) 1; \
@@ -717,7 +717,7 @@ cl_ ## T ## 8 &operator--(cl_ ## T ## 8 &lhs) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 8 operator++(cl_ ## T ## 8 &lhs, int) \
 { \
     cl_ ## T ## 8 result = lhs; \
@@ -725,7 +725,7 @@ cl_ ## T ## 8 operator++(cl_ ## T ## 8 &lhs, int) \
     return result; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 8 operator--(cl_ ## T ## 8 &lhs, int) \
 { \
     cl_ ## T ## 8 result = lhs; \
@@ -737,28 +737,28 @@ cl_ ## T ## 8 operator--(cl_ ## T ## 8 &lhs, int) \
  * @brief Binary arithmetic operators between two vectors.
  */
 #define ITO_OPENCL_VEC8_OPERATOR_BINARY_VECTOR(T) \
-ito_inline \
+inline \
 cl_ ## T ## 8 operator+(cl_ ## T ## 8 lhs, const cl_ ## T ## 8 &rhs) \
 { \
     lhs += rhs; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 8 operator-(cl_ ## T ## 8 lhs, const cl_ ## T ## 8 &rhs) \
 { \
     lhs -= rhs; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 8 operator*(cl_ ## T ## 8 lhs, const cl_ ## T ## 8 &rhs) \
 { \
     lhs *= rhs; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 8 operator/(cl_ ## T ## 8 lhs, const cl_ ## T ## 8 &rhs) \
 { \
     lhs /= rhs; \
@@ -769,28 +769,28 @@ cl_ ## T ## 8 operator/(cl_ ## T ## 8 lhs, const cl_ ## T ## 8 &rhs) \
  * @brief Binary arithmetic operators between a vector and a scalar.
  */
 #define ITO_OPENCL_VEC8_OPERATOR_BINARY_SCALAR(T) \
-ito_inline \
+inline \
 cl_ ## T ## 8 operator+(cl_ ## T ## 8 lhs, const cl_ ## T scalar) \
 { \
     lhs += scalar; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 8 operator-(cl_ ## T ## 8 lhs, const cl_ ## T scalar) \
 { \
     lhs -= scalar; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 8 operator*(cl_ ## T ## 8 lhs, const cl_ ## T scalar) \
 { \
     lhs *= scalar; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 8 operator/(cl_ ## T ## 8 lhs, const cl_ ## T scalar) \
 { \
     lhs /= scalar; \
@@ -872,7 +872,7 @@ ITO_OPENCL_VEC8_OPERATOR_BINARY_SCALAR(double)
  * @brief Unary arithmetic vector operators.
  */
 #define ITO_OPENCL_VEC16_OPERATOR_COMPOUND_VECTOR(T) \
-ito_inline \
+inline \
 cl_ ## T ## 16 &operator+=(cl_ ## T ## 16 &lhs, const cl_ ## T ## 16 &rhs) \
 { \
     lhs.s[0]  += rhs.s[0]; \
@@ -894,7 +894,7 @@ cl_ ## T ## 16 &operator+=(cl_ ## T ## 16 &lhs, const cl_ ## T ## 16 &rhs) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 16 &operator-=(cl_ ## T ## 16 &lhs, const cl_ ## T ## 16 &rhs) \
 { \
     lhs.s[0]  -= rhs.s[0]; \
@@ -916,7 +916,7 @@ cl_ ## T ## 16 &operator-=(cl_ ## T ## 16 &lhs, const cl_ ## T ## 16 &rhs) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 16 &operator*=(cl_ ## T ## 16 &lhs, const cl_ ## T ## 16 &rhs) \
 { \
     lhs.s[0]  *= rhs.s[0]; \
@@ -938,7 +938,7 @@ cl_ ## T ## 16 &operator*=(cl_ ## T ## 16 &lhs, const cl_ ## T ## 16 &rhs) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 16 &operator/=(cl_ ## T ## 16 &lhs, const cl_ ## T ## 16 &rhs) \
 { \
     lhs.s[0]  /= rhs.s[0]; \
@@ -964,7 +964,7 @@ cl_ ## T ## 16 &operator/=(cl_ ## T ## 16 &lhs, const cl_ ## T ## 16 &rhs) \
  * @brief Unary arithmetic scalar operators.
  */
 #define ITO_OPENCL_VEC16_OPERATOR_COMPOUND_SCALAR(T) \
-ito_inline \
+inline \
 cl_ ## T ## 16 &operator+=(cl_ ## T ## 16 &lhs, const cl_ ## T scalar) \
 { \
     lhs.s[0]  += scalar; \
@@ -986,7 +986,7 @@ cl_ ## T ## 16 &operator+=(cl_ ## T ## 16 &lhs, const cl_ ## T scalar) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 16 &operator-=(cl_ ## T ## 16 &lhs, const cl_ ## T scalar) \
 { \
     lhs.s[0]  -= scalar; \
@@ -1008,7 +1008,7 @@ cl_ ## T ## 16 &operator-=(cl_ ## T ## 16 &lhs, const cl_ ## T scalar) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 16 &operator*=(cl_ ## T ## 16 &lhs, const cl_ ## T scalar) \
 { \
     lhs.s[0]  *= scalar; \
@@ -1030,7 +1030,7 @@ cl_ ## T ## 16 &operator*=(cl_ ## T ## 16 &lhs, const cl_ ## T scalar) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 16 &operator/=(cl_ ## T ## 16 &lhs, const cl_ ## T scalar) \
 { \
     lhs.s[0]  /= scalar; \
@@ -1056,14 +1056,14 @@ cl_ ## T ## 16 &operator/=(cl_ ## T ## 16 &lhs, const cl_ ## T scalar) \
  * @brief Unary plus/negation operators.
  */
 #define ITO_OPENCL_VEC16_OPERATOR_NEGATION(T) \
-ito_inline \
+inline \
 cl_ ## T ## 16 operator+(const cl_ ## T ## 16 &lhs) \
 { \
     cl_ ## T ## 16 result = lhs; \
     return result; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 16 operator-(const cl_ ## T ## 16 &lhs) \
 { \
     constexpr cl_ ## T minus_one = (cl_ ## T) (-1); \
@@ -1076,7 +1076,7 @@ cl_ ## T ## 16 operator-(const cl_ ## T ## 16 &lhs) \
  * @brief Increment operators.
  */
 #define ITO_OPENCL_VEC16_OPERATOR_INCREMENT(T) \
-ito_inline \
+inline \
 cl_ ## T ## 16 &operator++(cl_ ## T ## 16 &lhs) \
 { \
     constexpr cl_ ## T one = (cl_ ## T) 1; \
@@ -1084,7 +1084,7 @@ cl_ ## T ## 16 &operator++(cl_ ## T ## 16 &lhs) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 16 &operator--(cl_ ## T ## 16 &lhs) \
 { \
     constexpr cl_ ## T one = (cl_ ## T) 1; \
@@ -1092,7 +1092,7 @@ cl_ ## T ## 16 &operator--(cl_ ## T ## 16 &lhs) \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 16 operator++(cl_ ## T ## 16 &lhs, int) \
 { \
     cl_ ## T ## 16 result = lhs; \
@@ -1100,7 +1100,7 @@ cl_ ## T ## 16 operator++(cl_ ## T ## 16 &lhs, int) \
     return result; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 16 operator--(cl_ ## T ## 16 &lhs, int) \
 { \
     cl_ ## T ## 16 result = lhs; \
@@ -1112,28 +1112,28 @@ cl_ ## T ## 16 operator--(cl_ ## T ## 16 &lhs, int) \
  * @brief Binary arithmetic operators between two vectors.
  */
 #define ITO_OPENCL_VEC16_OPERATOR_BINARY_VECTOR(T) \
-ito_inline \
+inline \
 cl_ ## T ## 16 operator+(cl_ ## T ## 16 lhs, const cl_ ## T ## 16 &rhs) \
 { \
     lhs += rhs; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 16 operator-(cl_ ## T ## 16 lhs, const cl_ ## T ## 16 &rhs) \
 { \
     lhs -= rhs; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 16 operator*(cl_ ## T ## 16 lhs, const cl_ ## T ## 16 &rhs) \
 { \
     lhs *= rhs; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 16 operator/(cl_ ## T ## 16 lhs, const cl_ ## T ## 16 &rhs) \
 { \
     lhs /= rhs; \
@@ -1144,28 +1144,28 @@ cl_ ## T ## 16 operator/(cl_ ## T ## 16 lhs, const cl_ ## T ## 16 &rhs) \
  * @brief Binary arithmetic operators between a vector and a scalar.
  */
 #define ITO_OPENCL_VEC16_OPERATOR_BINARY_SCALAR(T) \
-ito_inline \
+inline \
 cl_ ## T ## 16 operator+(cl_ ## T ## 16 lhs, const cl_ ## T scalar) \
 { \
     lhs += scalar; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 16 operator-(cl_ ## T ## 16 lhs, const cl_ ## T scalar) \
 { \
     lhs -= scalar; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 16 operator*(cl_ ## T ## 16 lhs, const cl_ ## T scalar) \
 { \
     lhs *= scalar; \
     return lhs; \
 } \
 \
-ito_inline \
+inline \
 cl_ ## T ## 16 operator/(cl_ ## T ## 16 lhs, const cl_ ## T scalar) \
 { \
     lhs /= scalar; \
@@ -1250,7 +1250,7 @@ namespace cl {
  * @brief OpenCL cl_vec2 arithmetic functions.
  */
 #define ITO_OPENCL_VEC2_ARITHMETIC(T) \
-ito_inline \
+inline \
 cl_ ## T ## 2 abs(const cl_ ## T ## 2 &v) \
 { \
     return cl_ ## T ## 2{ \
@@ -1258,7 +1258,7 @@ cl_ ## T ## 2 abs(const cl_ ## T ## 2 &v) \
         std::abs(v.s[1])}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 2 sign(const cl_ ## T ## 2 &v) \
 { \
     constexpr cl_ ## T zero = (cl_ ## T) 0; \
@@ -1268,7 +1268,7 @@ cl_ ## T ## 2 sign(const cl_ ## T ## 2 &v) \
         (v.s[1] < zero) ? -one : (v.s[1] > zero) ? one : zero}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 2 floor(const cl_ ## T ## 2 &v) \
 { \
     return cl_ ## T ## 2{ \
@@ -1276,7 +1276,7 @@ cl_ ## T ## 2 floor(const cl_ ## T ## 2 &v) \
         std::floor(v.s[1])}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 2 round(const cl_ ## T ## 2 &v) \
 { \
     return cl_ ## T ## 2{ \
@@ -1284,7 +1284,7 @@ cl_ ## T ## 2 round(const cl_ ## T ## 2 &v) \
         std::round(v.s[1])}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 2 ceil(const cl_ ## T ## 2 &v) \
 { \
     return cl_ ## T ## 2{ \
@@ -1292,7 +1292,7 @@ cl_ ## T ## 2 ceil(const cl_ ## T ## 2 &v) \
         std::ceil(v.s[1])}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 2 clamp(const cl_ ## T ## 2 &v, const cl_ ## T lo, const cl_ ## T hi) \
 { \
     return cl_ ## T ## 2{ \
@@ -1300,7 +1300,7 @@ cl_ ## T ## 2 clamp(const cl_ ## T ## 2 &v, const cl_ ## T lo, const cl_ ## T hi
         std::min(std::max(v.s[1], lo), hi)}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 2 lerp(const cl_ ## T ## 2 &lo, const cl_ ## T ## 2 &hi, const cl_ ## T alpha) \
 { \
     constexpr cl_ ## T one = (cl_ ## T) 1; \
@@ -1316,26 +1316,26 @@ ITO_OPENCL_VEC2_ARITHMETIC(double)
  * @brief OpenCL cl_vec2 algebra functions.
  */
 #define ITO_OPENCL_VEC2_ALGEBRA(T) \
-ito_inline \
+inline \
 cl_ ## T dot(const cl_ ## T ## 2 &a, const cl_ ## T ## 2 &b) \
 { \
     return (a.s[0] * b.s[0] + \
             a.s[1] * b.s[1]); \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T norm(const cl_ ## T ## 2 &a) \
 { \
     return std::sqrt(dot(a,a)); \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 2 normalize(const cl_ ## T ## 2 &a) \
 { \
     return (a / norm(a)); \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T distance(const cl_ ## T ## 2 &a, const cl_ ## T ## 2 &b) \
 { \
     return norm(a-b); \
@@ -1348,7 +1348,7 @@ ITO_OPENCL_VEC2_ALGEBRA(double)
  * @brief OpenCL cl_vec4 arithmetic functions.
  */
 #define ITO_OPENCL_VEC4_ARITHMETIC(T) \
-ito_inline \
+inline \
 cl_ ## T ## 4 abs(const cl_ ## T ## 4 &v) \
 { \
     return cl_ ## T ## 4{ \
@@ -1358,7 +1358,7 @@ cl_ ## T ## 4 abs(const cl_ ## T ## 4 &v) \
         std::abs(v.s[3])}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 4 sign(const cl_ ## T ## 4 &v) \
 { \
     constexpr cl_ ## T zero = (cl_ ## T) 0; \
@@ -1370,7 +1370,7 @@ cl_ ## T ## 4 sign(const cl_ ## T ## 4 &v) \
         (v.s[3] < zero) ? -one : (v.s[3] > zero) ? one : zero}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 4 floor(const cl_ ## T ## 4 &v) \
 { \
     return cl_ ## T ## 4{ \
@@ -1380,7 +1380,7 @@ cl_ ## T ## 4 floor(const cl_ ## T ## 4 &v) \
         std::floor(v.s[3])}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 4 round(const cl_ ## T ## 4 &v) \
 { \
     return cl_ ## T ## 4{ \
@@ -1390,7 +1390,7 @@ cl_ ## T ## 4 round(const cl_ ## T ## 4 &v) \
         std::round(v.s[3])}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 4 ceil(const cl_ ## T ## 4 &v) \
 { \
     return cl_ ## T ## 4{ \
@@ -1400,7 +1400,7 @@ cl_ ## T ## 4 ceil(const cl_ ## T ## 4 &v) \
         std::ceil(v.s[3])}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 4 clamp(const cl_ ## T ## 4 &v, const cl_ ## T lo, const cl_ ## T hi) \
 { \
     return cl_ ## T ## 4{ \
@@ -1410,7 +1410,7 @@ cl_ ## T ## 4 clamp(const cl_ ## T ## 4 &v, const cl_ ## T lo, const cl_ ## T hi
         std::min(std::max(v.s[3], lo), hi)}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 4 lerp(const cl_ ## T ## 4 &lo, const cl_ ## T ## 4 &hi, const cl_ ## T alpha) \
 { \
     constexpr cl_ ## T one = (cl_ ## T) 1; \
@@ -1428,7 +1428,7 @@ ITO_OPENCL_VEC4_ARITHMETIC(double)
  * @brief OpenCL cl_vec4 algebra functions.
  */
 #define ITO_OPENCL_VEC4_ALGEBRA(T) \
-ito_inline \
+inline \
 cl_ ## T dot(const cl_ ## T ## 4 &a, const cl_ ## T ## 4 &b) \
 { \
     return (a.s[0] * b.s[0] + \
@@ -1437,19 +1437,19 @@ cl_ ## T dot(const cl_ ## T ## 4 &a, const cl_ ## T ## 4 &b) \
             a.s[3] * b.s[3]); \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T norm(const cl_ ## T ## 4 &a) \
 { \
     return std::sqrt(dot(a,a)); \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 4 normalize(const cl_ ## T ## 4 &a) \
 { \
     return (a / norm(a)); \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T distance(const cl_ ## T ## 4 &a, const cl_ ## T ## 4 &b) \
 { \
     return norm(a-b); \
@@ -1462,7 +1462,7 @@ ITO_OPENCL_VEC4_ALGEBRA(double)
  * @brief OpenCL cl_vec8 arithmetic functions.
  */
 #define ITO_OPENCL_VEC8_ARITHMETIC(T) \
-ito_inline \
+inline \
 cl_ ## T ## 8 abs(const cl_ ## T ## 8 &v) \
 { \
     return cl_ ## T ## 8{ \
@@ -1476,7 +1476,7 @@ cl_ ## T ## 8 abs(const cl_ ## T ## 8 &v) \
         std::abs(v.s[7])}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 8 sign(const cl_ ## T ## 8 &v) \
 { \
     constexpr cl_ ## T zero = (cl_ ## T) 0; \
@@ -1492,7 +1492,7 @@ cl_ ## T ## 8 sign(const cl_ ## T ## 8 &v) \
         (v.s[7] < zero) ? -one : (v.s[7] > zero) ? one : zero}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 8 floor(const cl_ ## T ## 8 &v) \
 { \
     return cl_ ## T ## 8{ \
@@ -1506,7 +1506,7 @@ cl_ ## T ## 8 floor(const cl_ ## T ## 8 &v) \
         std::floor(v.s[7])}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 8 round(const cl_ ## T ## 8 &v) \
 { \
     return cl_ ## T ## 8{ \
@@ -1520,7 +1520,7 @@ cl_ ## T ## 8 round(const cl_ ## T ## 8 &v) \
         std::round(v.s[7])}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 8 ceil(const cl_ ## T ## 8 &v) \
 { \
     return cl_ ## T ## 8{ \
@@ -1534,7 +1534,7 @@ cl_ ## T ## 8 ceil(const cl_ ## T ## 8 &v) \
         std::ceil(v.s[7])}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 8 clamp(const cl_ ## T ## 8 &v, const cl_ ## T lo, const cl_ ## T hi) \
 { \
     return cl_ ## T ## 8{ \
@@ -1548,7 +1548,7 @@ cl_ ## T ## 8 clamp(const cl_ ## T ## 8 &v, const cl_ ## T lo, const cl_ ## T hi
         std::min(std::max(v.s[7], lo), hi)}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 8 lerp(const cl_ ## T ## 8 &lo, const cl_ ## T ## 8 &hi, const cl_ ## T alpha) \
 { \
     constexpr cl_ ## T one = (cl_ ## T) 1; \
@@ -1570,7 +1570,7 @@ ITO_OPENCL_VEC8_ARITHMETIC(double)
  * @brief OpenCL cl_vec8 algebra functions.
  */
 #define ITO_OPENCL_VEC8_ALGEBRA(T) \
-ito_inline \
+inline \
 cl_ ## T dot(const cl_ ## T ## 8 &a, const cl_ ## T ## 8 &b) \
 { \
     return (a.s[0] * b.s[0] + \
@@ -1583,19 +1583,19 @@ cl_ ## T dot(const cl_ ## T ## 8 &a, const cl_ ## T ## 8 &b) \
             a.s[7] * b.s[7]); \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T norm(const cl_ ## T ## 8 &a) \
 { \
     return std::sqrt(dot(a,a)); \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 8 normalize(const cl_ ## T ## 8 &a) \
 { \
     return (a / norm(a)); \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T distance(const cl_ ## T ## 8 &a, const cl_ ## T ## 8 &b) \
 { \
     return norm(a-b); \
@@ -1608,7 +1608,7 @@ ITO_OPENCL_VEC8_ALGEBRA(double)
  * @brief OpenCL cl_vec16 arithmetic functions.
  */
 #define ITO_OPENCL_VEC16_ARITHMETIC(T) \
-ito_inline \
+inline \
 cl_ ## T ## 16 abs(const cl_ ## T ## 16 &v) \
 { \
     return cl_ ## T ## 16{ \
@@ -1630,7 +1630,7 @@ cl_ ## T ## 16 abs(const cl_ ## T ## 16 &v) \
         std::abs(v.s[15])}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 16 sign(const cl_ ## T ## 16 &v) \
 { \
     constexpr cl_ ## T zero = (cl_ ## T) 0; \
@@ -1654,7 +1654,7 @@ cl_ ## T ## 16 sign(const cl_ ## T ## 16 &v) \
         (v.s[15] < zero) ? -one : (v.s[15] > zero) ? one : zero}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 16 floor(const cl_ ## T ## 16 &v) \
 { \
     return cl_ ## T ## 16{ \
@@ -1676,7 +1676,7 @@ cl_ ## T ## 16 floor(const cl_ ## T ## 16 &v) \
         std::floor(v.s[15])}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 16 round(const cl_ ## T ## 16 &v) \
 { \
     return cl_ ## T ## 16{ \
@@ -1698,7 +1698,7 @@ cl_ ## T ## 16 round(const cl_ ## T ## 16 &v) \
         std::round(v.s[15])}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 16 ceil(const cl_ ## T ## 16 &v) \
 { \
     return cl_ ## T ## 16{ \
@@ -1720,7 +1720,7 @@ cl_ ## T ## 16 ceil(const cl_ ## T ## 16 &v) \
         std::ceil(v.s[15])}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 16 clamp(const cl_ ## T ## 16 &v, const cl_ ## T lo, const cl_ ## T hi) \
 { \
     return cl_ ## T ## 16{ \
@@ -1742,7 +1742,7 @@ cl_ ## T ## 16 clamp(const cl_ ## T ## 16 &v, const cl_ ## T lo, const cl_ ## T 
         std::min(std::max(v.s[15], lo), hi)}; \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 16 lerp(const cl_ ## T ## 16 &lo, const cl_ ## T ## 16 &hi, const cl_ ## T alpha) \
 { \
     constexpr cl_ ## T one = (cl_ ## T) 1; \
@@ -1772,7 +1772,7 @@ ITO_OPENCL_VEC16_ARITHMETIC(double)
  * @brief OpenCL cl_vec16 algebra functions.
  */
 #define ITO_OPENCL_VEC16_ALGEBRA(T) \
-ito_inline \
+inline \
 cl_ ## T dot(const cl_ ## T ## 16 &a, const cl_ ## T ## 16 &b) \
 { \
     return (a.s[0] * b.s[0] + \
@@ -1793,19 +1793,19 @@ cl_ ## T dot(const cl_ ## T ## 16 &a, const cl_ ## T ## 16 &b) \
             a.s[15] * b.s[15]); \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T norm(const cl_ ## T ## 16 &a) \
 { \
     return std::sqrt(dot(a,a)); \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T ## 16 normalize(const cl_ ## T ## 16 &a) \
 { \
     return (a / norm(a)); \
 } \
  \
-ito_inline \
+inline \
 cl_ ## T distance(const cl_ ## T ## 16 &a, const cl_ ## T ## 16 &b) \
 { \
     return norm(a-b); \

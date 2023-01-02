@@ -131,110 +131,110 @@ const vec4<T> vec4<T>::ones = {(T) 1, (T) 1, (T) 1, (T) 1};
  * Compound assignment operators vector operators.
  */
 template<typename T>
-ito_inline vec2<T> &operator+=(vec2<T> &lhs, const vec2<T> &rhs);
-template<typename T> ito_inline vec2<T> &operator-=(vec2<T> &lhs, const vec2<T> &rhs);
-template<typename T> ito_inline vec2<T> &operator*=(vec2<T> &lhs, const vec2<T> &rhs);
-template<typename T> ito_inline vec2<T> &operator/=(vec2<T> &lhs, const vec2<T> &rhs);
+inline vec2<T> &operator+=(vec2<T> &lhs, const vec2<T> &rhs);
+template<typename T> inline vec2<T> &operator-=(vec2<T> &lhs, const vec2<T> &rhs);
+template<typename T> inline vec2<T> &operator*=(vec2<T> &lhs, const vec2<T> &rhs);
+template<typename T> inline vec2<T> &operator/=(vec2<T> &lhs, const vec2<T> &rhs);
 
-template<typename T> ito_inline vec2<T> &operator+=(vec2<T> &lhs, const T scalar);
-template<typename T> ito_inline vec2<T> &operator-=(vec2<T> &lhs, const T scalar);
-template<typename T> ito_inline vec2<T> &operator*=(vec2<T> &lhs, const T scalar);
-template<typename T> ito_inline vec2<T> &operator/=(vec2<T> &lhs, const T scalar);
+template<typename T> inline vec2<T> &operator+=(vec2<T> &lhs, const T scalar);
+template<typename T> inline vec2<T> &operator-=(vec2<T> &lhs, const T scalar);
+template<typename T> inline vec2<T> &operator*=(vec2<T> &lhs, const T scalar);
+template<typename T> inline vec2<T> &operator/=(vec2<T> &lhs, const T scalar);
 
 /** Arithmetic operators. */
-template<typename T> ito_inline vec2<T> operator+(vec2<T> lhs, const vec2<T> &rhs);
-template<typename T> ito_inline vec2<T> operator-(vec2<T> lhs, const vec2<T> &rhs);
-template<typename T> ito_inline vec2<T> operator*(vec2<T> lhs, const vec2<T> &rhs);
-template<typename T> ito_inline vec2<T> operator/(vec2<T> lhs, const vec2<T> &rhs);
+template<typename T> inline vec2<T> operator+(vec2<T> lhs, const vec2<T> &rhs);
+template<typename T> inline vec2<T> operator-(vec2<T> lhs, const vec2<T> &rhs);
+template<typename T> inline vec2<T> operator*(vec2<T> lhs, const vec2<T> &rhs);
+template<typename T> inline vec2<T> operator/(vec2<T> lhs, const vec2<T> &rhs);
 
-template<typename T> ito_inline vec2<T> operator+(vec2<T> lhs, const T scalar);
-template<typename T> ito_inline vec2<T> operator-(vec2<T> lhs, const T scalar);
-template<typename T> ito_inline vec2<T> operator*(vec2<T> lhs, const T scalar);
-template<typename T> ito_inline vec2<T> operator/(vec2<T> lhs, const T scalar);
+template<typename T> inline vec2<T> operator+(vec2<T> lhs, const T scalar);
+template<typename T> inline vec2<T> operator-(vec2<T> lhs, const T scalar);
+template<typename T> inline vec2<T> operator*(vec2<T> lhs, const T scalar);
+template<typename T> inline vec2<T> operator/(vec2<T> lhs, const T scalar);
 
 /** Unary operators. */
-template<typename T> ito_inline vec2<T> operator+(vec2<T> lhs);
-template<typename T> ito_inline vec2<T> operator-(vec2<T> lhs);
+template<typename T> inline vec2<T> operator+(vec2<T> lhs);
+template<typename T> inline vec2<T> operator-(vec2<T> lhs);
 
 /** Increment operators. */
-template<typename T> ito_inline vec2<T> &operator++(vec2<T> &lhs);
-template<typename T> ito_inline vec2<T> &operator--(vec2<T> &lhs);
-template<typename T> ito_inline vec2<T> operator++(vec2<T> &lhs, int);
-template<typename T> ito_inline vec2<T> operator--(vec2<T> &lhs, int);
+template<typename T> inline vec2<T> &operator++(vec2<T> &lhs);
+template<typename T> inline vec2<T> &operator--(vec2<T> &lhs);
+template<typename T> inline vec2<T> operator++(vec2<T> &lhs, int);
+template<typename T> inline vec2<T> operator--(vec2<T> &lhs, int);
 
 /** ---- vec3 declarations ----------------------------------------------------
  * Compound assignment operators vector operators.
  */
-template<typename T> ito_inline vec3<T> &operator+=(vec3<T> &lhs, const vec3<T> &rhs);
-template<typename T> ito_inline vec3<T> &operator-=(vec3<T> &lhs, const vec3<T> &rhs);
-template<typename T> ito_inline vec3<T> &operator*=(vec3<T> &lhs, const vec3<T> &rhs);
-template<typename T> ito_inline vec3<T> &operator/=(vec3<T> &lhs, const vec3<T> &rhs);
+template<typename T> inline vec3<T> &operator+=(vec3<T> &lhs, const vec3<T> &rhs);
+template<typename T> inline vec3<T> &operator-=(vec3<T> &lhs, const vec3<T> &rhs);
+template<typename T> inline vec3<T> &operator*=(vec3<T> &lhs, const vec3<T> &rhs);
+template<typename T> inline vec3<T> &operator/=(vec3<T> &lhs, const vec3<T> &rhs);
 
-template<typename T> ito_inline vec3<T> &operator+=(vec3<T> &lhs, const T scalar);
-template<typename T> ito_inline vec3<T> &operator-=(vec3<T> &lhs, const T scalar);
-template<typename T> ito_inline vec3<T> &operator*=(vec3<T> &lhs, const T scalar);
-template<typename T> ito_inline vec3<T> &operator/=(vec3<T> &lhs, const T scalar);
+template<typename T> inline vec3<T> &operator+=(vec3<T> &lhs, const T scalar);
+template<typename T> inline vec3<T> &operator-=(vec3<T> &lhs, const T scalar);
+template<typename T> inline vec3<T> &operator*=(vec3<T> &lhs, const T scalar);
+template<typename T> inline vec3<T> &operator/=(vec3<T> &lhs, const T scalar);
 
 /** Arithmetic operators. */
-template<typename T> ito_inline vec3<T> operator+(vec3<T> lhs, const vec3<T> &rhs);
-template<typename T> ito_inline vec3<T> operator-(vec3<T> lhs, const vec3<T> &rhs);
-template<typename T> ito_inline vec3<T> operator*(vec3<T> lhs, const vec3<T> &rhs);
-template<typename T> ito_inline vec3<T> operator/(vec3<T> lhs, const vec3<T> &rhs);
+template<typename T> inline vec3<T> operator+(vec3<T> lhs, const vec3<T> &rhs);
+template<typename T> inline vec3<T> operator-(vec3<T> lhs, const vec3<T> &rhs);
+template<typename T> inline vec3<T> operator*(vec3<T> lhs, const vec3<T> &rhs);
+template<typename T> inline vec3<T> operator/(vec3<T> lhs, const vec3<T> &rhs);
 
-template<typename T> ito_inline vec3<T> operator+(vec3<T> lhs, const T scalar);
-template<typename T> ito_inline vec3<T> operator-(vec3<T> lhs, const T scalar);
-template<typename T> ito_inline vec3<T> operator*(vec3<T> lhs, const T scalar);
-template<typename T> ito_inline vec3<T> operator/(vec3<T> lhs, const T scalar);
+template<typename T> inline vec3<T> operator+(vec3<T> lhs, const T scalar);
+template<typename T> inline vec3<T> operator-(vec3<T> lhs, const T scalar);
+template<typename T> inline vec3<T> operator*(vec3<T> lhs, const T scalar);
+template<typename T> inline vec3<T> operator/(vec3<T> lhs, const T scalar);
 
 /** Unary operators. */
-template<typename T> ito_inline vec3<T> operator+(vec3<T> lhs);
-template<typename T> ito_inline vec3<T> operator-(vec3<T> lhs);
+template<typename T> inline vec3<T> operator+(vec3<T> lhs);
+template<typename T> inline vec3<T> operator-(vec3<T> lhs);
 
 /** Increment operators. */
-template<typename T> ito_inline vec3<T> &operator++(vec3<T> &lhs);
-template<typename T> ito_inline vec3<T> &operator--(vec3<T> &lhs);
-template<typename T> ito_inline vec3<T> operator++(vec3<T> &lhs, int);
-template<typename T> ito_inline vec3<T> operator--(vec3<T> &lhs, int);
+template<typename T> inline vec3<T> &operator++(vec3<T> &lhs);
+template<typename T> inline vec3<T> &operator--(vec3<T> &lhs);
+template<typename T> inline vec3<T> operator++(vec3<T> &lhs, int);
+template<typename T> inline vec3<T> operator--(vec3<T> &lhs, int);
 
 /** ---- vec4 declarations ----------------------------------------------------
  * Compound assignment operators vector operators.
  */
-template<typename T> ito_inline vec4<T> &operator+=(vec4<T> &lhs, const vec4<T> &rhs);
-template<typename T> ito_inline vec4<T> &operator-=(vec4<T> &lhs, const vec4<T> &rhs);
-template<typename T> ito_inline vec4<T> &operator*=(vec4<T> &lhs, const vec4<T> &rhs);
-template<typename T> ito_inline vec4<T> &operator/=(vec4<T> &lhs, const vec4<T> &rhs);
+template<typename T> inline vec4<T> &operator+=(vec4<T> &lhs, const vec4<T> &rhs);
+template<typename T> inline vec4<T> &operator-=(vec4<T> &lhs, const vec4<T> &rhs);
+template<typename T> inline vec4<T> &operator*=(vec4<T> &lhs, const vec4<T> &rhs);
+template<typename T> inline vec4<T> &operator/=(vec4<T> &lhs, const vec4<T> &rhs);
 
-template<typename T> ito_inline vec4<T> &operator+=(vec4<T> &lhs, const T scalar);
-template<typename T> ito_inline vec4<T> &operator-=(vec4<T> &lhs, const T scalar);
-template<typename T> ito_inline vec4<T> &operator*=(vec4<T> &lhs, const T scalar);
-template<typename T> ito_inline vec4<T> &operator/=(vec4<T> &lhs, const T scalar);
+template<typename T> inline vec4<T> &operator+=(vec4<T> &lhs, const T scalar);
+template<typename T> inline vec4<T> &operator-=(vec4<T> &lhs, const T scalar);
+template<typename T> inline vec4<T> &operator*=(vec4<T> &lhs, const T scalar);
+template<typename T> inline vec4<T> &operator/=(vec4<T> &lhs, const T scalar);
 
 /** Arithmetic operators. */
-template<typename T> ito_inline vec4<T> operator+(vec4<T> lhs, const vec4<T> &rhs);
-template<typename T> ito_inline vec4<T> operator-(vec4<T> lhs, const vec4<T> &rhs);
-template<typename T> ito_inline vec4<T> operator*(vec4<T> lhs, const vec4<T> &rhs);
-template<typename T> ito_inline vec4<T> operator/(vec4<T> lhs, const vec4<T> &rhs);
+template<typename T> inline vec4<T> operator+(vec4<T> lhs, const vec4<T> &rhs);
+template<typename T> inline vec4<T> operator-(vec4<T> lhs, const vec4<T> &rhs);
+template<typename T> inline vec4<T> operator*(vec4<T> lhs, const vec4<T> &rhs);
+template<typename T> inline vec4<T> operator/(vec4<T> lhs, const vec4<T> &rhs);
 
-template<typename T> ito_inline vec4<T> operator+(vec4<T> lhs, const T scalar);
-template<typename T> ito_inline vec4<T> operator-(vec4<T> lhs, const T scalar);
-template<typename T> ito_inline vec4<T> operator*(vec4<T> lhs, const T scalar);
-template<typename T> ito_inline vec4<T> operator/(vec4<T> lhs, const T scalar);
+template<typename T> inline vec4<T> operator+(vec4<T> lhs, const T scalar);
+template<typename T> inline vec4<T> operator-(vec4<T> lhs, const T scalar);
+template<typename T> inline vec4<T> operator*(vec4<T> lhs, const T scalar);
+template<typename T> inline vec4<T> operator/(vec4<T> lhs, const T scalar);
 
 /** Unary operators. */
-template<typename T> ito_inline vec4<T> operator+(vec4<T> lhs);
-template<typename T> ito_inline vec4<T> operator-(vec4<T> lhs);
+template<typename T> inline vec4<T> operator+(vec4<T> lhs);
+template<typename T> inline vec4<T> operator-(vec4<T> lhs);
 
 /** Increment operators. */
-template<typename T> ito_inline vec4<T> &operator++(vec4<T> &lhs);
-template<typename T> ito_inline vec4<T> &operator--(vec4<T> &lhs);
-template<typename T> ito_inline vec4<T> operator++(vec4<T> &lhs, int);
-template<typename T> ito_inline vec4<T> operator--(vec4<T> &lhs, int);
+template<typename T> inline vec4<T> &operator++(vec4<T> &lhs);
+template<typename T> inline vec4<T> &operator--(vec4<T> &lhs);
+template<typename T> inline vec4<T> operator++(vec4<T> &lhs, int);
+template<typename T> inline vec4<T> operator--(vec4<T> &lhs, int);
 
 /** ---- vec2 implementation --------------------------------------------------
  * Compound assignment operators vector operators.
  */
 template<typename T>
-ito_inline vec2<T> &operator+=(vec2<T> &lhs, const vec2<T> &rhs)
+inline vec2<T> &operator+=(vec2<T> &lhs, const vec2<T> &rhs)
 {
     lhs.x += rhs.x;
     lhs.y += rhs.y;
@@ -242,7 +242,7 @@ ito_inline vec2<T> &operator+=(vec2<T> &lhs, const vec2<T> &rhs)
 }
 
 template<typename T>
-ito_inline vec2<T> &operator-=(vec2<T> &lhs, const vec2<T> &rhs)
+inline vec2<T> &operator-=(vec2<T> &lhs, const vec2<T> &rhs)
 {
     lhs.x -= rhs.x;
     lhs.y -= rhs.y;
@@ -250,7 +250,7 @@ ito_inline vec2<T> &operator-=(vec2<T> &lhs, const vec2<T> &rhs)
 }
 
 template<typename T>
-ito_inline vec2<T> &operator*=(vec2<T> &lhs, const vec2<T> &rhs)
+inline vec2<T> &operator*=(vec2<T> &lhs, const vec2<T> &rhs)
 {
     lhs.x *= rhs.x;
     lhs.y *= rhs.y;
@@ -258,7 +258,7 @@ ito_inline vec2<T> &operator*=(vec2<T> &lhs, const vec2<T> &rhs)
 }
 
 template<typename T>
-ito_inline vec2<T> &operator/=(vec2<T> &lhs, const vec2<T> &rhs)
+inline vec2<T> &operator/=(vec2<T> &lhs, const vec2<T> &rhs)
 {
     lhs.x /= rhs.x;
     lhs.y /= rhs.y;
@@ -266,7 +266,7 @@ ito_inline vec2<T> &operator/=(vec2<T> &lhs, const vec2<T> &rhs)
 }
 
 template<typename T>
-ito_inline vec2<T> &operator+=(vec2<T> &lhs, const T scalar)
+inline vec2<T> &operator+=(vec2<T> &lhs, const T scalar)
 {
     lhs.x += scalar;
     lhs.y += scalar;
@@ -274,7 +274,7 @@ ito_inline vec2<T> &operator+=(vec2<T> &lhs, const T scalar)
 }
 
 template<typename T>
-ito_inline vec2<T> &operator-=(vec2<T> &lhs, const T scalar)
+inline vec2<T> &operator-=(vec2<T> &lhs, const T scalar)
 {
     lhs.x -= scalar;
     lhs.y -= scalar;
@@ -282,7 +282,7 @@ ito_inline vec2<T> &operator-=(vec2<T> &lhs, const T scalar)
 }
 
 template<typename T>
-ito_inline vec2<T> &operator*=(vec2<T> &lhs, const T scalar)
+inline vec2<T> &operator*=(vec2<T> &lhs, const T scalar)
 {
     lhs.x *= scalar;
     lhs.y *= scalar;
@@ -290,7 +290,7 @@ ito_inline vec2<T> &operator*=(vec2<T> &lhs, const T scalar)
 }
 
 template<typename T>
-ito_inline vec2<T> &operator/=(vec2<T> &lhs, const T scalar)
+inline vec2<T> &operator/=(vec2<T> &lhs, const T scalar)
 {
     lhs.x /= scalar;
     lhs.y /= scalar;
@@ -301,43 +301,43 @@ ito_inline vec2<T> &operator/=(vec2<T> &lhs, const T scalar)
  * Arithmetic operators.
  */
 template<typename T>
-ito_inline vec2<T> operator+(vec2<T> lhs, const vec2<T> &rhs) { return lhs += rhs; }
+inline vec2<T> operator+(vec2<T> lhs, const vec2<T> &rhs) { return lhs += rhs; }
 template<typename T>
-ito_inline vec2<T> operator-(vec2<T> lhs, const vec2<T> &rhs) { return lhs -= rhs; }
+inline vec2<T> operator-(vec2<T> lhs, const vec2<T> &rhs) { return lhs -= rhs; }
 template<typename T>
-ito_inline vec2<T> operator*(vec2<T> lhs, const vec2<T> &rhs) { return lhs *= rhs; }
+inline vec2<T> operator*(vec2<T> lhs, const vec2<T> &rhs) { return lhs *= rhs; }
 template<typename T>
-ito_inline vec2<T> operator/(vec2<T> lhs, const vec2<T> &rhs) { return lhs /= rhs; }
+inline vec2<T> operator/(vec2<T> lhs, const vec2<T> &rhs) { return lhs /= rhs; }
 
 template<typename T>
-ito_inline vec2<T> operator+(vec2<T> lhs, const T scalar) { return lhs += scalar; }
+inline vec2<T> operator+(vec2<T> lhs, const T scalar) { return lhs += scalar; }
 template<typename T>
-ito_inline vec2<T> operator-(vec2<T> lhs, const T scalar) { return lhs -= scalar; }
+inline vec2<T> operator-(vec2<T> lhs, const T scalar) { return lhs -= scalar; }
 template<typename T>
-ito_inline vec2<T> operator*(vec2<T> lhs, const T scalar) { return lhs *= scalar; }
+inline vec2<T> operator*(vec2<T> lhs, const T scalar) { return lhs *= scalar; }
 template<typename T>
-ito_inline vec2<T> operator/(vec2<T> lhs, const T scalar) { return lhs /= scalar; }
+inline vec2<T> operator/(vec2<T> lhs, const T scalar) { return lhs /= scalar; }
 
 /**
  * Unary operators.
  */
 template<typename T>
-ito_inline vec2<T> operator+(vec2<T> lhs) { return lhs; }
+inline vec2<T> operator+(vec2<T> lhs) { return lhs; }
 
 template<typename T>
-ito_inline vec2<T> operator-(vec2<T> lhs) { return lhs *= (T) -1; }
+inline vec2<T> operator-(vec2<T> lhs) { return lhs *= (T) -1; }
 
 /**
  * Increment operators.
  */
 template<typename T>
-ito_inline vec2<T> &operator++(vec2<T> &lhs) { return lhs += (T) 1; }
+inline vec2<T> &operator++(vec2<T> &lhs) { return lhs += (T) 1; }
 
 template<typename T>
-ito_inline vec2<T> &operator--(vec2<T> &lhs) { return lhs -= (T) 1; }
+inline vec2<T> &operator--(vec2<T> &lhs) { return lhs -= (T) 1; }
 
 template<typename T>
-ito_inline vec2<T> operator++(vec2<T> &lhs, int)
+inline vec2<T> operator++(vec2<T> &lhs, int)
 {
     vec2<T> result = lhs;
     ++lhs;
@@ -346,7 +346,7 @@ ito_inline vec2<T> operator++(vec2<T> &lhs, int)
 }
 
 template<typename T>
-ito_inline vec2<T> operator--(vec2<T> &lhs, int)
+inline vec2<T> operator--(vec2<T> &lhs, int)
 {
     vec2<T> result = lhs;
     --lhs;
@@ -357,7 +357,7 @@ ito_inline vec2<T> operator--(vec2<T> &lhs, int)
  * Compound assignment operators vector operators.
  */
 template<typename T>
-ito_inline vec3<T> &operator+=(vec3<T> &lhs, const vec3<T> &rhs)
+inline vec3<T> &operator+=(vec3<T> &lhs, const vec3<T> &rhs)
 {
     lhs.x += rhs.x;
     lhs.y += rhs.y;
@@ -366,7 +366,7 @@ ito_inline vec3<T> &operator+=(vec3<T> &lhs, const vec3<T> &rhs)
 }
 
 template<typename T>
-ito_inline vec3<T> &operator-=(vec3<T> &lhs, const vec3<T> &rhs)
+inline vec3<T> &operator-=(vec3<T> &lhs, const vec3<T> &rhs)
 {
     lhs.x -= rhs.x;
     lhs.y -= rhs.y;
@@ -375,7 +375,7 @@ ito_inline vec3<T> &operator-=(vec3<T> &lhs, const vec3<T> &rhs)
 }
 
 template<typename T>
-ito_inline vec3<T> &operator*=(vec3<T> &lhs, const vec3<T> &rhs)
+inline vec3<T> &operator*=(vec3<T> &lhs, const vec3<T> &rhs)
 {
     lhs.x *= rhs.x;
     lhs.y *= rhs.y;
@@ -384,7 +384,7 @@ ito_inline vec3<T> &operator*=(vec3<T> &lhs, const vec3<T> &rhs)
 }
 
 template<typename T>
-ito_inline vec3<T> &operator/=(vec3<T> &lhs, const vec3<T> &rhs)
+inline vec3<T> &operator/=(vec3<T> &lhs, const vec3<T> &rhs)
 {
     lhs.x /= rhs.x;
     lhs.y /= rhs.y;
@@ -393,7 +393,7 @@ ito_inline vec3<T> &operator/=(vec3<T> &lhs, const vec3<T> &rhs)
 }
 
 template<typename T>
-ito_inline vec3<T> &operator+=(vec3<T> &lhs, const T scalar)
+inline vec3<T> &operator+=(vec3<T> &lhs, const T scalar)
 {
     lhs.x += scalar;
     lhs.y += scalar;
@@ -402,7 +402,7 @@ ito_inline vec3<T> &operator+=(vec3<T> &lhs, const T scalar)
 }
 
 template<typename T>
-ito_inline vec3<T> &operator-=(vec3<T> &lhs, const T scalar)
+inline vec3<T> &operator-=(vec3<T> &lhs, const T scalar)
 {
     lhs.x -= scalar;
     lhs.y -= scalar;
@@ -411,7 +411,7 @@ ito_inline vec3<T> &operator-=(vec3<T> &lhs, const T scalar)
 }
 
 template<typename T>
-ito_inline vec3<T> &operator*=(vec3<T> &lhs, const T scalar)
+inline vec3<T> &operator*=(vec3<T> &lhs, const T scalar)
 {
     lhs.x *= scalar;
     lhs.y *= scalar;
@@ -420,7 +420,7 @@ ito_inline vec3<T> &operator*=(vec3<T> &lhs, const T scalar)
 }
 
 template<typename T>
-ito_inline vec3<T> &operator/=(vec3<T> &lhs, const T scalar)
+inline vec3<T> &operator/=(vec3<T> &lhs, const T scalar)
 {
     lhs.x /= scalar;
     lhs.y /= scalar;
@@ -432,43 +432,43 @@ ito_inline vec3<T> &operator/=(vec3<T> &lhs, const T scalar)
  * Arithmetic operators.
  */
 template<typename T>
-ito_inline vec3<T> operator+(vec3<T> lhs, const vec3<T> &rhs) { return lhs += rhs; }
+inline vec3<T> operator+(vec3<T> lhs, const vec3<T> &rhs) { return lhs += rhs; }
 template<typename T>
-ito_inline vec3<T> operator-(vec3<T> lhs, const vec3<T> &rhs) { return lhs -= rhs; }
+inline vec3<T> operator-(vec3<T> lhs, const vec3<T> &rhs) { return lhs -= rhs; }
 template<typename T>
-ito_inline vec3<T> operator*(vec3<T> lhs, const vec3<T> &rhs) { return lhs *= rhs; }
+inline vec3<T> operator*(vec3<T> lhs, const vec3<T> &rhs) { return lhs *= rhs; }
 template<typename T>
-ito_inline vec3<T> operator/(vec3<T> lhs, const vec3<T> &rhs) { return lhs /= rhs; }
+inline vec3<T> operator/(vec3<T> lhs, const vec3<T> &rhs) { return lhs /= rhs; }
 
 template<typename T>
-ito_inline vec3<T> operator+(vec3<T> lhs, const T scalar) { return lhs += scalar; }
+inline vec3<T> operator+(vec3<T> lhs, const T scalar) { return lhs += scalar; }
 template<typename T>
-ito_inline vec3<T> operator-(vec3<T> lhs, const T scalar) { return lhs -= scalar; }
+inline vec3<T> operator-(vec3<T> lhs, const T scalar) { return lhs -= scalar; }
 template<typename T>
-ito_inline vec3<T> operator*(vec3<T> lhs, const T scalar) { return lhs *= scalar; }
+inline vec3<T> operator*(vec3<T> lhs, const T scalar) { return lhs *= scalar; }
 template<typename T>
-ito_inline vec3<T> operator/(vec3<T> lhs, const T scalar) { return lhs /= scalar; }
+inline vec3<T> operator/(vec3<T> lhs, const T scalar) { return lhs /= scalar; }
 
 /**
  * Unary operators.
  */
 template<typename T>
-ito_inline vec3<T> operator+(vec3<T> lhs) { return lhs; }
+inline vec3<T> operator+(vec3<T> lhs) { return lhs; }
 
 template<typename T>
-ito_inline vec3<T> operator-(vec3<T> lhs) { return lhs *= (T) -1; }
+inline vec3<T> operator-(vec3<T> lhs) { return lhs *= (T) -1; }
 
 /**
  * Increment operators.
  */
 template<typename T>
-ito_inline vec3<T> &operator++(vec3<T> &lhs) { return lhs += (T) 1; }
+inline vec3<T> &operator++(vec3<T> &lhs) { return lhs += (T) 1; }
 
 template<typename T>
-ito_inline vec3<T> &operator--(vec3<T> &lhs) { return lhs -= (T) 1; }
+inline vec3<T> &operator--(vec3<T> &lhs) { return lhs -= (T) 1; }
 
 template<typename T>
-ito_inline vec3<T> operator++(vec3<T> &lhs, int)
+inline vec3<T> operator++(vec3<T> &lhs, int)
 {
     vec3<T> result = lhs;
     ++lhs;
@@ -477,7 +477,7 @@ ito_inline vec3<T> operator++(vec3<T> &lhs, int)
 }
 
 template<typename T>
-ito_inline vec3<T> operator--(vec3<T> &lhs, int)
+inline vec3<T> operator--(vec3<T> &lhs, int)
 {
     vec3<T> result = lhs;
     --lhs;
@@ -488,7 +488,7 @@ ito_inline vec3<T> operator--(vec3<T> &lhs, int)
  * Compound assignment operators vector operators.
  */
 template<typename T>
-ito_inline vec4<T> &operator+=(vec4<T> &lhs, const vec4<T> &rhs)
+inline vec4<T> &operator+=(vec4<T> &lhs, const vec4<T> &rhs)
 {
     lhs.x += rhs.x;
     lhs.y += rhs.y;
@@ -498,7 +498,7 @@ ito_inline vec4<T> &operator+=(vec4<T> &lhs, const vec4<T> &rhs)
 }
 
 template<typename T>
-ito_inline vec4<T> &operator-=(vec4<T> &lhs, const vec4<T> &rhs)
+inline vec4<T> &operator-=(vec4<T> &lhs, const vec4<T> &rhs)
 {
     lhs.x -= rhs.x;
     lhs.y -= rhs.y;
@@ -508,7 +508,7 @@ ito_inline vec4<T> &operator-=(vec4<T> &lhs, const vec4<T> &rhs)
 }
 
 template<typename T>
-ito_inline vec4<T> &operator*=(vec4<T> &lhs, const vec4<T> &rhs)
+inline vec4<T> &operator*=(vec4<T> &lhs, const vec4<T> &rhs)
 {
     lhs.x *= rhs.x;
     lhs.y *= rhs.y;
@@ -518,7 +518,7 @@ ito_inline vec4<T> &operator*=(vec4<T> &lhs, const vec4<T> &rhs)
 }
 
 template<typename T>
-ito_inline vec4<T> &operator/=(vec4<T> &lhs, const vec4<T> &rhs)
+inline vec4<T> &operator/=(vec4<T> &lhs, const vec4<T> &rhs)
 {
     lhs.x /= rhs.x;
     lhs.y /= rhs.y;
@@ -528,7 +528,7 @@ ito_inline vec4<T> &operator/=(vec4<T> &lhs, const vec4<T> &rhs)
 }
 
 template<typename T>
-ito_inline vec4<T> &operator+=(vec4<T> &lhs, const T scalar)
+inline vec4<T> &operator+=(vec4<T> &lhs, const T scalar)
 {
     lhs.x += scalar;
     lhs.y += scalar;
@@ -538,7 +538,7 @@ ito_inline vec4<T> &operator+=(vec4<T> &lhs, const T scalar)
 }
 
 template<typename T>
-ito_inline vec4<T> &operator-=(vec4<T> &lhs, const T scalar)
+inline vec4<T> &operator-=(vec4<T> &lhs, const T scalar)
 {
     lhs.x -= scalar;
     lhs.y -= scalar;
@@ -548,7 +548,7 @@ ito_inline vec4<T> &operator-=(vec4<T> &lhs, const T scalar)
 }
 
 template<typename T>
-ito_inline vec4<T> &operator*=(vec4<T> &lhs, const T scalar)
+inline vec4<T> &operator*=(vec4<T> &lhs, const T scalar)
 {
     lhs.x *= scalar;
     lhs.y *= scalar;
@@ -558,7 +558,7 @@ ito_inline vec4<T> &operator*=(vec4<T> &lhs, const T scalar)
 }
 
 template<typename T>
-ito_inline vec4<T> &operator/=(vec4<T> &lhs, const T scalar)
+inline vec4<T> &operator/=(vec4<T> &lhs, const T scalar)
 {
     lhs.x /= scalar;
     lhs.y /= scalar;
@@ -571,43 +571,43 @@ ito_inline vec4<T> &operator/=(vec4<T> &lhs, const T scalar)
  * Arithmetic operators.
  */
 template<typename T>
-ito_inline vec4<T> operator+(vec4<T> lhs, const vec4<T> &rhs) { return lhs += rhs; }
+inline vec4<T> operator+(vec4<T> lhs, const vec4<T> &rhs) { return lhs += rhs; }
 template<typename T>
-ito_inline vec4<T> operator-(vec4<T> lhs, const vec4<T> &rhs) { return lhs -= rhs; }
+inline vec4<T> operator-(vec4<T> lhs, const vec4<T> &rhs) { return lhs -= rhs; }
 template<typename T>
-ito_inline vec4<T> operator*(vec4<T> lhs, const vec4<T> &rhs) { return lhs *= rhs; }
+inline vec4<T> operator*(vec4<T> lhs, const vec4<T> &rhs) { return lhs *= rhs; }
 template<typename T>
-ito_inline vec4<T> operator/(vec4<T> lhs, const vec4<T> &rhs) { return lhs /= rhs; }
+inline vec4<T> operator/(vec4<T> lhs, const vec4<T> &rhs) { return lhs /= rhs; }
 
 template<typename T>
-ito_inline vec4<T> operator+(vec4<T> lhs, const T scalar) { return lhs += scalar; }
+inline vec4<T> operator+(vec4<T> lhs, const T scalar) { return lhs += scalar; }
 template<typename T>
-ito_inline vec4<T> operator-(vec4<T> lhs, const T scalar) { return lhs -= scalar; }
+inline vec4<T> operator-(vec4<T> lhs, const T scalar) { return lhs -= scalar; }
 template<typename T>
-ito_inline vec4<T> operator*(vec4<T> lhs, const T scalar) { return lhs *= scalar; }
+inline vec4<T> operator*(vec4<T> lhs, const T scalar) { return lhs *= scalar; }
 template<typename T>
-ito_inline vec4<T> operator/(vec4<T> lhs, const T scalar) { return lhs /= scalar; }
+inline vec4<T> operator/(vec4<T> lhs, const T scalar) { return lhs /= scalar; }
 
 /**
  * Unary operators.
  */
 template<typename T>
-ito_inline vec4<T> operator+(vec4<T> lhs) { return lhs; }
+inline vec4<T> operator+(vec4<T> lhs) { return lhs; }
 
 template<typename T>
-ito_inline vec4<T> operator-(vec4<T> lhs) { return lhs *= (T) -1; }
+inline vec4<T> operator-(vec4<T> lhs) { return lhs *= (T) -1; }
 
 /**
  * Increment operators.
  */
 template<typename T>
-ito_inline vec4<T> &operator++(vec4<T> &lhs) { return lhs += (T) 1; }
+inline vec4<T> &operator++(vec4<T> &lhs) { return lhs += (T) 1; }
 
 template<typename T>
-ito_inline vec4<T> &operator--(vec4<T> &lhs) { return lhs -= (T) 1; }
+inline vec4<T> &operator--(vec4<T> &lhs) { return lhs -= (T) 1; }
 
 template<typename T>
-ito_inline vec4<T> operator++(vec4<T> &lhs, int)
+inline vec4<T> operator++(vec4<T> &lhs, int)
 {
     vec4<T> result = lhs;
     ++lhs;
@@ -615,7 +615,7 @@ ito_inline vec4<T> operator++(vec4<T> &lhs, int)
 }
 
 template<typename T>
-ito_inline vec4<T> operator--(vec4<T> &lhs, int)
+inline vec4<T> operator--(vec4<T> &lhs, int)
 {
     vec4<T> result = lhs;
     --lhs;

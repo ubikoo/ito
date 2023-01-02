@@ -44,7 +44,7 @@ namespace ito {
  *
  * @note align_alloc and align_free are paired functions.
  */
-ito_inline void *align_alloc(size_t size, size_t alignment = 32)
+inline void *align_alloc(size_t size, size_t alignment = 32)
 {
     /* Check size is valid and alignment is power of 2. */
     ito_assert(size > 0, "invalid size");
@@ -73,7 +73,7 @@ ito_inline void *align_alloc(size_t size, size_t alignment = 32)
  *
  * @note align_alloc and align_free are paired functions.
  */
-ito_inline void align_free(void *ptr)
+inline void align_free(void *ptr)
 {
     if (ptr == nullptr) {
         return;
@@ -114,7 +114,7 @@ ito_inline void align_free(void *ptr)
  *   If the input pointer is null and the requested size is 0, then the
  *   result is undefined.
  */
-ito_inline void *align_realloc(void *ptr, size_t oldsize, size_t newsize)
+inline void *align_realloc(void *ptr, size_t oldsize, size_t newsize)
 {
     /*
      * New size is 0 - free the ptr and return null. Align free a null pointer

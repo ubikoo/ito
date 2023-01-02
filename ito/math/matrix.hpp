@@ -183,110 +183,176 @@ const mat4<T> mat4<T>::eye = {
 /** ---- mat2 declarations ----------------------------------------------------
  * Compound assignment operators matrix operators.
  */
-template<typename T> ito_inline mat2<T> &operator+=(mat2<T> &lhs, const mat2<T> &rhs);
-template<typename T> ito_inline mat2<T> &operator-=(mat2<T> &lhs, const mat2<T> &rhs);
-template<typename T> ito_inline mat2<T> &operator*=(mat2<T> &lhs, const mat2<T> &rhs);
-template<typename T> ito_inline mat2<T> &operator/=(mat2<T> &lhs, const mat2<T> &rhs);
+template<typename T>
+inline mat2<T> &operator+=(mat2<T> &lhs, const mat2<T> &rhs);
+template<typename T>
+inline mat2<T> &operator-=(mat2<T> &lhs, const mat2<T> &rhs);
+template<typename T>
+inline mat2<T> &operator*=(mat2<T> &lhs, const mat2<T> &rhs);
+template<typename T>
+inline mat2<T> &operator/=(mat2<T> &lhs, const mat2<T> &rhs);
 
-template<typename T> ito_inline mat2<T> &operator+=(mat2<T> &lhs, const T scalar);
-template<typename T> ito_inline mat2<T> &operator-=(mat2<T> &lhs, const T scalar);
-template<typename T> ito_inline mat2<T> &operator*=(mat2<T> &lhs, const T scalar);
-template<typename T> ito_inline mat2<T> &operator/=(mat2<T> &lhs, const T scalar);
+template<typename T>
+inline mat2<T> &operator+=(mat2<T> &lhs, const T scalar);
+template<typename T>
+inline mat2<T> &operator-=(mat2<T> &lhs, const T scalar);
+template<typename T>
+inline mat2<T> &operator*=(mat2<T> &lhs, const T scalar);
+template<typename T>
+inline mat2<T> &operator/=(mat2<T> &lhs, const T scalar);
 
 /** Arithmetic operators. */
-template<typename T> ito_inline mat2<T> operator+(mat2<T> lhs, const mat2<T> &rhs);
-template<typename T> ito_inline mat2<T> operator-(mat2<T> lhs, const mat2<T> &rhs);
-template<typename T> ito_inline mat2<T> operator*(mat2<T> lhs, const mat2<T> &rhs);
-template<typename T> ito_inline mat2<T> operator/(mat2<T> lhs, const mat2<T> &rhs);
+template<typename T>
+inline mat2<T> operator+(mat2<T> lhs, const mat2<T> &rhs);
+template<typename T>
+inline mat2<T> operator-(mat2<T> lhs, const mat2<T> &rhs);
+template<typename T>
+inline mat2<T> operator*(mat2<T> lhs, const mat2<T> &rhs);
+template<typename T>
+inline mat2<T> operator/(mat2<T> lhs, const mat2<T> &rhs);
 
-template<typename T> ito_inline mat2<T> operator+(mat2<T> lhs, const T scalar);
-template<typename T> ito_inline mat2<T> operator-(mat2<T> lhs, const T scalar);
-template<typename T> ito_inline mat2<T> operator*(mat2<T> lhs, const T scalar);
-template<typename T> ito_inline mat2<T> operator/(mat2<T> lhs, const T scalar);
+template<typename T>
+inline mat2<T> operator+(mat2<T> lhs, const T scalar);
+template<typename T>
+inline mat2<T> operator-(mat2<T> lhs, const T scalar);
+template<typename T>
+inline mat2<T> operator*(mat2<T> lhs, const T scalar);
+template<typename T>
+inline mat2<T> operator/(mat2<T> lhs, const T scalar);
 
 /** Unary operators. */
-template<typename T> ito_inline mat2<T> operator+(mat2<T> lhs);
-template<typename T> ito_inline mat2<T> operator-(mat2<T> lhs);
+template<typename T>
+inline mat2<T> operator+(mat2<T> lhs);
+template<typename T>
+inline mat2<T> operator-(mat2<T> lhs);
 
 /** Increment operators. */
-template<typename T> ito_inline mat2<T> &operator++(mat2<T> &lhs);
-template<typename T> ito_inline mat2<T> &operator--(mat2<T> &lhs);
-template<typename T> ito_inline mat2<T> operator++(mat2<T> &lhs, int);
-template<typename T> ito_inline mat2<T> operator--(mat2<T> &lhs, int);
+template<typename T>
+inline mat2<T> &operator++(mat2<T> &lhs);
+template<typename T>
+inline mat2<T> &operator--(mat2<T> &lhs);
+template<typename T>
+inline mat2<T> operator++(mat2<T> &lhs, int);
+template<typename T>
+inline mat2<T> operator--(mat2<T> &lhs, int);
 
 /** ---- mat3 declarations ----------------------------------------------------
  * Compound assignment operators matrix operators.
  */
-template<typename T> ito_inline mat3<T> &operator+=(mat3<T> &lhs, const mat3<T> &rhs);
-template<typename T> ito_inline mat3<T> &operator-=(mat3<T> &lhs, const mat3<T> &rhs);
-template<typename T> ito_inline mat3<T> &operator*=(mat3<T> &lhs, const mat3<T> &rhs);
-template<typename T> ito_inline mat3<T> &operator/=(mat3<T> &lhs, const mat3<T> &rhs);
+template<typename T>
+inline mat3<T> &operator+=(mat3<T> &lhs, const mat3<T> &rhs);
+template<typename T>
+inline mat3<T> &operator-=(mat3<T> &lhs, const mat3<T> &rhs);
+template<typename T>
+inline mat3<T> &operator*=(mat3<T> &lhs, const mat3<T> &rhs);
+template<typename T>
+inline mat3<T> &operator/=(mat3<T> &lhs, const mat3<T> &rhs);
 
-template<typename T> ito_inline mat3<T> &operator+=(mat3<T> &lhs, const T scalar);
-template<typename T> ito_inline mat3<T> &operator-=(mat3<T> &lhs, const T scalar);
-template<typename T> ito_inline mat3<T> &operator*=(mat3<T> &lhs, const T scalar);
-template<typename T> ito_inline mat3<T> &operator/=(mat3<T> &lhs, const T scalar);
+template<typename T>
+inline mat3<T> &operator+=(mat3<T> &lhs, const T scalar);
+template<typename T>
+inline mat3<T> &operator-=(mat3<T> &lhs, const T scalar);
+template<typename T>
+inline mat3<T> &operator*=(mat3<T> &lhs, const T scalar);
+template<typename T>
+inline mat3<T> &operator/=(mat3<T> &lhs, const T scalar);
 
 /** Arithmetic operators. */
-template<typename T> ito_inline mat3<T> operator+(mat3<T> lhs, const mat3<T> &rhs);
-template<typename T> ito_inline mat3<T> operator-(mat3<T> lhs, const mat3<T> &rhs);
-template<typename T> ito_inline mat3<T> operator*(mat3<T> lhs, const mat3<T> &rhs);
-template<typename T> ito_inline mat3<T> operator/(mat3<T> lhs, const mat3<T> &rhs);
+template<typename T>
+inline mat3<T> operator+(mat3<T> lhs, const mat3<T> &rhs);
+template<typename T>
+inline mat3<T> operator-(mat3<T> lhs, const mat3<T> &rhs);
+template<typename T>
+inline mat3<T> operator*(mat3<T> lhs, const mat3<T> &rhs);
+template<typename T>
+inline mat3<T> operator/(mat3<T> lhs, const mat3<T> &rhs);
 
-template<typename T> ito_inline mat3<T> operator+(mat3<T> lhs, const T scalar);
-template<typename T> ito_inline mat3<T> operator-(mat3<T> lhs, const T scalar);
-template<typename T> ito_inline mat3<T> operator*(mat3<T> lhs, const T scalar);
-template<typename T> ito_inline mat3<T> operator/(mat3<T> lhs, const T scalar);
+template<typename T>
+inline mat3<T> operator+(mat3<T> lhs, const T scalar);
+template<typename T>
+inline mat3<T> operator-(mat3<T> lhs, const T scalar);
+template<typename T>
+inline mat3<T> operator*(mat3<T> lhs, const T scalar);
+template<typename T>
+inline mat3<T> operator/(mat3<T> lhs, const T scalar);
 
 /** Unary operators. */
-template<typename T> ito_inline mat3<T> operator+(mat3<T> lhs);
-template<typename T> ito_inline mat3<T> operator-(mat3<T> lhs);
+template<typename T>
+inline mat3<T> operator+(mat3<T> lhs);
+template<typename T>
+inline mat3<T> operator-(mat3<T> lhs);
 
 /** Increment operators. */
-template<typename T> ito_inline mat3<T> &operator++(mat3<T> &lhs);
-template<typename T> ito_inline mat3<T> &operator--(mat3<T> &lhs);
-template<typename T> ito_inline mat3<T> operator++(mat3<T> &lhs, int);
-template<typename T> ito_inline mat3<T> operator--(mat3<T> &lhs, int);
+template<typename T>
+inline mat3<T> &operator++(mat3<T> &lhs);
+template<typename T>
+inline mat3<T> &operator--(mat3<T> &lhs);
+template<typename T>
+inline mat3<T> operator++(mat3<T> &lhs, int);
+template<typename T>
+inline mat3<T> operator--(mat3<T> &lhs, int);
 
 /** ---- mat4 declarations ----------------------------------------------------
  * Compound assignment operators matrix operators.
  */
-template<typename T> ito_inline mat4<T> &operator+=(mat4<T> &lhs, const mat4<T> &rhs);
-template<typename T> ito_inline mat4<T> &operator-=(mat4<T> &lhs, const mat4<T> &rhs);
-template<typename T> ito_inline mat4<T> &operator*=(mat4<T> &lhs, const mat4<T> &rhs);
-template<typename T> ito_inline mat4<T> &operator/=(mat4<T> &lhs, const mat4<T> &rhs);
+template<typename T>
+inline mat4<T> &operator+=(mat4<T> &lhs, const mat4<T> &rhs);
+template<typename T>
+inline mat4<T> &operator-=(mat4<T> &lhs, const mat4<T> &rhs);
+template<typename T>
+inline mat4<T> &operator*=(mat4<T> &lhs, const mat4<T> &rhs);
+template<typename T>
+inline mat4<T> &operator/=(mat4<T> &lhs, const mat4<T> &rhs);
 
-template<typename T> ito_inline mat4<T> &operator+=(mat4<T> &lhs, const T scalar);
-template<typename T> ito_inline mat4<T> &operator-=(mat4<T> &lhs, const T scalar);
-template<typename T> ito_inline mat4<T> &operator*=(mat4<T> &lhs, const T scalar);
-template<typename T> ito_inline mat4<T> &operator/=(mat4<T> &lhs, const T scalar);
+template<typename T>
+inline mat4<T> &operator+=(mat4<T> &lhs, const T scalar);
+template<typename T>
+inline mat4<T> &operator-=(mat4<T> &lhs, const T scalar);
+template<typename T>
+inline mat4<T> &operator*=(mat4<T> &lhs, const T scalar);
+template<typename T>
+inline mat4<T> &operator/=(mat4<T> &lhs, const T scalar);
 
 /** Arithmetic operators. */
-template<typename T> ito_inline mat4<T> operator+(mat4<T> lhs, const mat4<T> &rhs);
-template<typename T> ito_inline mat4<T> operator-(mat4<T> lhs, const mat4<T> &rhs);
-template<typename T> ito_inline mat4<T> operator*(mat4<T> lhs, const mat4<T> &rhs);
-template<typename T> ito_inline mat4<T> operator/(mat4<T> lhs, const mat4<T> &rhs);
+template<typename T>
+inline mat4<T> operator+(mat4<T> lhs, const mat4<T> &rhs);
+template<typename T>
+inline mat4<T> operator-(mat4<T> lhs, const mat4<T> &rhs);
+template<typename T>
+inline mat4<T> operator*(mat4<T> lhs, const mat4<T> &rhs);
+template<typename T>
+inline mat4<T> operator/(mat4<T> lhs, const mat4<T> &rhs);
 
-template<typename T> ito_inline mat4<T> operator+(mat4<T> lhs, const T scalar);
-template<typename T> ito_inline mat4<T> operator-(mat4<T> lhs, const T scalar);
-template<typename T> ito_inline mat4<T> operator*(mat4<T> lhs, const T scalar);
-template<typename T> ito_inline mat4<T> operator/(mat4<T> lhs, const T scalar);
+template<typename T>
+inline mat4<T> operator+(mat4<T> lhs, const T scalar);
+template<typename T>
+inline mat4<T> operator-(mat4<T> lhs, const T scalar);
+template<typename T>
+inline mat4<T> operator*(mat4<T> lhs, const T scalar);
+template<typename T>
+inline mat4<T> operator/(mat4<T> lhs, const T scalar);
 
 /** Unary operators. */
-template<typename T> ito_inline mat4<T> operator+(mat4<T> lhs);
-template<typename T> ito_inline mat4<T> operator-(mat4<T> lhs);
+template<typename T>
+inline mat4<T> operator+(mat4<T> lhs);
+template<typename T>
+inline mat4<T> operator-(mat4<T> lhs);
 
 /** Increment operators. */
-template<typename T> ito_inline mat4<T> &operator++(mat4<T> &lhs);
-template<typename T> ito_inline mat4<T> &operator--(mat4<T> &lhs);
-template<typename T> ito_inline mat4<T> operator++(mat4<T> &lhs, int);
-template<typename T> ito_inline mat4<T> operator--(mat4<T> &lhs, int);
+template<typename T>
+inline mat4<T> &operator++(mat4<T> &lhs);
+template<typename T>
+inline mat4<T> &operator--(mat4<T> &lhs);
+template<typename T>
+inline mat4<T> operator++(mat4<T> &lhs, int);
+template<typename T>
+inline mat4<T> operator--(mat4<T> &lhs, int);
 
 /** ---- mat2 implementation --------------------------------------------------
  * Compound assignment operators vector operators.
  */
 template<typename T>
-ito_inline mat2<T> &operator+=(mat2<T> &lhs, const mat2<T> &rhs)
+inline mat2<T> &operator+=(mat2<T> &lhs, const mat2<T> &rhs)
 {
     lhs.s0 += rhs.s0;
     lhs.s1 += rhs.s1;
@@ -296,7 +362,7 @@ ito_inline mat2<T> &operator+=(mat2<T> &lhs, const mat2<T> &rhs)
 }
 
 template<typename T>
-ito_inline mat2<T> &operator-=(mat2<T> &lhs, const mat2<T> &rhs)
+inline mat2<T> &operator-=(mat2<T> &lhs, const mat2<T> &rhs)
 {
     lhs.s0 -= rhs.s0;
     lhs.s1 -= rhs.s1;
@@ -306,7 +372,7 @@ ito_inline mat2<T> &operator-=(mat2<T> &lhs, const mat2<T> &rhs)
 }
 
 template<typename T>
-ito_inline mat2<T> &operator*=(mat2<T> &lhs, const mat2<T> &rhs)
+inline mat2<T> &operator*=(mat2<T> &lhs, const mat2<T> &rhs)
 {
     lhs.s0 *= rhs.s0;
     lhs.s1 *= rhs.s1;
@@ -316,7 +382,7 @@ ito_inline mat2<T> &operator*=(mat2<T> &lhs, const mat2<T> &rhs)
 }
 
 template<typename T>
-ito_inline mat2<T> &operator/=(mat2<T> &lhs, const mat2<T> &rhs)
+inline mat2<T> &operator/=(mat2<T> &lhs, const mat2<T> &rhs)
 {
     lhs.s0 /= rhs.s0;
     lhs.s1 /= rhs.s1;
@@ -326,7 +392,7 @@ ito_inline mat2<T> &operator/=(mat2<T> &lhs, const mat2<T> &rhs)
 }
 
 template<typename T>
-ito_inline mat2<T> &operator+=(mat2<T> &lhs, const T scalar)
+inline mat2<T> &operator+=(mat2<T> &lhs, const T scalar)
 {
     lhs.s0 += scalar;
     lhs.s1 += scalar;
@@ -336,7 +402,7 @@ ito_inline mat2<T> &operator+=(mat2<T> &lhs, const T scalar)
 }
 
 template<typename T>
-ito_inline mat2<T> &operator-=(mat2<T> &lhs, const T scalar)
+inline mat2<T> &operator-=(mat2<T> &lhs, const T scalar)
 {
     lhs.s0 -= scalar;
     lhs.s1 -= scalar;
@@ -346,7 +412,7 @@ ito_inline mat2<T> &operator-=(mat2<T> &lhs, const T scalar)
 }
 
 template<typename T>
-ito_inline mat2<T> &operator*=(mat2<T> &lhs, const T scalar)
+inline mat2<T> &operator*=(mat2<T> &lhs, const T scalar)
 {
     lhs.s0 *= scalar;
     lhs.s1 *= scalar;
@@ -356,7 +422,7 @@ ito_inline mat2<T> &operator*=(mat2<T> &lhs, const T scalar)
 }
 
 template<typename T>
-ito_inline mat2<T> &operator/=(mat2<T> &lhs, const T scalar)
+inline mat2<T> &operator/=(mat2<T> &lhs, const T scalar)
 {
     lhs.s0 /= scalar;
     lhs.s1 /= scalar;
@@ -369,43 +435,43 @@ ito_inline mat2<T> &operator/=(mat2<T> &lhs, const T scalar)
  * Arithmetic operators.
  */
 template<typename T>
-ito_inline mat2<T> operator+(mat2<T> lhs, const mat2<T> &rhs) { return lhs += rhs; }
+inline mat2<T> operator+(mat2<T> lhs, const mat2<T> &rhs) { return lhs += rhs; }
 template<typename T>
-ito_inline mat2<T> operator-(mat2<T> lhs, const mat2<T> &rhs) { return lhs -= rhs; }
+inline mat2<T> operator-(mat2<T> lhs, const mat2<T> &rhs) { return lhs -= rhs; }
 template<typename T>
-ito_inline mat2<T> operator*(mat2<T> lhs, const mat2<T> &rhs) { return lhs *= rhs; }
+inline mat2<T> operator*(mat2<T> lhs, const mat2<T> &rhs) { return lhs *= rhs; }
 template<typename T>
-ito_inline mat2<T> operator/(mat2<T> lhs, const mat2<T> &rhs) { return lhs /= rhs; }
+inline mat2<T> operator/(mat2<T> lhs, const mat2<T> &rhs) { return lhs /= rhs; }
 
 template<typename T>
-ito_inline mat2<T> operator+(mat2<T> lhs, const T scalar) { return lhs += scalar; }
+inline mat2<T> operator+(mat2<T> lhs, const T scalar) { return lhs += scalar; }
 template<typename T>
-ito_inline mat2<T> operator-(mat2<T> lhs, const T scalar) { return lhs -= scalar; }
+inline mat2<T> operator-(mat2<T> lhs, const T scalar) { return lhs -= scalar; }
 template<typename T>
-ito_inline mat2<T> operator*(mat2<T> lhs, const T scalar) { return lhs *= scalar; }
+inline mat2<T> operator*(mat2<T> lhs, const T scalar) { return lhs *= scalar; }
 template<typename T>
-ito_inline mat2<T> operator/(mat2<T> lhs, const T scalar) { return lhs /= scalar; }
+inline mat2<T> operator/(mat2<T> lhs, const T scalar) { return lhs /= scalar; }
 
 /**
  * Unary operators.
  */
 template<typename T>
-ito_inline mat2<T> operator+(mat2<T> lhs) { return lhs; }
+inline mat2<T> operator+(mat2<T> lhs) { return lhs; }
 
 template<typename T>
-ito_inline mat2<T> operator-(mat2<T> lhs) { return lhs *= (T) -1; }
+inline mat2<T> operator-(mat2<T> lhs) { return lhs *= (T) -1; }
 
 /**
  * Increment operators.
  */
 template<typename T>
-ito_inline mat2<T> &operator++(mat2<T> &lhs) { return lhs += (T) 1; }
+inline mat2<T> &operator++(mat2<T> &lhs) { return lhs += (T) 1; }
 
 template<typename T>
-ito_inline mat2<T> &operator--(mat2<T> &lhs) { return lhs -= (T) 1; }
+inline mat2<T> &operator--(mat2<T> &lhs) { return lhs -= (T) 1; }
 
 template<typename T>
-ito_inline mat2<T> operator++(mat2<T> &lhs, int)
+inline mat2<T> operator++(mat2<T> &lhs, int)
 {
     mat2<T> result = lhs;
     ++lhs;
@@ -413,7 +479,7 @@ ito_inline mat2<T> operator++(mat2<T> &lhs, int)
 }
 
 template<typename T>
-ito_inline mat2<T> operator--(mat2<T> &lhs, int)
+inline mat2<T> operator--(mat2<T> &lhs, int)
 {
     mat2<T> result = lhs;
     --lhs;
@@ -424,7 +490,7 @@ ito_inline mat2<T> operator--(mat2<T> &lhs, int)
  * Compound assignment operators vector operators.
  */
 template<typename T>
-ito_inline mat3<T> &operator+=(mat3<T> &lhs, const mat3<T> &rhs)
+inline mat3<T> &operator+=(mat3<T> &lhs, const mat3<T> &rhs)
 {
     lhs.s0 += rhs.s0;
     lhs.s1 += rhs.s1;
@@ -439,7 +505,7 @@ ito_inline mat3<T> &operator+=(mat3<T> &lhs, const mat3<T> &rhs)
 }
 
 template<typename T>
-ito_inline mat3<T> &operator-=(mat3<T> &lhs, const mat3<T> &rhs)
+inline mat3<T> &operator-=(mat3<T> &lhs, const mat3<T> &rhs)
 {
     lhs.s0 -= rhs.s0;
     lhs.s1 -= rhs.s1;
@@ -454,7 +520,7 @@ ito_inline mat3<T> &operator-=(mat3<T> &lhs, const mat3<T> &rhs)
 }
 
 template<typename T>
-ito_inline mat3<T> &operator*=(mat3<T> &lhs, const mat3<T> &rhs)
+inline mat3<T> &operator*=(mat3<T> &lhs, const mat3<T> &rhs)
 {
     lhs.s0 *= rhs.s0;
     lhs.s1 *= rhs.s1;
@@ -469,7 +535,7 @@ ito_inline mat3<T> &operator*=(mat3<T> &lhs, const mat3<T> &rhs)
 }
 
 template<typename T>
-ito_inline mat3<T> &operator/=(mat3<T> &lhs, const mat3<T> &rhs)
+inline mat3<T> &operator/=(mat3<T> &lhs, const mat3<T> &rhs)
 {
     lhs.s0 /= rhs.s0;
     lhs.s1 /= rhs.s1;
@@ -484,7 +550,7 @@ ito_inline mat3<T> &operator/=(mat3<T> &lhs, const mat3<T> &rhs)
 }
 
 template<typename T>
-ito_inline mat3<T> &operator+=(mat3<T> &lhs, const T scalar)
+inline mat3<T> &operator+=(mat3<T> &lhs, const T scalar)
 {
     lhs.s0 += scalar;
     lhs.s1 += scalar;
@@ -499,7 +565,7 @@ ito_inline mat3<T> &operator+=(mat3<T> &lhs, const T scalar)
 }
 
 template<typename T>
-ito_inline mat3<T> &operator-=(mat3<T> &lhs, const T scalar)
+inline mat3<T> &operator-=(mat3<T> &lhs, const T scalar)
 {
     lhs.s0 -= scalar;
     lhs.s1 -= scalar;
@@ -514,7 +580,7 @@ ito_inline mat3<T> &operator-=(mat3<T> &lhs, const T scalar)
 }
 
 template<typename T>
-ito_inline mat3<T> &operator*=(mat3<T> &lhs, const T scalar)
+inline mat3<T> &operator*=(mat3<T> &lhs, const T scalar)
 {
     lhs.s0 *= scalar;
     lhs.s1 *= scalar;
@@ -529,7 +595,7 @@ ito_inline mat3<T> &operator*=(mat3<T> &lhs, const T scalar)
 }
 
 template<typename T>
-ito_inline mat3<T> &operator/=(mat3<T> &lhs, const T scalar)
+inline mat3<T> &operator/=(mat3<T> &lhs, const T scalar)
 {
     lhs.s0 /= scalar;
     lhs.s1 /= scalar;
@@ -547,43 +613,43 @@ ito_inline mat3<T> &operator/=(mat3<T> &lhs, const T scalar)
  * Arithmetic operators.
  */
 template<typename T>
-ito_inline mat3<T> operator+(mat3<T> lhs, const mat3<T> &rhs) { return lhs += rhs; }
+inline mat3<T> operator+(mat3<T> lhs, const mat3<T> &rhs) { return lhs += rhs; }
 template<typename T>
-ito_inline mat3<T> operator-(mat3<T> lhs, const mat3<T> &rhs) { return lhs -= rhs; }
+inline mat3<T> operator-(mat3<T> lhs, const mat3<T> &rhs) { return lhs -= rhs; }
 template<typename T>
-ito_inline mat3<T> operator*(mat3<T> lhs, const mat3<T> &rhs) { return lhs *= rhs; }
+inline mat3<T> operator*(mat3<T> lhs, const mat3<T> &rhs) { return lhs *= rhs; }
 template<typename T>
-ito_inline mat3<T> operator/(mat3<T> lhs, const mat3<T> &rhs) { return lhs /= rhs; }
+inline mat3<T> operator/(mat3<T> lhs, const mat3<T> &rhs) { return lhs /= rhs; }
 
 template<typename T>
-ito_inline mat3<T> operator+(mat3<T> lhs, const T scalar) { return lhs += scalar; }
+inline mat3<T> operator+(mat3<T> lhs, const T scalar) { return lhs += scalar; }
 template<typename T>
-ito_inline mat3<T> operator-(mat3<T> lhs, const T scalar) { return lhs -= scalar; }
+inline mat3<T> operator-(mat3<T> lhs, const T scalar) { return lhs -= scalar; }
 template<typename T>
-ito_inline mat3<T> operator*(mat3<T> lhs, const T scalar) { return lhs *= scalar; }
+inline mat3<T> operator*(mat3<T> lhs, const T scalar) { return lhs *= scalar; }
 template<typename T>
-ito_inline mat3<T> operator/(mat3<T> lhs, const T scalar) { return lhs /= scalar; }
+inline mat3<T> operator/(mat3<T> lhs, const T scalar) { return lhs /= scalar; }
 
 /**
  * Unary operators.
  */
 template<typename T>
-ito_inline mat3<T> operator+(mat3<T> lhs) { return lhs; }
+inline mat3<T> operator+(mat3<T> lhs) { return lhs; }
 
 template<typename T>
-ito_inline mat3<T> operator-(mat3<T> lhs) { return lhs *= (T) -1; }
+inline mat3<T> operator-(mat3<T> lhs) { return lhs *= (T) -1; }
 
 /**
  * Increment operators.
  */
 template<typename T>
-ito_inline mat3<T> &operator++(mat3<T> &lhs) { return lhs += (T) 1; }
+inline mat3<T> &operator++(mat3<T> &lhs) { return lhs += (T) 1; }
 
 template<typename T>
-ito_inline mat3<T> &operator--(mat3<T> &lhs) { return lhs -= (T) 1; }
+inline mat3<T> &operator--(mat3<T> &lhs) { return lhs -= (T) 1; }
 
 template<typename T>
-ito_inline mat3<T> operator++(mat3<T> &lhs, int)
+inline mat3<T> operator++(mat3<T> &lhs, int)
 {
     mat3<T> result = lhs;
     ++lhs;
@@ -591,7 +657,7 @@ ito_inline mat3<T> operator++(mat3<T> &lhs, int)
 }
 
 template<typename T>
-ito_inline mat3<T> operator--(mat3<T> &lhs, int)
+inline mat3<T> operator--(mat3<T> &lhs, int)
 {
     mat3<T> result = lhs;
     --lhs;
@@ -602,7 +668,7 @@ ito_inline mat3<T> operator--(mat3<T> &lhs, int)
  * Compound assignment operators vector operators.
  */
 template<typename T>
-ito_inline mat4<T> &operator+=(mat4<T> &lhs, const mat4<T> &rhs)
+inline mat4<T> &operator+=(mat4<T> &lhs, const mat4<T> &rhs)
 {
     lhs.s0  += rhs.s0;
     lhs.s1  += rhs.s1;
@@ -624,7 +690,7 @@ ito_inline mat4<T> &operator+=(mat4<T> &lhs, const mat4<T> &rhs)
 }
 
 template<typename T>
-ito_inline mat4<T> &operator-=(mat4<T> &lhs, const mat4<T> &rhs)
+inline mat4<T> &operator-=(mat4<T> &lhs, const mat4<T> &rhs)
 {
     lhs.s0  -= rhs.s0;
     lhs.s1  -= rhs.s1;
@@ -646,7 +712,7 @@ ito_inline mat4<T> &operator-=(mat4<T> &lhs, const mat4<T> &rhs)
 }
 
 template<typename T>
-ito_inline mat4<T> &operator*=(mat4<T> &lhs, const mat4<T> &rhs)
+inline mat4<T> &operator*=(mat4<T> &lhs, const mat4<T> &rhs)
 {
     lhs.s0  *= rhs.s0;
     lhs.s1  *= rhs.s1;
@@ -668,7 +734,7 @@ ito_inline mat4<T> &operator*=(mat4<T> &lhs, const mat4<T> &rhs)
 }
 
 template<typename T>
-ito_inline mat4<T> &operator/=(mat4<T> &lhs, const mat4<T> &rhs)
+inline mat4<T> &operator/=(mat4<T> &lhs, const mat4<T> &rhs)
 {
     lhs.s0  /= rhs.s0;
     lhs.s1  /= rhs.s1;
@@ -690,7 +756,7 @@ ito_inline mat4<T> &operator/=(mat4<T> &lhs, const mat4<T> &rhs)
 }
 
 template<typename T>
-ito_inline mat4<T> &operator+=(mat4<T> &lhs, const T scalar)
+inline mat4<T> &operator+=(mat4<T> &lhs, const T scalar)
 {
     lhs.s0  += scalar;
     lhs.s1  += scalar;
@@ -712,7 +778,7 @@ ito_inline mat4<T> &operator+=(mat4<T> &lhs, const T scalar)
 }
 
 template<typename T>
-ito_inline mat4<T> &operator-=(mat4<T> &lhs, const T scalar)
+inline mat4<T> &operator-=(mat4<T> &lhs, const T scalar)
 {
     lhs.s0  -= scalar;
     lhs.s1  -= scalar;
@@ -734,7 +800,7 @@ ito_inline mat4<T> &operator-=(mat4<T> &lhs, const T scalar)
 }
 
 template<typename T>
-ito_inline mat4<T> &operator*=(mat4<T> &lhs, const T scalar)
+inline mat4<T> &operator*=(mat4<T> &lhs, const T scalar)
 {
     lhs.s0  *= scalar;
     lhs.s1  *= scalar;
@@ -756,7 +822,7 @@ ito_inline mat4<T> &operator*=(mat4<T> &lhs, const T scalar)
 }
 
 template<typename T>
-ito_inline mat4<T> &operator/=(mat4<T> &lhs, const T scalar)
+inline mat4<T> &operator/=(mat4<T> &lhs, const T scalar)
 {
     lhs.s0  /= scalar;
     lhs.s1  /= scalar;
@@ -781,43 +847,43 @@ ito_inline mat4<T> &operator/=(mat4<T> &lhs, const T scalar)
  * Arithmetic operators.
  */
 template<typename T>
-ito_inline mat4<T> operator+(mat4<T> lhs, const mat4<T> &rhs) { return lhs += rhs; }
+inline mat4<T> operator+(mat4<T> lhs, const mat4<T> &rhs) { return lhs += rhs; }
 template<typename T>
-ito_inline mat4<T> operator-(mat4<T> lhs, const mat4<T> &rhs) { return lhs -= rhs; }
+inline mat4<T> operator-(mat4<T> lhs, const mat4<T> &rhs) { return lhs -= rhs; }
 template<typename T>
-ito_inline mat4<T> operator*(mat4<T> lhs, const mat4<T> &rhs) { return lhs *= rhs; }
+inline mat4<T> operator*(mat4<T> lhs, const mat4<T> &rhs) { return lhs *= rhs; }
 template<typename T>
-ito_inline mat4<T> operator/(mat4<T> lhs, const mat4<T> &rhs) { return lhs /= rhs; }
+inline mat4<T> operator/(mat4<T> lhs, const mat4<T> &rhs) { return lhs /= rhs; }
 
 template<typename T>
-ito_inline mat4<T> operator+(mat4<T> lhs, const T scalar) { return lhs += scalar; }
+inline mat4<T> operator+(mat4<T> lhs, const T scalar) { return lhs += scalar; }
 template<typename T>
-ito_inline mat4<T> operator-(mat4<T> lhs, const T scalar) { return lhs -= scalar; }
+inline mat4<T> operator-(mat4<T> lhs, const T scalar) { return lhs -= scalar; }
 template<typename T>
-ito_inline mat4<T> operator*(mat4<T> lhs, const T scalar) { return lhs *= scalar; }
+inline mat4<T> operator*(mat4<T> lhs, const T scalar) { return lhs *= scalar; }
 template<typename T>
-ito_inline mat4<T> operator/(mat4<T> lhs, const T scalar) { return lhs /= scalar; }
+inline mat4<T> operator/(mat4<T> lhs, const T scalar) { return lhs /= scalar; }
 
 /**
  * Unary operators.
  */
 template<typename T>
-ito_inline mat4<T> operator+(mat4<T> lhs) { return lhs; }
+inline mat4<T> operator+(mat4<T> lhs) { return lhs; }
 
 template<typename T>
-ito_inline mat4<T> operator-(mat4<T> lhs) { return lhs *= (T) -1; }
+inline mat4<T> operator-(mat4<T> lhs) { return lhs *= (T) -1; }
 
 /**
  * Increment operators.
  */
 template<typename T>
-ito_inline mat4<T> &operator++(mat4<T> &lhs) { return lhs += (T) 1; }
+inline mat4<T> &operator++(mat4<T> &lhs) { return lhs += (T) 1; }
 
 template<typename T>
-ito_inline mat4<T> &operator--(mat4<T> &lhs) { return lhs -= (T) 1; }
+inline mat4<T> &operator--(mat4<T> &lhs) { return lhs -= (T) 1; }
 
 template<typename T>
-ito_inline mat4<T> operator++(mat4<T> &lhs, int)
+inline mat4<T> operator++(mat4<T> &lhs, int)
 {
     mat4<T> result = lhs;
     ++lhs;
@@ -825,7 +891,7 @@ ito_inline mat4<T> operator++(mat4<T> &lhs, int)
 }
 
 template<typename T>
-ito_inline mat4<T> operator--(mat4<T> &lhs, int)
+inline mat4<T> operator--(mat4<T> &lhs, int)
 {
     mat4<T> result = lhs;
     --lhs;

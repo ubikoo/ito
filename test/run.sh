@@ -74,6 +74,7 @@ execute() {
     run make -f ../Makefile clean
     popd
 }
+
 pushd opencl
 execute 0-helloworld
 execute 1-platform

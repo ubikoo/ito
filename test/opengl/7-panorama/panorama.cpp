@@ -61,26 +61,27 @@ Panorama Panorama::Create()
         /*
          * Create a mesh over a rectangle.
          */
-        panorama.mesh = gl::Mesh::Plane(
+        panorama.mesh = gl::Mesh::Sphere(
             panorama.program,           /* shader program object */
-            "quad",                     /* vertex attributes prefix */
+            "sphere",                   /* vertex attributes prefix */
             kMeshNodes,                 /* n1 vertices */
             kMeshNodes,                 /* n2 vertices */
-            -1.0,                       /* xlo */
-            1.0,                        /* xhi */
-            -1.0,                       /* ylo */
-            1.0);                       /* yhi */
+            1.0,                        /* radius */
+            0.0,                        /* theta_lo */
+            M_PI,                       /* theta_hi */
+            -M_PI,                      /* phi_lo */
+            M_PI);                      /* phi_hi */
     }
 
     /*
-     * Initialize panorama camera.
+     * Create panorama camera.
      */
     {
-        panorama.camera = Camera{
-             0.0f,                      /* theta */
-             0.0f,                      /* phi */
-             0.01f * M_PI,              /* theta_step */
-             0.02f * M_PI};             /* phi_step */
+        panorama.camera = Camera::Create(
+            math::vec3f{0.0f, 0.0f, 0.0f},  /* eye */
+            math::vec3f{1.0f, 0.0f, 0.0f},  /* ctr */
+            math::vec3f{0.0f, 0.0f, 1.0f}   /* up */
+        );
     }
 
     return panorama;
@@ -102,21 +103,39 @@ void Panorama::Destroy(Panorama &panorama)
 void Panorama::Handle(Panorama &panorama, gl::Renderer::Event &event)
 {
     using gl::Renderer::Event;
+    static const float speed = 0.01f;
+    static const float step = 10.0f;
 
-    if (event.type == Event::Key && event.key.code == GLFW_KEY_LEFT) {
-        panorama.camera.rotate_left();
+    if (event.type == Event::Key && event.key.code == GLFW_KEY_W) {
+        panorama.camera.Move(speed * step);
     }
 
-    if (event.type == Event::Key && event.key.code == GLFW_KEY_RIGHT) {
-        panorama.camera.rotate_right();
+    if (event.type == Event::Key && event.key.code == GLFW_KEY_S) {
+        panorama.camera.Move(-speed * step);
+    }
+
+    if (event.type == Event::Key && event.key.code == GLFW_KEY_A) {
+        panorama.camera.Strafe(-speed * step);
+    }
+
+    if (event.type == Event::Key && event.key.code == GLFW_KEY_D) {
+        panorama.camera.Strafe(speed * step);
     }
 
     if (event.type == Event::Key && event.key.code == GLFW_KEY_UP) {
-        panorama.camera.rotate_up();
+        panorama.camera.Pitch(speed * M_PI);
     }
 
     if (event.type == Event::Key && event.key.code == GLFW_KEY_DOWN) {
-        panorama.camera.rotate_down();
+        panorama.camera.Pitch(-speed * M_PI);
+    }
+
+    if (event.type == Event::Key && event.key.code == GLFW_KEY_LEFT) {
+        panorama.camera.Yaw(-2.0f * speed * M_PI);
+    }
+
+    if (event.type == Event::Key && event.key.code == GLFW_KEY_RIGHT) {
+        panorama.camera.Yaw(2.0f * speed * M_PI);
     }
 }
 
@@ -132,7 +151,7 @@ void Panorama::Update(Panorama &panorama)
     const float znear = 0.1f;
     const float zfar = 10.0f;
     math::mat4f proj = math::perspective(fovy, aspect, znear, zfar);
-    math::mat4f view = panorama.camera.lookat();
+    math::mat4f view = panorama.camera.View();
     panorama.mvp = math::dot(proj, view);
 }
 

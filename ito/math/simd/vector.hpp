@@ -20,7 +20,7 @@ namespace math {
 /** ---- simd load/store functions --------------------------------------------
  * @brief Load 128-bits (2 packed double-precision 64-bit) from a vec2 array.
  */
-ito_inline __m128d simd_load(const vec2<double> &v)
+inline __m128d simd_load(const vec2<double> &v)
 {
     return _mm_load_pd(v.data);
 }
@@ -28,7 +28,7 @@ ito_inline __m128d simd_load(const vec2<double> &v)
 /**
  * @brief Store 128-bits (2 packed double-precision 64-bit) into a vec2 array.
  */
-ito_inline void simd_store(vec2<double> &v, const __m128d a)
+inline void simd_store(vec2<double> &v, const __m128d a)
 {
     _mm_store_pd(v.data, a);
 }
@@ -51,7 +51,7 @@ ito_inline void simd_store(vec2<double> &v, const __m128d a)
  * the memory location is not loaded and the corresponding field of the
  * destination vector is set to zero.
  */
-ito_inline __m256d simd_load(const vec3<double> &v)
+inline __m256d simd_load(const vec3<double> &v)
 {
     const __m256i mask = _mm256_set_epi64x(
         0x0,
@@ -79,7 +79,7 @@ ito_inline __m256d simd_load(const vec3<double> &v)
  * the vector-a is not loaded, and the corresponding field of the destination
  * vector-v is left unchanged.
  */
-ito_inline void simd_store(vec3<double> &v, const __m256d a)
+inline void simd_store(vec3<double> &v, const __m256d a)
 {
     const __m256i mask = _mm256_set_epi64x(
         0x0,
@@ -92,7 +92,7 @@ ito_inline void simd_store(vec3<double> &v, const __m256d a)
 /**
  * @brief Load 256-bits (4 packed double precision 64-bit) from a vec4 array.
  */
-ito_inline __m256d simd_load(const vec4<double> &v)
+inline __m256d simd_load(const vec4<double> &v)
 {
     return _mm256_load_pd(v.data);
 }
@@ -100,7 +100,7 @@ ito_inline __m256d simd_load(const vec4<double> &v)
 /**
  * @brief Store 256-bits (4 packed double precision 64-bit) into a vec4 array.
  */
-ito_inline void simd_store(vec4<double> &v, const __m256d a)
+inline void simd_store(vec4<double> &v, const __m256d a)
 {
     _mm256_store_pd(v.data, a);
 }
@@ -108,7 +108,7 @@ ito_inline void simd_store(vec4<double> &v, const __m256d a)
 /** ---- vec2 simd arithmetic operators ---------------------------------------
  */
 template<>
-ito_inline vec2<double> &operator+=(vec2<double> &lhs, const vec2<double> &rhs)
+inline vec2<double> &operator+=(vec2<double> &lhs, const vec2<double> &rhs)
 {
     const __m128d a = simd_load(lhs);
     const __m128d b = simd_load(rhs);
@@ -117,7 +117,7 @@ ito_inline vec2<double> &operator+=(vec2<double> &lhs, const vec2<double> &rhs)
 }
 
 template<>
-ito_inline vec2<double> &operator-=(vec2<double> &lhs, const vec2<double> &rhs)
+inline vec2<double> &operator-=(vec2<double> &lhs, const vec2<double> &rhs)
 {
     const __m128d a = simd_load(lhs);
     const __m128d b = simd_load(rhs);
@@ -126,7 +126,7 @@ ito_inline vec2<double> &operator-=(vec2<double> &lhs, const vec2<double> &rhs)
 }
 
 template<>
-ito_inline vec2<double> &operator*=(vec2<double> &lhs, const vec2<double> &rhs)
+inline vec2<double> &operator*=(vec2<double> &lhs, const vec2<double> &rhs)
 {
     const __m128d a = simd_load(lhs);
     const __m128d b = simd_load(rhs);
@@ -135,7 +135,7 @@ ito_inline vec2<double> &operator*=(vec2<double> &lhs, const vec2<double> &rhs)
 }
 
 template<>
-ito_inline vec2<double> &operator/=(vec2<double> &lhs, const vec2<double> &rhs)
+inline vec2<double> &operator/=(vec2<double> &lhs, const vec2<double> &rhs)
 {
     const __m128d a = simd_load(lhs);
     const __m128d b = simd_load(rhs);
@@ -144,7 +144,7 @@ ito_inline vec2<double> &operator/=(vec2<double> &lhs, const vec2<double> &rhs)
 }
 
 template<>
-ito_inline vec2<double> &operator+=(vec2<double> &lhs, const double scalar)
+inline vec2<double> &operator+=(vec2<double> &lhs, const double scalar)
 {
     const __m128d a = simd_load(lhs);
     const __m128d b = _mm_set1_pd(scalar);
@@ -153,7 +153,7 @@ ito_inline vec2<double> &operator+=(vec2<double> &lhs, const double scalar)
 }
 
 template<>
-ito_inline vec2<double> &operator-=(vec2<double> &lhs, const double scalar)
+inline vec2<double> &operator-=(vec2<double> &lhs, const double scalar)
 {
     const __m128d a = simd_load(lhs);
     const __m128d b = _mm_set1_pd(scalar);
@@ -162,7 +162,7 @@ ito_inline vec2<double> &operator-=(vec2<double> &lhs, const double scalar)
 }
 
 template<>
-ito_inline vec2<double> &operator*=(vec2<double> &lhs, const double scalar)
+inline vec2<double> &operator*=(vec2<double> &lhs, const double scalar)
 {
     const __m128d a = simd_load(lhs);
     const __m128d b = _mm_set1_pd(scalar);
@@ -171,7 +171,7 @@ ito_inline vec2<double> &operator*=(vec2<double> &lhs, const double scalar)
 }
 
 template<>
-ito_inline vec2<double> &operator/=(vec2<double> &lhs, const double scalar)
+inline vec2<double> &operator/=(vec2<double> &lhs, const double scalar)
 {
     const __m128d a = simd_load(lhs);
     const __m128d b = _mm_set1_pd(scalar);
@@ -182,7 +182,7 @@ ito_inline vec2<double> &operator/=(vec2<double> &lhs, const double scalar)
 /** ---- vec3 simd arithmetic operators ---------------------------------------
  */
 template<>
-ito_inline vec3<double> &operator+=(vec3<double> &lhs, const vec3<double> &rhs)
+inline vec3<double> &operator+=(vec3<double> &lhs, const vec3<double> &rhs)
 {
     const __m256d a = simd_load(lhs);
     const __m256d b = simd_load(rhs);
@@ -191,7 +191,7 @@ ito_inline vec3<double> &operator+=(vec3<double> &lhs, const vec3<double> &rhs)
 }
 
 template<>
-ito_inline vec3<double> &operator-=(vec3<double> &lhs, const vec3<double> &rhs)
+inline vec3<double> &operator-=(vec3<double> &lhs, const vec3<double> &rhs)
 {
     const __m256d a = simd_load(lhs);
     const __m256d b = simd_load(rhs);
@@ -200,7 +200,7 @@ ito_inline vec3<double> &operator-=(vec3<double> &lhs, const vec3<double> &rhs)
 }
 
 template<>
-ito_inline vec3<double> &operator*=(vec3<double> &lhs, const vec3<double> &rhs)
+inline vec3<double> &operator*=(vec3<double> &lhs, const vec3<double> &rhs)
 {
     const __m256d a = simd_load(lhs);
     const __m256d b = simd_load(rhs);
@@ -209,7 +209,7 @@ ito_inline vec3<double> &operator*=(vec3<double> &lhs, const vec3<double> &rhs)
 }
 
 template<>
-ito_inline vec3<double> &operator/=(vec3<double> &lhs, const vec3<double> &rhs)
+inline vec3<double> &operator/=(vec3<double> &lhs, const vec3<double> &rhs)
 {
     const __m256d a = simd_load(lhs);
     const __m256d b = simd_load(rhs);
@@ -218,7 +218,7 @@ ito_inline vec3<double> &operator/=(vec3<double> &lhs, const vec3<double> &rhs)
 }
 
 template<>
-ito_inline vec3<double> &operator+=(vec3<double> &lhs, const double scalar)
+inline vec3<double> &operator+=(vec3<double> &lhs, const double scalar)
 {
     const __m256d a = simd_load(lhs);
     const __m256d b = _mm256_set1_pd(scalar);
@@ -227,7 +227,7 @@ ito_inline vec3<double> &operator+=(vec3<double> &lhs, const double scalar)
 }
 
 template<>
-ito_inline vec3<double> &operator-=(vec3<double> &lhs, const double scalar)
+inline vec3<double> &operator-=(vec3<double> &lhs, const double scalar)
 {
     const __m256d a = simd_load(lhs);
     const __m256d b = _mm256_set1_pd(scalar);
@@ -236,7 +236,7 @@ ito_inline vec3<double> &operator-=(vec3<double> &lhs, const double scalar)
 }
 
 template<>
-ito_inline vec3<double> &operator*=(vec3<double> &lhs, const double scalar)
+inline vec3<double> &operator*=(vec3<double> &lhs, const double scalar)
 {
     const __m256d a = simd_load(lhs);
     const __m256d b = _mm256_set1_pd(scalar);
@@ -245,7 +245,7 @@ ito_inline vec3<double> &operator*=(vec3<double> &lhs, const double scalar)
 }
 
 template<>
-ito_inline vec3<double> &operator/=(vec3<double> &lhs, const double scalar)
+inline vec3<double> &operator/=(vec3<double> &lhs, const double scalar)
 {
     const __m256d a = simd_load(lhs);
     const __m256d b = _mm256_set1_pd(scalar);
@@ -256,7 +256,7 @@ ito_inline vec3<double> &operator/=(vec3<double> &lhs, const double scalar)
 /** ---- vec4 simd arithmetic operators ---------------------------------------
  */
 template<>
-ito_inline vec4<double> &operator+=(vec4<double> &lhs, const vec4<double> &rhs)
+inline vec4<double> &operator+=(vec4<double> &lhs, const vec4<double> &rhs)
 {
     const __m256d a = simd_load(lhs);
     const __m256d b = simd_load(rhs);
@@ -265,7 +265,7 @@ ito_inline vec4<double> &operator+=(vec4<double> &lhs, const vec4<double> &rhs)
 }
 
 template<>
-ito_inline vec4<double> &operator-=(vec4<double> &lhs, const vec4<double> &rhs)
+inline vec4<double> &operator-=(vec4<double> &lhs, const vec4<double> &rhs)
 {
     const __m256d a = simd_load(lhs);
     const __m256d b = simd_load(rhs);
@@ -274,7 +274,7 @@ ito_inline vec4<double> &operator-=(vec4<double> &lhs, const vec4<double> &rhs)
 }
 
 template<>
-ito_inline vec4<double> &operator*=(vec4<double> &lhs, const vec4<double> &rhs)
+inline vec4<double> &operator*=(vec4<double> &lhs, const vec4<double> &rhs)
 {
     const __m256d a = simd_load(lhs);
     const __m256d b = simd_load(rhs);
@@ -283,7 +283,7 @@ ito_inline vec4<double> &operator*=(vec4<double> &lhs, const vec4<double> &rhs)
 }
 
 template<>
-ito_inline vec4<double> &operator/=(vec4<double> &lhs, const vec4<double> &rhs)
+inline vec4<double> &operator/=(vec4<double> &lhs, const vec4<double> &rhs)
 {
     const __m256d a = simd_load(lhs);
     const __m256d b = simd_load(rhs);
@@ -292,7 +292,7 @@ ito_inline vec4<double> &operator/=(vec4<double> &lhs, const vec4<double> &rhs)
 }
 
 template<>
-ito_inline vec4<double> &operator+=(vec4<double> &lhs, const double scalar)
+inline vec4<double> &operator+=(vec4<double> &lhs, const double scalar)
 {
     const __m256d a = simd_load(lhs);
     const __m256d b = _mm256_set1_pd(scalar);
@@ -301,7 +301,7 @@ ito_inline vec4<double> &operator+=(vec4<double> &lhs, const double scalar)
 }
 
 template<>
-ito_inline vec4<double> &operator-=(vec4<double> &lhs, const double scalar)
+inline vec4<double> &operator-=(vec4<double> &lhs, const double scalar)
 {
     const __m256d a = simd_load(lhs);
     const __m256d b = _mm256_set1_pd(scalar);
@@ -310,7 +310,7 @@ ito_inline vec4<double> &operator-=(vec4<double> &lhs, const double scalar)
 }
 
 template<>
-ito_inline vec4<double> &operator*=(vec4<double> &lhs, const double scalar)
+inline vec4<double> &operator*=(vec4<double> &lhs, const double scalar)
 {
     const __m256d a = simd_load(lhs);
     const __m256d b = _mm256_set1_pd(scalar);
@@ -319,7 +319,7 @@ ito_inline vec4<double> &operator*=(vec4<double> &lhs, const double scalar)
 }
 
 template<>
-ito_inline vec4<double> &operator/=(vec4<double> &lhs, const double scalar)
+inline vec4<double> &operator/=(vec4<double> &lhs, const double scalar)
 {
     const __m256d a = simd_load(lhs);
     const __m256d b = _mm256_set1_pd(scalar);

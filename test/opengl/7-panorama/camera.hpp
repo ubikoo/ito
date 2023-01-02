@@ -15,18 +15,23 @@
 #include "ito/opengl.hpp"
 
 struct Camera {
-    float theta;                /* camera polar angle */
-    float phi;                  /* camera azimuth angle */
-    float theta_step;           /* polar angle increment value */
-    float phi_step;             /* azimuth angle increment value */
+    ito::math::vec3f eye;       /* camera position */
+    ito::math::vec3f look;      /* look direction */
+    ito::math::vec3f up;        /* camera position */
 
-    void rotate_left(void);
-    void rotate_right(void);
+    void Move(float step);
+    void Strafe(float step);
+    void Pitch(float angle);
+    void Yaw(float angle);
+    void Rotate(const math::mat4f &rot);
 
-    void rotate_up(void);
-    void rotate_down(void);
+    ito::math::mat4f View(void);
 
-    ito::math::mat4f lookat(void);
+    static Camera Create(
+        const ito::math::vec3f &eye,
+        const ito::math::vec3f &ctr,
+        const ito::math::vec3f &up);
+
 };
 
 #endif /* TEST_ITO_OPENGL_CAMERA_H_ */

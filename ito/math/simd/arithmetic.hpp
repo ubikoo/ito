@@ -32,7 +32,7 @@ namespace math {
  *      (_MM_FROUND_TO_ZERO |_MM_FROUND_NO_EXC)
  */
 template<>
-ito_inline vec2<double> round(const vec2<double> &u)
+inline vec2<double> round(const vec2<double> &u)
 {
     static constexpr int rounding = _MM_FROUND_TO_NEAREST_INT | _MM_FROUND_NO_EXC;
     vec2<double> result{};
@@ -41,7 +41,7 @@ ito_inline vec2<double> round(const vec2<double> &u)
 }
 
 template<>
-ito_inline vec3<double> round(const vec3<double> &u)
+inline vec3<double> round(const vec3<double> &u)
 {
     static constexpr int rounding = _MM_FROUND_TO_NEAREST_INT | _MM_FROUND_NO_EXC;
     vec3<double> result{};
@@ -50,7 +50,7 @@ ito_inline vec3<double> round(const vec3<double> &u)
 }
 
 template<>
-ito_inline vec4<double> round(const vec4<double> &u)
+inline vec4<double> round(const vec4<double> &u)
 {
     static constexpr int rounding = _MM_FROUND_TO_NEAREST_INT | _MM_FROUND_NO_EXC;
     vec4<double> result{};
@@ -62,7 +62,7 @@ ito_inline vec4<double> round(const vec4<double> &u)
  * @brief Find the nearest integer less than or equal to the vector elements.
  */
 template<>
-ito_inline vec2<double> floor(const vec2<double> &u)
+inline vec2<double> floor(const vec2<double> &u)
 {
     vec2<double> result{};
     simd_store(result, _mm_floor_pd(simd_load(u)));
@@ -70,7 +70,7 @@ ito_inline vec2<double> floor(const vec2<double> &u)
 }
 
 template<>
-ito_inline vec3<double> floor(const vec3<double> &u)
+inline vec3<double> floor(const vec3<double> &u)
 {
     vec3<double> result{};
     simd_store(result, _mm256_floor_pd(simd_load(u)));
@@ -78,7 +78,7 @@ ito_inline vec3<double> floor(const vec3<double> &u)
 }
 
 template<>
-ito_inline vec4<double> floor(const vec4<double> &u)
+inline vec4<double> floor(const vec4<double> &u)
 {
     vec4<double> result{};
     simd_store(result, _mm256_floor_pd(simd_load(u)));
@@ -89,7 +89,7 @@ ito_inline vec4<double> floor(const vec4<double> &u)
  * @brief Find the nearest integer greater than or equal to the vector elements.
  */
 template<>
-ito_inline vec2<double> ceil(const vec2<double> &u)
+inline vec2<double> ceil(const vec2<double> &u)
 {
     vec2<double> result{};
     simd_store(result, _mm_ceil_pd(simd_load(u)));
@@ -97,7 +97,7 @@ ito_inline vec2<double> ceil(const vec2<double> &u)
 }
 
 template<>
-ito_inline vec3<double> ceil(const vec3<double> &u)
+inline vec3<double> ceil(const vec3<double> &u)
 {
     vec3<double> result{};
     simd_store(result, _mm256_ceil_pd(simd_load(u)));
@@ -105,7 +105,7 @@ ito_inline vec3<double> ceil(const vec3<double> &u)
 }
 
 template<>
-ito_inline vec4<double> ceil(const vec4<double> &u)
+inline vec4<double> ceil(const vec4<double> &u)
 {
     vec4<double> result{};
     simd_store(result, _mm256_ceil_pd(simd_load(u)));
@@ -116,7 +116,7 @@ ito_inline vec4<double> ceil(const vec4<double> &u)
  * @brief Return modulo operation (u mod v).
  */
 template<>
-ito_inline vec2<double> mod(const vec2<double> &u, const vec2<double> &v)
+inline vec2<double> mod(const vec2<double> &u, const vec2<double> &v)
 {
     __m128d a = simd_load(u);
     __m128d b = simd_load(v);
@@ -129,7 +129,7 @@ ito_inline vec2<double> mod(const vec2<double> &u, const vec2<double> &v)
 }
 
 template<>
-ito_inline vec3<double> mod(const vec3<double> &u, const vec3<double> &v)
+inline vec3<double> mod(const vec3<double> &u, const vec3<double> &v)
 {
     __m256d a = simd_load(u);
     __m256d b = simd_load(v);
@@ -142,7 +142,7 @@ ito_inline vec3<double> mod(const vec3<double> &u, const vec3<double> &v)
 }
 
 template<>
-ito_inline vec4<double> mod(const vec4<double> &u, const vec4<double> &v)
+inline vec4<double> mod(const vec4<double> &u, const vec4<double> &v)
 {
     __m256d a = simd_load(u);
     __m256d b = simd_load(v);
@@ -159,7 +159,7 @@ ito_inline vec4<double> mod(const vec4<double> &u, const vec4<double> &v)
  * width e. The corresponding delta function is the asymptotic value when e->0.
  */
 template<>
-ito_inline vec2<double> dirac(const double e, const vec2<double> &u)
+inline vec2<double> dirac(const double e, const vec2<double> &u)
 {
     const __m128d zero = _mm_set1_pd(0.0);
     const __m128d one = _mm_set1_pd(1.0);
@@ -180,7 +180,7 @@ ito_inline vec2<double> dirac(const double e, const vec2<double> &u)
 }
 
 template<>
-ito_inline vec3<double> dirac(const double e, const vec3<double> &u)
+inline vec3<double> dirac(const double e, const vec3<double> &u)
 {
     const __m256d zero = _mm256_set1_pd(0.0);
     const __m256d one = _mm256_set1_pd(1.0);
@@ -202,7 +202,7 @@ ito_inline vec3<double> dirac(const double e, const vec3<double> &u)
 }
 
 template<>
-ito_inline vec4<double> dirac(const double e, const vec4<double> &u)
+inline vec4<double> dirac(const double e, const vec4<double> &u)
 {
     const __m256d zero = _mm256_set1_pd(0.0);
     const __m256d one = _mm256_set1_pd(1.0);
@@ -227,7 +227,7 @@ ito_inline vec4<double> dirac(const double e, const vec4<double> &u)
  * @brief Heaviside step function.
  */
 template<>
-ito_inline vec2<double> step(const vec2<double> &u)
+inline vec2<double> step(const vec2<double> &u)
 {
     const __m128d zero = _mm_set1_pd(0.0);
     const __m128d one = _mm_set1_pd(1.0);
@@ -242,7 +242,7 @@ ito_inline vec2<double> step(const vec2<double> &u)
 }
 
 template<>
-ito_inline vec3<double> step(const vec3<double> &u)
+inline vec3<double> step(const vec3<double> &u)
 {
     const __m256d zero = _mm256_set1_pd(0.0);
     const __m256d one = _mm256_set1_pd(1.0);
@@ -257,7 +257,7 @@ ito_inline vec3<double> step(const vec3<double> &u)
 }
 
 template<>
-ito_inline vec4<double> step(const vec4<double> &u)
+inline vec4<double> step(const vec4<double> &u)
 {
     const __m256d zero = _mm256_set1_pd(0.0);
     const __m256d one = _mm256_set1_pd(1.0);
@@ -275,7 +275,7 @@ ito_inline vec4<double> step(const vec4<double> &u)
  * @brief Smooth step between lo and hi.
  */
 template<>
-ito_inline vec2<double> smoothstep(
+inline vec2<double> smoothstep(
     const vec2<double> &lo,
     const vec2<double> &hi,
     const vec2<double> &u)
@@ -305,7 +305,7 @@ ito_inline vec2<double> smoothstep(
 }
 
 template<>
-ito_inline vec3<double> smoothstep(
+inline vec3<double> smoothstep(
     const vec3<double> &lo,
     const vec3<double> &hi,
     const vec3<double> &u)
@@ -335,7 +335,7 @@ ito_inline vec3<double> smoothstep(
 }
 
 template<>
-ito_inline vec4<double> smoothstep(
+inline vec4<double> smoothstep(
     const vec4<double> &lo,
     const vec4<double> &hi,
     const vec4<double> &u)
@@ -368,7 +368,7 @@ ito_inline vec4<double> smoothstep(
  * @brief Linear interpolation between lo and hi.
  */
 template<>
-ito_inline vec2<double> lerp(
+inline vec2<double> lerp(
     const vec2<double> &lo,
     const vec2<double> &hi,
     const vec2<double> &u)
@@ -388,7 +388,7 @@ ito_inline vec2<double> lerp(
 }
 
 template<>
-ito_inline vec3<double> lerp(
+inline vec3<double> lerp(
     const vec3<double> &lo,
     const vec3<double> &hi,
     const vec3<double> &u)
@@ -408,7 +408,7 @@ ito_inline vec3<double> lerp(
 }
 
 template<>
-ito_inline vec4<double> lerp(
+inline vec4<double> lerp(
     const vec4<double> &lo,
     const vec4<double> &hi,
     const vec4<double> &u)
@@ -431,7 +431,7 @@ ito_inline vec4<double> lerp(
  * @brief Convert degrees to radians.
  */
 template<>
-ito_inline vec2<double> radians(const vec2<double> &u)
+inline vec2<double> radians(const vec2<double> &u)
 {
     const __m128d deg_to_rad = _mm_set1_pd(M_PI / 180);
     __m128d a = simd_load(u);
@@ -443,7 +443,7 @@ ito_inline vec2<double> radians(const vec2<double> &u)
 }
 
 template<>
-ito_inline vec3<double> radians(const vec3<double> &u)
+inline vec3<double> radians(const vec3<double> &u)
 {
     const __m256d deg_to_rad = _mm256_set1_pd(M_PI / 180);
     __m256d a = simd_load(u);
@@ -455,7 +455,7 @@ ito_inline vec3<double> radians(const vec3<double> &u)
 }
 
 template<>
-ito_inline vec4<double> radians(const vec4<double> &u)
+inline vec4<double> radians(const vec4<double> &u)
 {
     const __m256d deg_to_rad = _mm256_set1_pd(M_PI / 180);
     __m256d a = simd_load(u);
@@ -470,7 +470,7 @@ ito_inline vec4<double> radians(const vec4<double> &u)
  * @brief Convert radians to degrees.
  */
 template<>
-ito_inline vec2<double> degrees(const vec2<double> &u)
+inline vec2<double> degrees(const vec2<double> &u)
 {
     const __m128d rad_to_deg = _mm_set1_pd(180 / M_PI);
     __m128d a = simd_load(u);
@@ -482,7 +482,7 @@ ito_inline vec2<double> degrees(const vec2<double> &u)
 }
 
 template<>
-ito_inline vec3<double> degrees(const vec3<double> &u)
+inline vec3<double> degrees(const vec3<double> &u)
 {
     const __m256d rad_to_deg = _mm256_set1_pd(180 / M_PI);
     __m256d a = simd_load(u);
@@ -494,7 +494,7 @@ ito_inline vec3<double> degrees(const vec3<double> &u)
 }
 
 template<>
-ito_inline vec4<double> degrees(const vec4<double> &u)
+inline vec4<double> degrees(const vec4<double> &u)
 {
     const __m256d rad_to_deg = _mm256_set1_pd(180 / M_PI);
     __m256d a = simd_load(u);
@@ -509,7 +509,7 @@ ito_inline vec4<double> degrees(const vec4<double> &u)
  * @brief Return the signum function of u.
  */
 template<>
-ito_inline vec2<double> sign(const vec2<double> &u)
+inline vec2<double> sign(const vec2<double> &u)
 {
     const __m128d zero = _mm_set1_pd(0.0);
     const __m128d plus_one = _mm_set1_pd(1.0);
@@ -526,7 +526,7 @@ ito_inline vec2<double> sign(const vec2<double> &u)
 }
 
 template<>
-ito_inline vec3<double> sign(const vec3<double> &u)
+inline vec3<double> sign(const vec3<double> &u)
 {
     const __m256d zero = _mm256_set1_pd(0.0);
     const __m256d plus_one = _mm256_set1_pd(1.0);
@@ -543,7 +543,7 @@ ito_inline vec3<double> sign(const vec3<double> &u)
 }
 
 template<>
-ito_inline vec4<double> sign(const vec4<double> &u)
+inline vec4<double> sign(const vec4<double> &u)
 {
     const __m256d zero = _mm256_set1_pd(0.0);
     const __m256d plus_one = _mm256_set1_pd(1.0);
@@ -564,7 +564,7 @@ ito_inline vec4<double> sign(const vec4<double> &u)
  * |a| = max((0-a), a) = max(-a,a)
  */
 template<>
-ito_inline vec2<double> abs(const vec2<double> &u)
+inline vec2<double> abs(const vec2<double> &u)
 {
     const __m128d zero = _mm_set1_pd(0.0);
 
@@ -577,7 +577,7 @@ ito_inline vec2<double> abs(const vec2<double> &u)
 }
 
 template<>
-ito_inline vec3<double> abs(const vec3<double> &u)
+inline vec3<double> abs(const vec3<double> &u)
 {
     const __m256d zero = _mm256_set1_pd(0.0);
 
@@ -590,7 +590,7 @@ ito_inline vec3<double> abs(const vec3<double> &u)
 }
 
 template<>
-ito_inline vec4<double> abs(const vec4<double> &u)
+inline vec4<double> abs(const vec4<double> &u)
 {
     const __m256d zero = _mm256_set1_pd(0.0);
 
@@ -606,7 +606,7 @@ ito_inline vec4<double> abs(const vec4<double> &u)
  * @brief Return the min between u and v.
  */
 template<>
-ito_inline vec2<double> min(const vec2<double> &u, const vec2<double> &v)
+inline vec2<double> min(const vec2<double> &u, const vec2<double> &v)
 {
     vec2<double> result{};
     simd_store(result, _mm_min_pd(simd_load(u), simd_load(v)));
@@ -614,7 +614,7 @@ ito_inline vec2<double> min(const vec2<double> &u, const vec2<double> &v)
 }
 
 template<>
-ito_inline vec3<double> min(const vec3<double> &u, const vec3<double> &v)
+inline vec3<double> min(const vec3<double> &u, const vec3<double> &v)
 {
     vec3<double> result{};
     simd_store(result, _mm256_min_pd(simd_load(u), simd_load(v)));
@@ -622,7 +622,7 @@ ito_inline vec3<double> min(const vec3<double> &u, const vec3<double> &v)
 }
 
 template<>
-ito_inline vec4<double> min(const vec4<double> &u, const vec4<double> &v)
+inline vec4<double> min(const vec4<double> &u, const vec4<double> &v)
 {
     vec4<double> result{};
     simd_store(result, _mm256_min_pd(simd_load(u), simd_load(v)));
@@ -633,7 +633,7 @@ ito_inline vec4<double> min(const vec4<double> &u, const vec4<double> &v)
  * @brief Return the max between u and v.
  */
 template<>
-ito_inline vec2<double> max(const vec2<double> &u, const vec2<double> &v)
+inline vec2<double> max(const vec2<double> &u, const vec2<double> &v)
 {
     vec2<double> result{};
     simd_store(result, _mm_max_pd(simd_load(u), simd_load(v)));
@@ -641,7 +641,7 @@ ito_inline vec2<double> max(const vec2<double> &u, const vec2<double> &v)
 }
 
 template<>
-ito_inline vec3<double> max(const vec3<double> &u, const vec3<double> &v)
+inline vec3<double> max(const vec3<double> &u, const vec3<double> &v)
 {
     vec3<double> result{};
     simd_store(result, _mm256_max_pd(simd_load(u), simd_load(v)));
@@ -649,7 +649,7 @@ ito_inline vec3<double> max(const vec3<double> &u, const vec3<double> &v)
 }
 
 template<>
-ito_inline vec4<double> max(const vec4<double> &u, const vec4<double> &v)
+inline vec4<double> max(const vec4<double> &u, const vec4<double> &v)
 {
     vec4<double> result{};
     simd_store(result, _mm256_max_pd(simd_load(u), simd_load(v)));
@@ -662,7 +662,7 @@ ito_inline vec4<double> max(const vec4<double> &u, const vec4<double> &v)
  * @brief Clamp u between lo and hi.
  */
 template<>
-ito_inline vec2<double> clamp(
+inline vec2<double> clamp(
     const vec2<double> &u,
     const vec2<double> &lo,
     const vec2<double> &hi)
@@ -676,7 +676,7 @@ ito_inline vec2<double> clamp(
     return result;
 }
 template<>
-ito_inline vec3<double> clamp(
+inline vec3<double> clamp(
     const vec3<double> &u,
     const vec3<double> &lo,
     const vec3<double> &hi)
@@ -690,7 +690,7 @@ ito_inline vec3<double> clamp(
     return result;
 }
 template<>
-ito_inline vec4<double> clamp(
+inline vec4<double> clamp(
     const vec4<double> &u,
     const vec4<double> &lo,
     const vec4<double> &hi)

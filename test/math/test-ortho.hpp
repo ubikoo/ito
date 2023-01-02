@@ -19,7 +19,7 @@
  * @brief ortho test client.
  */
 template<typename T>
-ito_inline bool test_ortho_is_valid(const ito::math::onb<T> &o)
+inline bool test_ortho_is_valid(const ito::math::onb<T> &o)
 {
     using namespace ito;
 
@@ -90,7 +90,7 @@ ito_inline bool test_ortho_is_valid(const ito::math::onb<T> &o)
 }
 
 template<typename T>
-ito_inline bool test_ortho_is_nan(const ito::math::vec3<T> &v)
+inline bool test_ortho_is_nan(const ito::math::vec3<T> &v)
 {
     using namespace ito;
 
@@ -102,7 +102,7 @@ ito_inline bool test_ortho_is_nan(const ito::math::vec3<T> &v)
 }
 
 template<typename T>
-ito_inline void test_ortho_run(const size_t n_iters)
+inline void test_ortho_run(const size_t n_iters)
 {
     using namespace ito;
 
@@ -255,7 +255,7 @@ ito_inline void test_ortho_run(const size_t n_iters)
 }
 
 template<typename T>
-ito_inline void test_ortho(const size_t n_iters)
+inline void test_ortho(const size_t n_iters)
 {
     /* Test random orthonormal basis */
     ito_pragma(omp parallel default(none) shared(n_iters))

@@ -19,28 +19,28 @@ namespace math {
  * @brief Vector and matrix output stream operators.
  */
 template<typename T>
-ito_inline std::ostream &operator<< (std::ostream &os, const vec2<T> &v)
+inline std::ostream &operator<< (std::ostream &os, const vec2<T> &v)
 {
     os << v.x << " " << v.y << "\n";
     return os;
 }
 
 template<typename T>
-ito_inline std::ostream &operator<< (std::ostream &os, const vec3<T> &v)
+inline std::ostream &operator<< (std::ostream &os, const vec3<T> &v)
 {
     os << v.x << " " << v.y << " " << v.z << "\n";
     return os;
 }
 
 template<typename T>
-ito_inline std::ostream &operator<< (std::ostream &os, const vec4<T> &v)
+inline std::ostream &operator<< (std::ostream &os, const vec4<T> &v)
 {
     os << v.x << " " << v.y << " " << v.z << " " << v.w << "\n";
     return os;
 }
 
 template<typename T>
-ito_inline std::ostream &operator<< (std::ostream &os, const mat2<T> &a)
+inline std::ostream &operator<< (std::ostream &os, const mat2<T> &a)
 {
     os << a.xx << " " << a.xy << "\n"
        << a.yx << " " << a.yy << "\n";
@@ -48,7 +48,7 @@ ito_inline std::ostream &operator<< (std::ostream &os, const mat2<T> &a)
 }
 
 template<typename T>
-ito_inline std::ostream &operator<< (std::ostream &os, const mat3<T> &a)
+inline std::ostream &operator<< (std::ostream &os, const mat3<T> &a)
 {
     os << a.xx << " " << a.xy << " " << a.xz << "\n"
        << a.yx << " " << a.yy << " " << a.yz << "\n"
@@ -57,7 +57,7 @@ ito_inline std::ostream &operator<< (std::ostream &os, const mat3<T> &a)
 }
 
 template<typename T>
-ito_inline std::ostream &operator<< (std::ostream &os, const mat4<T> &a)
+inline std::ostream &operator<< (std::ostream &os, const mat4<T> &a)
 {
     os << a.xx << " " << a.xy << " " << a.xz << " " << a.xw << "\n"
        << a.yx << " " << a.yy << " " << a.yz << " " << a.yw << "\n"
@@ -70,7 +70,7 @@ ito_inline std::ostream &operator<< (std::ostream &os, const mat4<T> &a)
  * @brief Vector and matrix string serialization functions.
  */
 template<typename T>
-ito_inline std::string to_string(const T &v, const char *format = nullptr)
+inline std::string to_string(const T &v, const char *format = nullptr)
 {
     std::ostringstream ss;
     ss << (format ? ito::str::format(format, v) : std::to_string(v));
@@ -78,7 +78,7 @@ ito_inline std::string to_string(const T &v, const char *format = nullptr)
 }
 
 template<typename T>
-ito_inline std::string to_string(const vec2<T> &v, const char *format = nullptr)
+inline std::string to_string(const vec2<T> &v, const char *format = nullptr)
 {
     std::ostringstream ss;
     ss << to_string(v.x) << " ";
@@ -87,7 +87,7 @@ ito_inline std::string to_string(const vec2<T> &v, const char *format = nullptr)
 }
 
 template<typename T>
-ito_inline std::string to_string(const vec3<T> &v, const char *format = nullptr)
+inline std::string to_string(const vec3<T> &v, const char *format = nullptr)
 {
     std::ostringstream ss;
     ss << to_string(v.x) << " ";
@@ -97,7 +97,7 @@ ito_inline std::string to_string(const vec3<T> &v, const char *format = nullptr)
 }
 
 template<typename T>
-ito_inline std::string to_string(const vec4<T> &v, const char *format = nullptr)
+inline std::string to_string(const vec4<T> &v, const char *format = nullptr)
 {
     std::ostringstream ss;
     ss << to_string(v.x) << " ";
@@ -108,7 +108,7 @@ ito_inline std::string to_string(const vec4<T> &v, const char *format = nullptr)
 }
 
 template<typename T>
-ito_inline std::string to_string(const mat2<T> &a, const char *format = nullptr)
+inline std::string to_string(const mat2<T> &a, const char *format = nullptr)
 {
     std::ostringstream ss;
     ss << to_string(a.xx) << " ";
@@ -120,7 +120,7 @@ ito_inline std::string to_string(const mat2<T> &a, const char *format = nullptr)
 }
 
 template<typename T>
-ito_inline std::string to_string(const mat3<T> &a, const char *format = nullptr)
+inline std::string to_string(const mat3<T> &a, const char *format = nullptr)
 {
     std::ostringstream ss;
     ss << to_string(a.xx) << " ";
@@ -138,7 +138,7 @@ ito_inline std::string to_string(const mat3<T> &a, const char *format = nullptr)
 }
 
 template<typename T>
-ito_inline std::string to_string(const mat4<T> &a, const char *format = nullptr)
+inline std::string to_string(const mat4<T> &a, const char *format = nullptr)
 {
     std::ostringstream ss;
     ss << to_string(a.xx) << " ";
@@ -167,7 +167,7 @@ ito_inline std::string to_string(const mat4<T> &a, const char *format = nullptr)
  * @brief Return a string serialization of the orthonormal vectors.
  */
 template<typename T>
-ito_inline std::string to_string(const onb<T> &o, const char *format = nullptr)
+inline std::string to_string(const onb<T> &o, const char *format = nullptr)
 {
     std::ostringstream ss;
     ss << to_string(o.u, format) << "\n";

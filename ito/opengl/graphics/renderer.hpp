@@ -198,7 +198,7 @@ struct Event {
 /**
  * @brief Event copy constructor.
  */
-ito_inline Event::Event(const Event &other)
+inline Event::Event(const Event &other)
 {
     /* Copy event type and event data. */
     type = other.type;
@@ -239,7 +239,7 @@ ito_inline Event::Event(const Event &other)
 /**
  * @brief Event copy assignment.
  */
-ito_inline Event &Event::operator=(const Event &other)
+inline Event &Event::operator=(const Event &other)
 {
     if (this == &other) {
         return *this;
@@ -286,15 +286,15 @@ ito_inline Event &Event::operator=(const Event &other)
 /**
  * @brief Event bitwise unary NOT and binary AND, OR and XOR operators.
  */
-ito_inline GLenum operator~(Event lhs) { return ~(lhs.type); }
+inline GLenum operator~(Event lhs) { return ~(lhs.type); }
 
-ito_inline GLenum operator&(Event lhs, const GLenum &rhs) { return (lhs &= rhs); }
-ito_inline GLenum operator|(Event lhs, const GLenum &rhs) { return (lhs |= rhs); }
-ito_inline GLenum operator^(Event lhs, const GLenum &rhs) { return (lhs ^= rhs); }
+inline GLenum operator&(Event lhs, const GLenum &rhs) { return (lhs &= rhs); }
+inline GLenum operator|(Event lhs, const GLenum &rhs) { return (lhs |= rhs); }
+inline GLenum operator^(Event lhs, const GLenum &rhs) { return (lhs ^= rhs); }
 
-ito_inline GLenum operator&(Event lhs, const Event &rhs) { return (lhs &= rhs.type); }
-ito_inline GLenum operator|(Event lhs, const Event &rhs) { return (lhs |= rhs.type); }
-ito_inline GLenum operator^(Event lhs, const Event &rhs) { return (lhs ^= rhs.type); }
+inline GLenum operator&(Event lhs, const Event &rhs) { return (lhs &= rhs.type); }
+inline GLenum operator|(Event lhs, const Event &rhs) { return (lhs |= rhs.type); }
+inline GLenum operator^(Event lhs, const Event &rhs) { return (lhs ^= rhs.type); }
 
 /**
  * @brief Does the queue have any events to be processed?

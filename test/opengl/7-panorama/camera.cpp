@@ -14,68 +14,70 @@ using namespace ito;
 #include "camera.hpp"
 
 /**
- * @brief Rotate camera
+ * @brief Move the camera forward and backward along its look vector.
  */
-void Camera::rotate_left(void)
+void Camera::Move(float step)
 {
-    phi += phi_step;
-}
-
-void Camera::rotate_right(void)
-{
-    phi -= phi_step;
-}
-
-void Camera::rotate_up(void)
-{
-    theta += theta_step;
-}
-
-void Camera::rotate_down(void)
-{
-    theta -= theta_step;
+    eye += look * step;
 }
 
 /**
- * @brief Return the camera view matrix.
+ * @brief Strafe the camera right and left along its right vector.
  */
-math::mat4f Camera::lookat(void)
+void Camera::Strafe(float step)
 {
-    /* The camera is located at the origin by default. */
-    math::vec3f eye = {0.0f, 0.0f, 0.0f};
+    math::vec3f right = math::normalize(math::cross(look, up));
+    eye += right * step;
+}
 
-    /* And is looking in the positive x-direction. */
-    math::vec3f ctr = {1.0f, 0.0f, 0.0f};
+/**
+ * @brief Rotate camera up and down around its right vector.
+ */
+void Camera::Pitch(float angle)
+{
+    math::vec3f right = math::normalize(math::cross(look, up));
+    Rotate(math::rotate(right, angle));
+}
 
-    /* Rotate the view in the azimuth direction */
-    {
-        math::mat4f rot = math::rotate({0.0f, 0.0f, 1.0f}, phi);
-        math::vec4f vec = {ctr.x, ctr.y, ctr.z, 0.0f};
-        vec = math::dot(rot, vec);
-        ctr = {vec.x, vec.y, vec.z};
-    }
+/**
+ * @brief Rotate camera left and right around its up vector.
+ */
+void Camera::Yaw(float angle)
+{
+    math::vec3f right = math::normalize(math::cross(look, up));
+    math::vec3f updir = math::normalize(math::cross(right, look));
+    Rotate(math::rotate(updir, angle));
+}
 
-    /*
-     * Compute the local basis set. The Gram-Schmidt up-vector is z-direction
-     * unless it is parallel to the w-direction, in which case, it will be in
-     * the y-direction.
-     */
-    math::vec3f w = math::normalize(eye - ctr);
-    math::vec3f up = {0.0f, 0.0f, 1.0f};
-    math::vec3f u = math::normalize(math::cross(up, w));
-    /* math::vec3f v = math::normalize(math::cross(w, u)); */
+/**
+ * @brief Rotate the camera look direction.
+ */
+void Camera::Rotate(const math::mat4f &rot)
+{
+    math::vec4f d = {look.x, look.y, look.z, 0.0f};
+    d = math::dot(rot, d);
+    look = math::vec3f{d.x, d.y, d.z};
+}
 
-    /* Rotate the view in the polar direction */
-    {
-        math::mat4f rot = math::rotate(u, theta);
-        math::vec4f vec = {ctr.x, ctr.y, ctr.z, 0.0f};
-        vec = math::dot(rot, vec);
-        ctr = {vec.x, vec.y, vec.z};
-    }
+/**
+ * @brief Return the camera view transform.
+ */
+math::mat4f Camera::View(void)
+{
+    return math::lookat(eye, eye + look, up);
+}
 
-    /* Return the modelviewprojection matrix */
-    return math::lookat(
-        {eye.x, eye.y, eye.z},
-        {ctr.x, ctr.y, ctr.z},
-        up);
+/**
+ * @brief Return the camera view transform.
+ */
+Camera Camera::Create(
+    const math::vec3f &eye,
+    const math::vec3f &ctr,
+    const math::vec3f &up)
+{
+    Camera camera = {};
+    camera.eye = eye;
+    camera.look = math::normalize(ctr - eye);
+    camera.up = up;
+    return camera;
 }

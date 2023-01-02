@@ -26,7 +26,7 @@ namespace math {
  *      1: dst[127:0] := a[255:128]
  *  ESAC
  */
-ito_inline __m128d simd_load(const mat2<double> &mat, const size_t row)
+inline __m128d simd_load(const mat2<double> &mat, const size_t row)
 {
     return _mm_load_pd(mat.data + row * mat.dim);
 }
@@ -41,7 +41,7 @@ ito_inline __m128d simd_load(const mat2<double> &mat, const size_t row)
  *      1: dst[255:128] := b[127:0]
  *  ESAC
  */
-ito_inline void simd_store(mat2<double> &mat, const size_t row, const __m128d a)
+inline void simd_store(mat2<double> &mat, const size_t row, const __m128d a)
 {
     _mm_store_pd(mat.data + row * mat.dim, a);
 }
@@ -64,7 +64,7 @@ ito_inline void simd_store(mat2<double> &mat, const size_t row, const __m128d a)
  * the memory location is not loaded and the corresponding field of the
  * destination vector is set to zero.
  */
-ito_inline __m256d simd_load(const mat3<double> &mat, const size_t row)
+inline __m256d simd_load(const mat3<double> &mat, const size_t row)
 {
     const __m256i mask = _mm256_set_epi64x(
         0x0,
@@ -93,7 +93,7 @@ ito_inline __m256d simd_load(const mat3<double> &mat, const size_t row)
  * the a vector is not loaded, and the corresponding field of the destination
  * vector v is left unchanged.
  */
-ito_inline void simd_store(mat3<double> &mat, const size_t row, const __m256d a)
+inline void simd_store(mat3<double> &mat, const size_t row, const __m256d a)
 {
     const __m256i mask = _mm256_set_epi64x(
         0x0,
@@ -107,7 +107,7 @@ ito_inline void simd_store(mat3<double> &mat, const size_t row, const __m256d a)
  * @brief Load 256-bits (4 packed double precision 64-bit) from the specified
  * row in the 4d-matrix.
  */
-ito_inline __m256d simd_load(const mat4<double> &mat, const size_t row)
+inline __m256d simd_load(const mat4<double> &mat, const size_t row)
 {
     return _mm256_load_pd(mat.data + row * mat.dim);
 }
@@ -116,7 +116,7 @@ ito_inline __m256d simd_load(const mat4<double> &mat, const size_t row)
  * @brief Store 256-bits (4 packed double precision 64-bit) into the specified
  * row in the 4d-matrix.
  */
-ito_inline void simd_store(mat4<double> &mat, const size_t row, const __m256d a)
+inline void simd_store(mat4<double> &mat, const size_t row, const __m256d a)
 {
     _mm256_store_pd(mat.data + row * mat.dim, a);
 }
@@ -124,7 +124,7 @@ ito_inline void simd_store(mat4<double> &mat, const size_t row, const __m256d a)
 /** ---- mat2 simd arithmetic operators ---------------------------------------
  */
 template<>
-ito_inline mat2<double> &operator+=(mat2<double> &lhs, const mat2<double> &rhs)
+inline mat2<double> &operator+=(mat2<double> &lhs, const mat2<double> &rhs)
 {
     const __m128d a0 = simd_load(lhs, 0);
     const __m128d a1 = simd_load(lhs, 1);
@@ -138,7 +138,7 @@ ito_inline mat2<double> &operator+=(mat2<double> &lhs, const mat2<double> &rhs)
 }
 
 template<>
-ito_inline mat2<double> &operator-=(mat2<double> &lhs, const mat2<double> &rhs)
+inline mat2<double> &operator-=(mat2<double> &lhs, const mat2<double> &rhs)
 {
     const __m128d a0 = simd_load(lhs, 0);
     const __m128d a1 = simd_load(lhs, 1);
@@ -152,7 +152,7 @@ ito_inline mat2<double> &operator-=(mat2<double> &lhs, const mat2<double> &rhs)
 }
 
 template<>
-ito_inline mat2<double> &operator*=(mat2<double> &lhs, const mat2<double> &rhs)
+inline mat2<double> &operator*=(mat2<double> &lhs, const mat2<double> &rhs)
 {
     const __m128d a0 = simd_load(lhs, 0);
     const __m128d a1 = simd_load(lhs, 1);
@@ -166,7 +166,7 @@ ito_inline mat2<double> &operator*=(mat2<double> &lhs, const mat2<double> &rhs)
 }
 
 template<>
-ito_inline mat2<double> &operator/=(mat2<double> &lhs, const mat2<double> &rhs)
+inline mat2<double> &operator/=(mat2<double> &lhs, const mat2<double> &rhs)
 {
     const __m128d a0 = simd_load(lhs, 0);
     const __m128d a1 = simd_load(lhs, 1);
@@ -180,7 +180,7 @@ ito_inline mat2<double> &operator/=(mat2<double> &lhs, const mat2<double> &rhs)
 }
 
 template<>
-ito_inline mat2<double> &operator+=(mat2<double> &lhs, const double scalar)
+inline mat2<double> &operator+=(mat2<double> &lhs, const double scalar)
 {
     const __m128d a0 = simd_load(lhs, 0);
     const __m128d a1 = simd_load(lhs, 1);
@@ -192,7 +192,7 @@ ito_inline mat2<double> &operator+=(mat2<double> &lhs, const double scalar)
 }
 
 template<>
-ito_inline mat2<double> &operator-=(mat2<double> &lhs, const double scalar)
+inline mat2<double> &operator-=(mat2<double> &lhs, const double scalar)
 {
     const __m128d a0 = simd_load(lhs, 0);
     const __m128d a1 = simd_load(lhs, 1);
@@ -204,7 +204,7 @@ ito_inline mat2<double> &operator-=(mat2<double> &lhs, const double scalar)
 }
 
 template<>
-ito_inline mat2<double> &operator*=(mat2<double> &lhs, const double scalar)
+inline mat2<double> &operator*=(mat2<double> &lhs, const double scalar)
 {
     const __m128d a0 = simd_load(lhs, 0);
     const __m128d a1 = simd_load(lhs, 1);
@@ -216,7 +216,7 @@ ito_inline mat2<double> &operator*=(mat2<double> &lhs, const double scalar)
 }
 
 template<>
-ito_inline mat2<double> &operator/=(mat2<double> &lhs, const double scalar)
+inline mat2<double> &operator/=(mat2<double> &lhs, const double scalar)
 {
     const __m128d a0 = simd_load(lhs, 0);
     const __m128d a1 = simd_load(lhs, 1);
@@ -230,7 +230,7 @@ ito_inline mat2<double> &operator/=(mat2<double> &lhs, const double scalar)
 /** ---- mat3 simd arithmetic operators ---------------------------------------
  */
 template<>
-ito_inline mat3<double> &operator+=(mat3<double> &lhs, const mat3<double> &rhs)
+inline mat3<double> &operator+=(mat3<double> &lhs, const mat3<double> &rhs)
 {
     const __m256d a0 = simd_load(lhs, 0);
     const __m256d a1 = simd_load(lhs, 1);
@@ -247,7 +247,7 @@ ito_inline mat3<double> &operator+=(mat3<double> &lhs, const mat3<double> &rhs)
 }
 
 template<>
-ito_inline mat3<double> &operator-=(mat3<double> &lhs, const mat3<double> &rhs)
+inline mat3<double> &operator-=(mat3<double> &lhs, const mat3<double> &rhs)
 {
     const __m256d a0 = simd_load(lhs, 0);
     const __m256d a1 = simd_load(lhs, 1);
@@ -264,7 +264,7 @@ ito_inline mat3<double> &operator-=(mat3<double> &lhs, const mat3<double> &rhs)
 }
 
 template<>
-ito_inline mat3<double> &operator*=(mat3<double> &lhs, const mat3<double> &rhs)
+inline mat3<double> &operator*=(mat3<double> &lhs, const mat3<double> &rhs)
 {
     const __m256d a0 = simd_load(lhs, 0);
     const __m256d a1 = simd_load(lhs, 1);
@@ -281,7 +281,7 @@ ito_inline mat3<double> &operator*=(mat3<double> &lhs, const mat3<double> &rhs)
 }
 
 template<>
-ito_inline mat3<double> &operator/=(mat3<double> &lhs, const mat3<double> &rhs)
+inline mat3<double> &operator/=(mat3<double> &lhs, const mat3<double> &rhs)
 {
     const __m256d a0 = simd_load(lhs, 0);
     const __m256d a1 = simd_load(lhs, 1);
@@ -298,7 +298,7 @@ ito_inline mat3<double> &operator/=(mat3<double> &lhs, const mat3<double> &rhs)
 }
 
 template<>
-ito_inline mat3<double> &operator+=(mat3<double> &lhs, const double scalar)
+inline mat3<double> &operator+=(mat3<double> &lhs, const double scalar)
 {
     const __m256d a0 = simd_load(lhs, 0);
     const __m256d a1 = simd_load(lhs, 1);
@@ -312,7 +312,7 @@ ito_inline mat3<double> &operator+=(mat3<double> &lhs, const double scalar)
 }
 
 template<>
-ito_inline mat3<double> &operator-=(mat3<double> &lhs, const double scalar)
+inline mat3<double> &operator-=(mat3<double> &lhs, const double scalar)
 {
     const __m256d a0 = simd_load(lhs, 0);
     const __m256d a1 = simd_load(lhs, 1);
@@ -326,7 +326,7 @@ ito_inline mat3<double> &operator-=(mat3<double> &lhs, const double scalar)
 }
 
 template<>
-ito_inline mat3<double> &operator*=(mat3<double> &lhs, const double scalar)
+inline mat3<double> &operator*=(mat3<double> &lhs, const double scalar)
 {
     const __m256d a0 = simd_load(lhs, 0);
     const __m256d a1 = simd_load(lhs, 1);
@@ -340,7 +340,7 @@ ito_inline mat3<double> &operator*=(mat3<double> &lhs, const double scalar)
 }
 
 template<>
-ito_inline mat3<double> &operator/=(mat3<double> &lhs, const double scalar)
+inline mat3<double> &operator/=(mat3<double> &lhs, const double scalar)
 {
     const __m256d a0 = simd_load(lhs, 0);
     const __m256d a1 = simd_load(lhs, 1);
@@ -356,7 +356,7 @@ ito_inline mat3<double> &operator/=(mat3<double> &lhs, const double scalar)
 /** ---- mat4 simd arithmetic operators ---------------------------------------
  */
 template<>
-ito_inline mat4<double> &operator+=(mat4<double> &lhs, const mat4<double> &rhs)
+inline mat4<double> &operator+=(mat4<double> &lhs, const mat4<double> &rhs)
 {
     const __m256d a0 = simd_load(lhs, 0);
     const __m256d a1 = simd_load(lhs, 1);
@@ -376,7 +376,7 @@ ito_inline mat4<double> &operator+=(mat4<double> &lhs, const mat4<double> &rhs)
 }
 
 template<>
-ito_inline mat4<double> &operator-=(mat4<double> &lhs, const mat4<double> &rhs)
+inline mat4<double> &operator-=(mat4<double> &lhs, const mat4<double> &rhs)
 {
     const __m256d a0 = simd_load(lhs, 0);
     const __m256d a1 = simd_load(lhs, 1);
@@ -396,7 +396,7 @@ ito_inline mat4<double> &operator-=(mat4<double> &lhs, const mat4<double> &rhs)
 }
 
 template<>
-ito_inline mat4<double> &operator*=(mat4<double> &lhs, const mat4<double> &rhs)
+inline mat4<double> &operator*=(mat4<double> &lhs, const mat4<double> &rhs)
 {
     const __m256d a0 = simd_load(lhs, 0);
     const __m256d a1 = simd_load(lhs, 1);
@@ -416,7 +416,7 @@ ito_inline mat4<double> &operator*=(mat4<double> &lhs, const mat4<double> &rhs)
 }
 
 template<>
-ito_inline mat4<double> &operator/=(mat4<double> &lhs, const mat4<double> &rhs)
+inline mat4<double> &operator/=(mat4<double> &lhs, const mat4<double> &rhs)
 {
     const __m256d a0 = simd_load(lhs, 0);
     const __m256d a1 = simd_load(lhs, 1);
@@ -436,7 +436,7 @@ ito_inline mat4<double> &operator/=(mat4<double> &lhs, const mat4<double> &rhs)
 }
 
 template<>
-ito_inline mat4<double> &operator+=(mat4<double> &lhs, const double scalar)
+inline mat4<double> &operator+=(mat4<double> &lhs, const double scalar)
 {
     const __m256d a0 = simd_load(lhs, 0);
     const __m256d a1 = simd_load(lhs, 1);
@@ -452,7 +452,7 @@ ito_inline mat4<double> &operator+=(mat4<double> &lhs, const double scalar)
 }
 
 template<>
-ito_inline mat4<double> &operator-=(mat4<double> &lhs, const double scalar)
+inline mat4<double> &operator-=(mat4<double> &lhs, const double scalar)
 {
     const __m256d a0 = simd_load(lhs, 0);
     const __m256d a1 = simd_load(lhs, 1);
@@ -468,7 +468,7 @@ ito_inline mat4<double> &operator-=(mat4<double> &lhs, const double scalar)
 }
 
 template<>
-ito_inline mat4<double> &operator*=(mat4<double> &lhs, const double scalar)
+inline mat4<double> &operator*=(mat4<double> &lhs, const double scalar)
 {
     const __m256d a0 = simd_load(lhs, 0);
     const __m256d a1 = simd_load(lhs, 1);
@@ -484,7 +484,7 @@ ito_inline mat4<double> &operator*=(mat4<double> &lhs, const double scalar)
 }
 
 template<>
-ito_inline mat4<double> &operator/=(mat4<double> &lhs, const double scalar)
+inline mat4<double> &operator/=(mat4<double> &lhs, const double scalar)
 {
     const __m256d a0 = simd_load(lhs, 0);
     const __m256d a1 = simd_load(lhs, 1);

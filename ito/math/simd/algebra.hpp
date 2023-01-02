@@ -21,7 +21,7 @@ namespace math {
  * @brief Return the 2-dimensional dot product.
  */
 template<>
-ito_inline double dot(const vec2<double> &v, const vec2<double> &w)
+inline double dot(const vec2<double> &v, const vec2<double> &w)
 {
     const __m128d a = simd_load(v);
     const __m128d b = simd_load(w);
@@ -29,7 +29,7 @@ ito_inline double dot(const vec2<double> &v, const vec2<double> &w)
 }
 
 template<>
-ito_inline vec2<double> dot(const mat2<double> &a, const vec2<double> &v)
+inline vec2<double> dot(const mat2<double> &a, const vec2<double> &v)
 {
     /*
      * a0 = {a0, a1}
@@ -57,7 +57,7 @@ ito_inline vec2<double> dot(const mat2<double> &a, const vec2<double> &v)
 }
 
 template<>
-ito_inline mat2<double> dot(const mat2<double> &a, const mat2<double> &b)
+inline mat2<double> dot(const mat2<double> &a, const mat2<double> &b)
 {
     /*
      * b0 = {b0, b1}
@@ -97,7 +97,7 @@ ito_inline mat2<double> dot(const mat2<double> &a, const mat2<double> &b)
  * @brief Return the 3-dimensional dot product.
  */
 template<>
-ito_inline double dot(const vec3<double> &v, const vec3<double> &w)
+inline double dot(const vec3<double> &v, const vec3<double> &w)
 {
     const __m256d a = simd_load(v);
     const __m256d b = simd_load(w);
@@ -105,7 +105,7 @@ ito_inline double dot(const vec3<double> &v, const vec3<double> &w)
 }
 
 template<>
-ito_inline vec3<double> dot(const mat3<double> &a, const vec3<double> &v)
+inline vec3<double> dot(const mat3<double> &a, const vec3<double> &v)
 {
     /*
      * a0 = {a0, a1, a2}
@@ -143,7 +143,7 @@ ito_inline vec3<double> dot(const mat3<double> &a, const vec3<double> &v)
 }
 
 template<>
-ito_inline mat3<double> dot(const mat3<double> &a, const mat3<double> &b)
+inline mat3<double> dot(const mat3<double> &a, const mat3<double> &b)
 {
     /*
      * b0 = {b0, b1, b2}
@@ -194,7 +194,7 @@ ito_inline mat3<double> dot(const mat3<double> &a, const mat3<double> &b)
  * @brief Return the 4-dimensional dot product.
  */
 template<>
-ito_inline double dot(const vec4<double> &v, const vec4<double> &w)
+inline double dot(const vec4<double> &v, const vec4<double> &w)
 {
     const __m256d a = simd_load(v);
     const __m256d b = simd_load(w);
@@ -202,7 +202,7 @@ ito_inline double dot(const vec4<double> &v, const vec4<double> &w)
 }
 
 template<>
-ito_inline vec4<double> dot(const mat4<double> &a, const vec4<double> &v)
+inline vec4<double> dot(const mat4<double> &a, const vec4<double> &v)
 {
     /*
      * a0 = {a0,  a1,  a2,  a3}
@@ -242,7 +242,7 @@ ito_inline vec4<double> dot(const mat4<double> &a, const vec4<double> &v)
 }
 
 template<>
-ito_inline mat4<double> dot(const mat4<double> &a, const mat4<double> &b)
+inline mat4<double> dot(const mat4<double> &a, const mat4<double> &b)
 {
     /*
      * b0 = {b0,  b1,  b2,  b3}
@@ -302,21 +302,21 @@ ito_inline mat4<double> dot(const mat4<double> &a, const mat4<double> &b)
  * @brief Return the norm of the specified vector.
  */
 template<>
-ito_inline double norm(const vec2<double> &v)
+inline double norm(const vec2<double> &v)
 {
     const __m128d a = simd_load(v);
     return _mm_cvtsd_f64(simd128_norm_(a));
 }
 
 template<>
-ito_inline double norm(const vec3<double> &v)
+inline double norm(const vec3<double> &v)
 {
     const __m256d a = simd_load(v);
     return _mm256_cvtsd_f64(simd256_norm_(a));
 }
 
 template<>
-ito_inline double norm(const vec4<double> &v)
+inline double norm(const vec4<double> &v)
 {
     const __m256d a = simd_load(v);
     return _mm256_cvtsd_f64(simd256_norm_(a));
@@ -326,7 +326,7 @@ ito_inline double norm(const vec4<double> &v)
  * @brief Return the normalized vector.
  */
 template<>
-ito_inline vec2<double> normalize(const vec2<double> &v)
+inline vec2<double> normalize(const vec2<double> &v)
 {
     const __m128d a = simd_load(v);
     vec2<double> result{};
@@ -335,7 +335,7 @@ ito_inline vec2<double> normalize(const vec2<double> &v)
 }
 
 template<>
-ito_inline vec3<double> normalize(const vec3<double> &v)
+inline vec3<double> normalize(const vec3<double> &v)
 {
     const __m256d a = simd_load(v);
     vec3<double> result{};
@@ -344,7 +344,7 @@ ito_inline vec3<double> normalize(const vec3<double> &v)
 }
 
 template<>
-ito_inline vec4<double> normalize(const vec4<double> &v)
+inline vec4<double> normalize(const vec4<double> &v)
 {
     const __m256d a = simd_load(v);
     vec4<double> result{};
@@ -356,19 +356,19 @@ ito_inline vec4<double> normalize(const vec4<double> &v)
  * @brief Return the distance between two vectors.
  */
 template<>
-ito_inline double distance(const vec2<double> &a, const vec2<double> &b)
+inline double distance(const vec2<double> &a, const vec2<double> &b)
 {
     return norm(a - b);
 }
 
 template<>
-ito_inline double distance(const vec3<double> &a, const vec3<double> &b)
+inline double distance(const vec3<double> &a, const vec3<double> &b)
 {
     return norm(a - b);
 }
 
 template<>
-ito_inline double distance(const vec4<double> &a, const vec4<double> &b)
+inline double distance(const vec4<double> &a, const vec4<double> &b)
 {
     return norm(a - b);
 }
@@ -399,7 +399,7 @@ ito_inline double distance(const vec4<double> &a, const vec4<double> &b)
  *      a0 * b1 - a1 * b0}
  */
 template<>
-ito_inline vec3<double> cross(const vec3<double> &a, const vec3<double> &b)
+inline vec3<double> cross(const vec3<double> &a, const vec3<double> &b)
 {
     /*
      * a0 = { 0, a2, a1, a0}
@@ -442,7 +442,7 @@ ito_inline vec3<double> cross(const vec3<double> &a, const vec3<double> &b)
  * @brief Return the transpose matrix
  */
 template<>
-ito_inline mat2<double> transpose(const mat2<double> &a)
+inline mat2<double> transpose(const mat2<double> &a)
 {
     /*
      * r0 = {a1, a0} -> {a2, a0}
@@ -460,7 +460,7 @@ ito_inline mat2<double> transpose(const mat2<double> &a)
 }
 
 template<>
-ito_inline mat3<double> transpose(const mat3<double> &a)
+inline mat3<double> transpose(const mat3<double> &a)
 {
     /*
      * r0 = { 0,  a2,  a1,  a0} -> { 0,  a8,  a4,  a0}
@@ -483,7 +483,7 @@ ito_inline mat3<double> transpose(const mat3<double> &a)
 }
 
 template<>
-ito_inline mat4<double> transpose(const mat4<double> &a)
+inline mat4<double> transpose(const mat4<double> &a)
 {
     /*
      * r0 = { a3,  a2,  a1,  a0} -> { a12,  a8,  a4,  a0}
@@ -512,7 +512,7 @@ ito_inline mat4<double> transpose(const mat4<double> &a)
  * the lower double-precision (64-bit) floating-point element.
  */
 template<>
-ito_inline double determinant(const mat2<double> &a)
+inline double determinant(const mat2<double> &a)
 {
     /*
      * Compute the determinant of a 2x2 matrix as a packed vector:
@@ -527,7 +527,7 @@ ito_inline double determinant(const mat2<double> &a)
 }
 
 template<>
-ito_inline double determinant(const mat3<double> &a)
+inline double determinant(const mat3<double> &a)
 {
     /*
      * Compute the determinant of a 3x3 matrix as a packed vector:
@@ -564,7 +564,7 @@ ito_inline double determinant(const mat3<double> &a)
 }
 
 template<>
-ito_inline double determinant(const mat4<double> &a)
+inline double determinant(const mat4<double> &a)
 {
     /*
      * Compute the determinant of a 4x4 matrix as a packed vector:
@@ -632,7 +632,7 @@ ito_inline double determinant(const mat4<double> &a)
  * @brief Return the inverse of the matrix.
  */
 template<>
-ito_inline mat2<double> inverse(const mat2<double> &a)
+inline mat2<double> inverse(const mat2<double> &a)
 {
     /*
      * Compute the inverse of matrix:
@@ -669,7 +669,7 @@ ito_inline mat2<double> inverse(const mat2<double> &a)
 }
 
 template<>
-ito_inline mat3<double> inverse(const mat3<double> &a)
+inline mat3<double> inverse(const mat3<double> &a)
 {
     /*
      * Compute the inverse of matrix:
@@ -781,7 +781,7 @@ ito_inline mat3<double> inverse(const mat3<double> &a)
 }
 
 template<>
-ito_inline mat4<double> inverse(const mat4<double> &a)
+inline mat4<double> inverse(const mat4<double> &a)
 {
     /*
      * Compute the inverse of matrix:

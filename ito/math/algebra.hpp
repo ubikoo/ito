@@ -18,84 +18,84 @@ namespace math {
 /** ---- Vector algebra function declarations ---------------------------------
  * @brief Return the 2-dimensional dot product.
  */
-template<typename T> ito_inline T dot(const vec2<T> &a, const vec2<T> &b);
-template<typename T> ito_inline vec2<T> dot(const mat2<T> &a, const vec2<T> &b);
-template<typename T> ito_inline mat2<T> dot(const mat2<T> &a, const mat2<T> &b);
+template<typename T> inline T dot(const vec2<T> &a, const vec2<T> &b);
+template<typename T> inline vec2<T> dot(const mat2<T> &a, const vec2<T> &b);
+template<typename T> inline mat2<T> dot(const mat2<T> &a, const mat2<T> &b);
 
 /**
  * @brief Return the 3-dimensional dot product.
  */
-template<typename T> ito_inline T dot(const vec3<T> &a, const vec3<T> &b);
-template<typename T> ito_inline vec3<T> dot(const mat3<T> &a, const vec3<T> &b);
-template<typename T> ito_inline mat3<T> dot(const mat3<T> &a, const mat3<T> &b);
+template<typename T> inline T dot(const vec3<T> &a, const vec3<T> &b);
+template<typename T> inline vec3<T> dot(const mat3<T> &a, const vec3<T> &b);
+template<typename T> inline mat3<T> dot(const mat3<T> &a, const mat3<T> &b);
 
 /**
  * @brief Return the 4-dimensional dot product.
  */
-template<typename T> ito_inline T dot(const vec4<T> &a, const vec4<T> &b);
-template<typename T> ito_inline vec4<T> dot(const mat4<T> &a, const vec4<T> &b);
-template<typename T> ito_inline mat4<T> dot(const mat4<T> &a, const mat4<T> &b);
+template<typename T> inline T dot(const vec4<T> &a, const vec4<T> &b);
+template<typename T> inline vec4<T> dot(const mat4<T> &a, const vec4<T> &b);
+template<typename T> inline mat4<T> dot(const mat4<T> &a, const mat4<T> &b);
 
 /**
  * @brief Return the norm of the specified vector.
  */
-template<typename T> ito_inline T norm(const vec2<T> &a);
-template<typename T> ito_inline T norm(const vec3<T> &a);
-template<typename T> ito_inline T norm(const vec4<T> &a);
+template<typename T> inline T norm(const vec2<T> &a);
+template<typename T> inline T norm(const vec3<T> &a);
+template<typename T> inline T norm(const vec4<T> &a);
 
 /**
  * @brief Return the normalized vector.
  */
-template<typename T> ito_inline vec2<T> normalize(const vec2<T> &a);
-template<typename T> ito_inline vec3<T> normalize(const vec3<T> &a);
-template<typename T> ito_inline vec4<T> normalize(const vec4<T> &a);
+template<typename T> inline vec2<T> normalize(const vec2<T> &a);
+template<typename T> inline vec3<T> normalize(const vec3<T> &a);
+template<typename T> inline vec4<T> normalize(const vec4<T> &a);
 
 /**
  * @brief Return the distance between two points.
  */
-template<typename T> ito_inline T distance(const vec2<T> &a, const vec2<T> &b);
-template<typename T> ito_inline T distance(const vec3<T> &a, const vec3<T> &b);
-template<typename T> ito_inline T distance(const vec4<T> &a, const vec4<T> &b);
+template<typename T> inline T distance(const vec2<T> &a, const vec2<T> &b);
+template<typename T> inline T distance(const vec3<T> &a, const vec3<T> &b);
+template<typename T> inline T distance(const vec4<T> &a, const vec4<T> &b);
 
 /**
  * @brief Return the cross product of two vectors.
  */
-template<typename T> ito_inline vec3<T> cross(
+template<typename T> inline vec3<T> cross(
     const vec3<T> &a, const vec3<T> &b);
 
 /** ---- Matrix algebra function declarations ---------------------------------
  * @brief Return the transpose of the matrix.
  */
-template<typename T> ito_inline mat2<T> transpose(const mat2<T> &a);
-template<typename T> ito_inline mat3<T> transpose(const mat3<T> &a);
-template<typename T> ito_inline mat4<T> transpose(const mat4<T> &a);
+template<typename T> inline mat2<T> transpose(const mat2<T> &a);
+template<typename T> inline mat3<T> transpose(const mat3<T> &a);
+template<typename T> inline mat4<T> transpose(const mat4<T> &a);
 
 /**
  * @brief Return the determinant of the matrix.
  */
-template<typename T> ito_inline T determinant(const mat2<T> &a);
-template<typename T> ito_inline T determinant(const mat3<T> &a);
-template<typename T> ito_inline T determinant(const mat4<T> &a);
+template<typename T> inline T determinant(const mat2<T> &a);
+template<typename T> inline T determinant(const mat3<T> &a);
+template<typename T> inline T determinant(const mat4<T> &a);
 
 /**
  * @brief Return the inverse of the matrix.
  */
-template<typename T> ito_inline mat2<T> inverse(const mat2<T> &a);
-template<typename T> ito_inline mat3<T> inverse(const mat3<T> &a);
-template<typename T> ito_inline mat4<T> inverse(const mat4<T> &a);
+template<typename T> inline mat2<T> inverse(const mat2<T> &a);
+template<typename T> inline mat3<T> inverse(const mat3<T> &a);
+template<typename T> inline mat4<T> inverse(const mat4<T> &a);
 
 /** ---- Vector algebra function implementations ------------------------------
  * @brief Return the 2-dimensional dot product.
  */
 template<typename T>
-ito_inline T dot(const vec2<T> &a, const vec2<T> &b)
+inline T dot(const vec2<T> &a, const vec2<T> &b)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return {a.x * b.x + a.y * b.y};
 }
 
 template<typename T>
-ito_inline vec2<T> dot(const mat2<T> &a, const vec2<T> &b)
+inline vec2<T> dot(const mat2<T> &a, const vec2<T> &b)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return {a.xx * b.x + a.xy * b.y,
@@ -103,7 +103,7 @@ ito_inline vec2<T> dot(const mat2<T> &a, const vec2<T> &b)
 }
 
 template<typename T>
-ito_inline mat2<T> dot(const mat2<T> &a, const mat2<T> &b)
+inline mat2<T> dot(const mat2<T> &a, const mat2<T> &b)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return {a.xx * b.xx + a.xy * b.yx,
@@ -116,14 +116,14 @@ ito_inline mat2<T> dot(const mat2<T> &a, const mat2<T> &b)
  * @brief Return the 3-dimensional dot product.
  */
 template<typename T>
-ito_inline T dot(const vec3<T> &a, const vec3<T> &b)
+inline T dot(const vec3<T> &a, const vec3<T> &b)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return {a.x * b.x + a.y * b.y + a.z * b.z};
 }
 
 template<typename T>
-ito_inline vec3<T> dot(const mat3<T> &a, const vec3<T> &b)
+inline vec3<T> dot(const mat3<T> &a, const vec3<T> &b)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return {a.xx * b.x + a.xy * b.y + a.xz * b.z,
@@ -132,7 +132,7 @@ ito_inline vec3<T> dot(const mat3<T> &a, const vec3<T> &b)
 }
 
 template<typename T>
-ito_inline mat3<T> dot(const mat3<T> &a, const mat3<T> &b)
+inline mat3<T> dot(const mat3<T> &a, const mat3<T> &b)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return {a.xx * b.xx + a.xy * b.yx + a.xz * b.zx,
@@ -152,14 +152,14 @@ ito_inline mat3<T> dot(const mat3<T> &a, const mat3<T> &b)
  * @brief Return the 4-dimensional dot product.
  */
 template<typename T>
-ito_inline T dot(const vec4<T> &a, const vec4<T> &b)
+inline T dot(const vec4<T> &a, const vec4<T> &b)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return {a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w};
 }
 
 template<typename T>
-ito_inline vec4<T> dot(const mat4<T> &a, const vec4<T> &b)
+inline vec4<T> dot(const mat4<T> &a, const vec4<T> &b)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return {a.xx * b.x + a.xy * b.y + a.xz * b.z + a.xw * b.w,
@@ -169,7 +169,7 @@ ito_inline vec4<T> dot(const mat4<T> &a, const vec4<T> &b)
 }
 
 template<typename T>
-ito_inline mat4<T> dot(const mat4<T> &a, const mat4<T> &b)
+inline mat4<T> dot(const mat4<T> &a, const mat4<T> &b)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return {a.xx * b.xx + a.xy * b.yx + a.xz * b.zx + a.xw * b.wx,
@@ -197,21 +197,21 @@ ito_inline mat4<T> dot(const mat4<T> &a, const mat4<T> &b)
  * @brief Return the norm of the specified vector.
  */
 template<typename T>
-ito_inline T norm(const vec2<T> &a)
+inline T norm(const vec2<T> &a)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return std::sqrt(dot(a,a));
 }
 
 template<typename T>
-ito_inline T norm(const vec3<T> &a)
+inline T norm(const vec3<T> &a)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return std::sqrt(dot(a,a));
 }
 
 template<typename T>
-ito_inline T norm(const vec4<T> &a)
+inline T norm(const vec4<T> &a)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return std::sqrt(dot(a,a));
@@ -221,21 +221,21 @@ ito_inline T norm(const vec4<T> &a)
  * @brief Return the normalized vector.
  */
 template<typename T>
-ito_inline vec2<T> normalize(const vec2<T> &a)
+inline vec2<T> normalize(const vec2<T> &a)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return (a / norm(a));
 }
 
 template<typename T>
-ito_inline vec3<T> normalize(const vec3<T> &a)
+inline vec3<T> normalize(const vec3<T> &a)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return (a / norm(a));
 }
 
 template<typename T>
-ito_inline vec4<T> normalize(const vec4<T> &a)
+inline vec4<T> normalize(const vec4<T> &a)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return (a / norm(a));
@@ -245,21 +245,21 @@ ito_inline vec4<T> normalize(const vec4<T> &a)
  * @brief Return the distance between two points.
  */
 template<typename T>
-ito_inline T distance(const vec2<T> &a, const vec2<T> &b)
+inline T distance(const vec2<T> &a, const vec2<T> &b)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return norm(a - b);
 }
 
 template<typename T>
-ito_inline T distance(const vec3<T> &a, const vec3<T> &b)
+inline T distance(const vec3<T> &a, const vec3<T> &b)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return norm(a - b);
 }
 
 template<typename T>
-ito_inline T distance(const vec4<T> &a, const vec4<T> &b)
+inline T distance(const vec4<T> &a, const vec4<T> &b)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return norm(a - b);
@@ -269,7 +269,7 @@ ito_inline T distance(const vec4<T> &a, const vec4<T> &b)
  * @brief Return the cross product of two vectors.
  */
 template<typename T>
-ito_inline vec3<T> cross(const vec3<T> &a, const vec3<T> &b)
+inline vec3<T> cross(const vec3<T> &a, const vec3<T> &b)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return {a.y * b.z - a.z * b.y,
@@ -281,14 +281,14 @@ ito_inline vec3<T> cross(const vec3<T> &a, const vec3<T> &b)
  * @brief Return the transpose of the matrix.
  */
 template<typename T>
-ito_inline mat2<T> transpose(const mat2<T> &a)
+inline mat2<T> transpose(const mat2<T> &a)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return {a.xx, a.yx, a.xy, a.yy};
 }
 
 template<typename T>
-ito_inline mat3<T> transpose(const mat3<T> &a)
+inline mat3<T> transpose(const mat3<T> &a)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return {a.xx, a.yx, a.zx,
@@ -297,7 +297,7 @@ ito_inline mat3<T> transpose(const mat3<T> &a)
 }
 
 template<typename T>
-ito_inline mat4<T> transpose(const mat4<T> &a)
+inline mat4<T> transpose(const mat4<T> &a)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     return {a.xx, a.yx, a.zx, a.wx,
@@ -310,7 +310,7 @@ ito_inline mat4<T> transpose(const mat4<T> &a)
  * @brief Return the determinant of the matrix.
  */
 template<typename T>
-ito_inline T determinant(const mat2<T> &a)
+inline T determinant(const mat2<T> &a)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     /*
@@ -324,7 +324,7 @@ ito_inline T determinant(const mat2<T> &a)
 }
 
 template<typename T>
-ito_inline T determinant(const mat3<T> &a)
+inline T determinant(const mat3<T> &a)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     /*
@@ -346,7 +346,7 @@ ito_inline T determinant(const mat3<T> &a)
 }
 
 template<typename T>
-ito_inline T determinant(const mat4<T> &a)
+inline T determinant(const mat4<T> &a)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     /*
@@ -407,7 +407,7 @@ ito_inline T determinant(const mat4<T> &a)
  * @brief Return the inverse of the matrix.
  */
 template<typename T>
-ito_inline mat2<T> inverse(const mat2<T> &a)
+inline mat2<T> inverse(const mat2<T> &a)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     /*
@@ -427,7 +427,7 @@ ito_inline mat2<T> inverse(const mat2<T> &a)
 }
 
 template<typename T>
-ito_inline mat3<T> inverse(const mat3<T> &a)
+inline mat3<T> inverse(const mat3<T> &a)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     /*
@@ -465,7 +465,7 @@ ito_inline mat3<T> inverse(const mat3<T> &a)
 }
 
 template<typename T>
-ito_inline mat4<T> inverse(const mat4<T> &a)
+inline mat4<T> inverse(const mat4<T> &a)
 {
     static_assert(std::is_floating_point<T>::value, "non floating point");
     /*

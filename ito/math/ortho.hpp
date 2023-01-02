@@ -60,7 +60,7 @@ typedef onb<double> onbd;
  * @brief Create an orthonormal basis set given the fixed vector u.
  */
 template<typename T>
-ito_inline onb<T> onb<T>::create_from_u(const vec3<T> &e_u)
+inline onb<T> onb<T>::create_from_u(const vec3<T> &e_u)
 {
     static const T eps = std::sqrt(std::numeric_limits<T>::epsilon());
     static const vec3<T> e_1{(T) 1, (T) 0, (T) 0};
@@ -82,7 +82,7 @@ ito_inline onb<T> onb<T>::create_from_u(const vec3<T> &e_u)
  * @brief Create an orthonormal basis set given the fixed vector v.
  */
 template<typename T>
-ito_inline onb<T> onb<T>::create_from_v(const vec3<T> &e_v)
+inline onb<T> onb<T>::create_from_v(const vec3<T> &e_v)
 {
     static const T eps = std::sqrt(std::numeric_limits<T>::epsilon());
     static const vec3<T> e_1{(T) 1, (T) 0, (T) 0};
@@ -104,7 +104,7 @@ ito_inline onb<T> onb<T>::create_from_v(const vec3<T> &e_v)
  * @brief Create an orthonormal basis set given the fixed vector w.
  */
 template<typename T>
-ito_inline onb<T> onb<T>::create_from_w(const vec3<T> &e_w)
+inline onb<T> onb<T>::create_from_w(const vec3<T> &e_w)
 {
     static const T eps = std::sqrt(std::numeric_limits<T>::epsilon());
     static const vec3<T> e_1{(T) 1, (T) 0, (T) 0};
@@ -128,7 +128,7 @@ ito_inline onb<T> onb<T>::create_from_w(const vec3<T> &e_w)
  *  v is orthogonalized using a Gram-Schmidt process.
  */
 template<typename T>
-ito_inline onb<T> onb<T>::create_from_uv(
+inline onb<T> onb<T>::create_from_uv(
     const vec3<T> &e_u, const vec3<T> &e_v)
 {
     onb<T> o;
@@ -145,7 +145,7 @@ ito_inline onb<T> onb<T>::create_from_uv(
  *  u is orthogonalized using a Gram-Schmidt process.
  */
 template<typename T>
-ito_inline onb<T> onb<T>::create_from_vu(
+inline onb<T> onb<T>::create_from_vu(
     const vec3<T> &e_v, const vec3<T> &e_u)
 {
     onb<T> o;
@@ -162,7 +162,7 @@ ito_inline onb<T> onb<T>::create_from_vu(
  *  w is orthogonalized using a Gram-Schmidt process.
  */
 template<typename T>
-ito_inline onb<T> onb<T>::create_from_vw(
+inline onb<T> onb<T>::create_from_vw(
     const vec3<T> &e_v, const vec3<T> &e_w)
 {
     onb<T> o;
@@ -179,7 +179,7 @@ ito_inline onb<T> onb<T>::create_from_vw(
  *  v is orthogonalized using a Gram-Schmidt process.
  */
 template<typename T>
-ito_inline onb<T> onb<T>::create_from_wv(
+inline onb<T> onb<T>::create_from_wv(
     const vec3<T> &e_w, const vec3<T> &e_v)
 {
     onb<T> o;
@@ -196,7 +196,7 @@ ito_inline onb<T> onb<T>::create_from_wv(
  *  u is orthogonalized using a Gram-Schmidt process.
  */
 template<typename T>
-ito_inline onb<T> onb<T>::create_from_wu(
+inline onb<T> onb<T>::create_from_wu(
     const vec3<T> &e_w, const vec3<T> &e_u)
 {
     onb<T> o;
@@ -213,7 +213,7 @@ ito_inline onb<T> onb<T>::create_from_wu(
  *  w is orthogonalized using a Gram-Schmidt process.
  */
 template<typename T>
-ito_inline onb<T> onb<T>::create_from_uw(
+inline onb<T> onb<T>::create_from_uw(
     const vec3<T> &e_u, const vec3<T> &e_w)
 {
     onb<T> o;
@@ -229,7 +229,7 @@ ito_inline onb<T> onb<T>::create_from_uw(
  * reference frame defined by the orthonormal basis set.
  */
 template<typename T>
-ito_inline vec3<T> onb<T>::world_to_local(const vec3<T> &a) const
+inline vec3<T> onb<T>::world_to_local(const vec3<T> &a) const
 {
     return {u.x * a.x + u.y * a.y + u.z * a.z,
             v.x * a.x + v.y * a.y + v.z * a.z,
@@ -242,7 +242,7 @@ ito_inline vec3<T> onb<T>::world_to_local(const vec3<T> &a) const
  * reference frame defined by the orthonormal basis set.
  */
 template<typename T>
-ito_inline vec3<T> onb<T>::local_to_world(const vec3<T> &a) const
+inline vec3<T> onb<T>::local_to_world(const vec3<T> &a) const
 {
     return {u.x * a.x + v.x * a.y + w.x * a.z,
             u.y * a.x + v.y * a.y + w.y * a.z,

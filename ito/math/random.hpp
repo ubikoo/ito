@@ -49,7 +49,7 @@ struct random_device {
  * even number larger than 2 is not prime.  If 2 does not divide n, then every
  * other even number smaller than n will also not divide n.
  */
-ito_inline uint64_t random_prime(random_device &device)
+inline uint64_t random_prime(random_device &device)
 {
     auto is_prime = [] (const uint64_t n) -> bool {
         if (n%2 == 0) {         /* Even numbers are not prime */
@@ -100,7 +100,7 @@ struct random_engine {
 /**
  * @brief Create a random number generator using default values.
  */
-ito_inline random_engine make_random(void)
+inline random_engine make_random(void)
 {
     return {123456789123ULL,    /* x */
             987654321987ULL,    /* y */
@@ -120,7 +120,7 @@ ito_inline random_engine make_random(void)
  *      0 < c2 < 698769069U
  * Do not set y = 0 and avoid x = z1 = c1 = z2 = c2 = 0.
  */
-ito_inline random_engine make_random(random_device &device)
+inline random_engine make_random(random_device &device)
 {
     /* Generate a random seed between n_min and n_max */
     auto random_seed = [&] (uint64_t n_max) -> uint64_t {
@@ -152,7 +152,7 @@ ito_inline random_engine make_random(random_device &device)
 /**
  * @brief 32-bit random number generator.
  */
-ito_inline uint32_t random32(random_engine &rng)
+inline uint32_t random32(random_engine &rng)
 {
     static constexpr uint64_t m1 = 1490024343005336237ULL;
     static constexpr uint64_t m2 = 123456789ULL;
@@ -178,7 +178,7 @@ ito_inline uint32_t random32(random_engine &rng)
 /**
  * @brief 64-bit random number generator.
  */
-ito_inline uint64_t random64(random_engine &rng)
+inline uint64_t random64(random_engine &rng)
 {
     static constexpr uint64_t m1 = 1490024343005336237ULL;
     static constexpr uint64_t m2 = 123456789ULL;

@@ -361,8 +361,8 @@ Mesh Mesh::Sphere(
     /* Create mesh vertices. */
     std::vector<Mesh::Vertex> vertices(n1 * n2);
 
-    GLfloat dtheta = (theta_hi - theta_lo) / (GLfloat) (n1 - 1);
-    GLfloat dphi = (phi_hi - phi_lo) / (GLfloat) (n2 - 1);
+    GLfloat dtheta = (theta_hi - theta_lo) / (GLfloat) (n2 - 1);
+    GLfloat dphi = (phi_hi - phi_lo) / (GLfloat) (n1 - 1);
 
     GLfloat du = 1.0f / (GLfloat) (n1 - 1);
     GLfloat dv = 1.0f / (GLfloat) (n2 - 1);
@@ -372,7 +372,7 @@ Mesh Mesh::Sphere(
             size_t k = i + j * n1;
 
             /* Compute the spherical coordinates */
-            GLfloat theta = theta_lo + (GLfloat) j * dtheta;
+            GLfloat theta = theta_hi - (GLfloat) j * dtheta;
             GLfloat phi = phi_lo + (GLfloat) i * dphi;
 
             /* Vertex positions are just the normal scaled by the radius. */

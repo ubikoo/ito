@@ -99,7 +99,7 @@ struct Image {
  * bitmap range, return a pointer to the pixel address specified by the pitch
  * size and number of colour components. Otherwise, return null.
  */
-ito_inline
+inline
 uint8_t *Image::operator()(const uint32_t x, const uint32_t y)
 {
     const uint32_t pixel_bytes = bpp >> 3;
@@ -109,7 +109,7 @@ uint8_t *Image::operator()(const uint32_t x, const uint32_t y)
     return nullptr;
 }
 
-ito_inline
+inline
 const uint8_t *Image::operator()(const uint32_t x, const uint32_t y) const
 {
     const uint32_t pixel_bytes = bpp >> 3;

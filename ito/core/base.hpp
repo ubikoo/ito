@@ -72,13 +72,11 @@ inline int omp_get_max_threads(void) { return 1; }
  *  #error GNU C extensions required.
  */
 #ifdef __GNUC__
-#define ito_inline              inline __attribute__((always_inline))
 #define ito_aligned(key)        __attribute__((aligned(key)))
 #define ito_unused(decl)        __attribute__((unused)) decl
 #define ito_extension(decl)     __extension__ decl
 #define ito_restrict(decl)      __restrict__ decl
 #else
-#define ito_inline              inline
 #define ito_aligned(key)
 #define ito_unused(decl)        decl
 #define ito_extension(decl)     decl
