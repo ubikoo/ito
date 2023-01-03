@@ -9,7 +9,7 @@ SOURCES  := $(filter-out $(wildcard _*.cpp), $(wildcard *.cpp)) \
 INCLUDES := $(wildcard *.hpp) $(wildcard *.h)
 CFLAGS   := -I.
 
-# Template makefile.mk
+# Template config.mk
 # 	SOURCES  += $(filter-out $(wildcard $(ROOTDIR)/source/_*.c), \
 #   	                     $(wildcard $(ROOTDIR)/source/*.c))
 # 	INCLUDES += $(wildcard $(ROOTDIR)/source/*.h)
