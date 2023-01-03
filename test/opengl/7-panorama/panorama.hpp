@@ -23,11 +23,12 @@ struct Panorama {
     Camera camera;                  /* panorama camera and projection matrix */
     ito::math::mat4f mvp;
 
+    void Handle(ito::gl::Renderer::Event &event);
+    void Update(void);
+    void Render(void);
+
     static Panorama Create(void);
     static void Destroy(Panorama &panorama);
-    static void Handle(Panorama &panorama, ito::gl::Renderer::Event &event);
-    static void Update(Panorama &panorama);
-    static void Render(const Panorama &panorama);
 };
 
 #endif /* TEST_ITO_OPENGL_PANORAMA_H_ */

@@ -125,7 +125,7 @@ Quad Quad::Create()
 }
 
 /**
- * @brief Destroy a quad.
+ * @brief Destroy the quad.
  */
 void Quad::Destroy(Quad &quad)
 {
@@ -138,13 +138,13 @@ void Quad::Destroy(Quad &quad)
 /**
  * @brief Handle the event in the quad.
  */
-void Quad::Handle(Quad &quad, gl::Renderer::Event &event)
+void Quad::Handle(gl::Renderer::Event &event)
 {}
 
 /**
  * @brief Update the quad.
  */
-void Quad::Update(Quad &quad)
+void Quad::Update(void)
 {
     /* Update the modelviewprojection matrix */
     float time = (float) glfwGetTime();
@@ -156,17 +156,17 @@ void Quad::Update(Quad &quad)
     m = math::rotate(m, math::vec3f{0.0f, 1.0f, 0.0f}, ang_y);
     m = math::rotate(m, math::vec3f{1.0f, 0.0f, 0.0f}, ang_x);
 
-    std::array<GLfloat,2> size = gl::Renderer::FramebufferSizef();
-    float ratio = size[0] / size[1];
+    std::array<GLfloat,2> fsize = gl::Renderer::FramebufferSizef();
+    float ratio = fsize[0] / fsize[1];
 
     math::mat4f p = math::ortho(-ratio, ratio, -1.0f, 1.0f, -1.0f, 1.0f);
-    quad.mvp = math::dot(p, m);
+    mvp = math::dot(p, m);
 }
 
 /**
  * @brief Render the quad.
  */
-void Quad::Render(const Quad &quad)
+void Quad::Render(void)
 {
     GLFWwindow *window = gl::Renderer::Window();
     if (window == nullptr) {
@@ -184,16 +184,15 @@ void Quad::Render(const Quad &quad)
     glDepthFunc(GL_LESS);
 
     /* Bind the shader program object. */
-    glUseProgram(quad.program);
+    glUseProgram(program);
 
     /* Get window dimensions and set corresponding uniforms. */
-    glBindVertexArray(quad.vao);
+    glBindVertexArray(vao);
 
-    std::array<GLfloat,2> size = gl::Renderer::FramebufferSizef();
-    gl::SetUniform(quad.program, "u_width", GL_FLOAT, &size[0]);
-    gl::SetUniform(quad.program, "u_height", GL_FLOAT, &size[1]);
-    gl::SetUniformMatrix(quad.program,
-        "u_mvp", GL_FLOAT_MAT4, true, quad.mvp.data);
+    std::array<GLfloat,2> fsize = gl::Renderer::FramebufferSizef();
+    gl::SetUniform(program, "u_width", GL_FLOAT, &fsize[0]);
+    gl::SetUniform(program, "u_height", GL_FLOAT, &fsize[1]);
+    gl::SetUniformMatrix(program, "u_mvp", GL_FLOAT_MAT4, true, mvp.data);
 
     glDrawElements(
         GL_TRIANGLES,       /* what kind of primitives to render */

@@ -1,5 +1,5 @@
 /*
- * rop.hpp
+ * drawable.hpp
  *
  * Copyright (c) 2020 Carlos Braga
  *
@@ -9,12 +9,12 @@
  * See accompanying LICENSE.md or https://opensource.org/licenses/MIT.
  */
 
-#ifndef TEST_ITO_OPENGL_ROP_H_
-#define TEST_ITO_OPENGL_ROP_H_
+#ifndef TEST_ITO_OPENGL_DRAWABLE_H_
+#define TEST_ITO_OPENGL_DRAWABLE_H_
 
 #include "ito/opengl.hpp"
 
-struct Rop {
+struct Drawable {
     /* Sphere drawable */
     struct {
         GLuint program;             /* shader program object */
@@ -32,7 +32,6 @@ struct Rop {
 
     /* Fbo data */
     struct {
-        float mix;                  /* mixing parameter */
         GLsizei width;              /* fbo width */
         GLsizei height;             /* fbo height */
         GLuint color_texture;       /* fbo color attachment */
@@ -40,11 +39,12 @@ struct Rop {
         GLuint id;                  /* framebuffer object id */
     } fbo;
 
-    static Rop Create(void);
-    static void Destroy(Rop &rop);
-    static void Handle(Rop &rop, ito::gl::Renderer::Event &event);
-    static void Update(Rop &rop);
-    static void Render(const Rop &rop);
+    void Handle(ito::gl::Renderer::Event &event);
+    void Update(void);
+    void Render(void);
+
+    static Drawable Create(void);
+    static void Destroy(Drawable &drawable);
 };
 
-#endif /* TEST_ITO_OPENGL_ROP_H_ */
+#endif /* TEST_ITO_OPENGL_DRAWABLE_H_ */

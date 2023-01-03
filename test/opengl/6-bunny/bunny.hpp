@@ -20,11 +20,12 @@ struct Bunny {
     std::vector<ito::gl::Mesh> model;       /* bunny model */
     ito::math::mat4f mvp;                   /* modelviewprojection */
 
+    void Handle(ito::gl::Renderer::Event &event);
+    void Update(void);
+    void Render(void);
+
     static Bunny Create(void);
     static void Destroy(Bunny &bunny);
-    static void Handle(Bunny &bunny, ito::gl::Renderer::Event &event);
-    static void Update(Bunny &bunny);
-    static void Render(const Bunny &bunny);
 };
 
 #endif /* TEST_ITO_OPENGL_BUNNY_H_ */

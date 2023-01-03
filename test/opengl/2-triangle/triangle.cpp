@@ -103,7 +103,7 @@ Triangle Triangle::Create()
 }
 
 /**
- * @brief Destroy a triangle.
+ * @brief Destroy the triangle.
  */
 void Triangle::Destroy(Triangle &triangle)
 {
@@ -115,19 +115,19 @@ void Triangle::Destroy(Triangle &triangle)
 /**
  * @brief Handle the event in the triangle.
  */
-void Triangle::Handle(Triangle &triangle, gl::Renderer::Event &event)
+void Triangle::Handle(gl::Renderer::Event &event)
 {}
 
 /**
  * @brief Update the triangle.
  */
-void Triangle::Update(Triangle &triangle)
+void Triangle::Update(void)
 {}
 
 /**
  * @brief Render the triangle.
  */
-void Triangle::Render(const Triangle &triangle)
+void Triangle::Render(void)
 {
     GLFWwindow *window = gl::Renderer::Window();
     if (window == nullptr) {
@@ -145,14 +145,14 @@ void Triangle::Render(const Triangle &triangle)
     glDepthFunc(GL_LESS);
 
     /* Bind the shader program object. */
-    glUseProgram(triangle.program);
+    glUseProgram(program);
 
     /* Get window dimensions and set corresponding uniforms. */
-    glBindVertexArray(triangle.vao);
+    glBindVertexArray(vao);
 
-    std::array<GLfloat,2> size = gl::Renderer::FramebufferSizef();
-    gl::SetUniform(triangle.program, "u_width", GL_FLOAT, &size[0]);
-    gl::SetUniform(triangle.program, "u_height", GL_FLOAT, &size[1]);
+    std::array<GLfloat,2> fsize = gl::Renderer::FramebufferSizef();
+    gl::SetUniform(program, "u_width", GL_FLOAT, &fsize[0]);
+    gl::SetUniform(program, "u_height", GL_FLOAT, &fsize[1]);
 
     glDrawArrays(
         GL_TRIANGLES,           /* what kind of primitives to render */

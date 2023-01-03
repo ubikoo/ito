@@ -11,7 +11,7 @@
 
 #include "ito/opengl.hpp"
 using namespace ito;
-#include "rop.hpp"
+#include "drawable.hpp"
 
 /** ---------------------------------------------------------------------------
  * @brief Constants and globals.
@@ -21,7 +21,7 @@ static const int kHeight = 800;
 static const char kTitle[] = "Test quadsph";
 static const double kTimeout = 0.001;
 
-Rop gRop;
+Drawable gDrawable;
 
 /** ---------------------------------------------------------------------------
  * @brief Handle events.
@@ -45,8 +45,7 @@ static void Handle(void)
             gl::Renderer::Close();
         }
 
-        /* Handle the input on the rop */
-        Rop::Handle(gRop, event);
+        gDrawable.Handle(event);
     }
 }
 
@@ -55,8 +54,7 @@ static void Handle(void)
  */
 static void Update(void)
 {
-    /* Update the rop. */
-    Rop::Update(gRop);
+    gDrawable.Update();
 }
 
 /** ---------------------------------------------------------------------------
@@ -65,7 +63,7 @@ static void Update(void)
 static void Render(void)
 {
     gl::Renderer::ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.0f);
-    Rop::Render(gRop);
+    gDrawable.Render();
     gl::Renderer::SwapBuffers();
 }
 
@@ -82,7 +80,7 @@ int main(int argc, char const *argv[])
         gl::Renderer::Event::Key);
 
     /* Create the rop object. */
-    gRop = Rop::Create();
+    gDrawable = Drawable::Create();
 
     /*
      * Render loop:
@@ -97,7 +95,7 @@ int main(int argc, char const *argv[])
     }
 
     /* Create the rop object. */
-    Rop::Destroy(gRop);
+    Drawable::Destroy(gDrawable);
 
     exit(EXIT_SUCCESS);
 }

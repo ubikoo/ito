@@ -45,8 +45,7 @@ static void Handle(void)
             gl::Renderer::Close();
         }
 
-        /* Handle the input on the quad */
-        Quad::Handle(gQuad, event);
+        gQuad.Handle(event);
     }
 }
 
@@ -55,8 +54,7 @@ static void Handle(void)
  */
 static void Update(void)
 {
-    /* Update the quad. */
-    Quad::Update(gQuad);
+    gQuad.Update();
 }
 
 /** ---------------------------------------------------------------------------
@@ -65,7 +63,7 @@ static void Update(void)
 static void Render(void)
 {
     gl::Renderer::ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.0f);
-    Quad::Render(gQuad);
+    gQuad.Render();
     gl::Renderer::SwapBuffers();
 }
 

@@ -21,11 +21,12 @@ struct Quad {
     GLuint ebo;             /* element buffer object */
     ito::math::mat4f mvp;   /* modelviewprojection */
 
+    void Handle(ito::gl::Renderer::Event &event);
+    void Update(void);
+    void Render(void);
+
     static Quad Create(void);
     static void Destroy(Quad &quad);
-    static void Handle(Quad &quad, ito::gl::Renderer::Event &event);
-    static void Update(Quad &quad);
-    static void Render(const Quad &quad);
 };
 
 #endif /* TEST_ITO_OPENGL_QUAD_H_ */

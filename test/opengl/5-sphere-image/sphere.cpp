@@ -76,7 +76,7 @@ Sphere Sphere::Create()
 }
 
 /**
- * @brief Destroy a sphere.
+ * @brief Destroy the sphere.
  */
 void Sphere::Destroy(Sphere &sphere)
 {
@@ -88,13 +88,13 @@ void Sphere::Destroy(Sphere &sphere)
 /**
  * @brief Handle the event in the sphere.
  */
-void Sphere::Handle(Sphere &sphere, gl::Renderer::Event &event)
+void Sphere::Handle(gl::Renderer::Event &event)
 {}
 
 /**
  * @brief Update the sphere.
  */
-void Sphere::Update(Sphere &sphere)
+void Sphere::Update(void)
 {
     /* Update the modelviewprojection matrix */
     float time = (float) glfwGetTime();
@@ -108,17 +108,17 @@ void Sphere::Update(Sphere &sphere)
     math::vec4f dir_z = math::dot(m, math::vec4f{0.0, 0.0, 1.0, 1.0});
     m = math::rotate(m, math::vec3f{dir_z.x, dir_z.y, dir_z.z}, 0.8f*time);
 
-    std::array<GLfloat,2> size = gl::Renderer::FramebufferSizef();
-    float ratio = size[0] / size[1];
+    std::array<GLfloat,2> fsize = gl::Renderer::FramebufferSizef();
+    float ratio = fsize[0] / fsize[1];
 
     math::mat4f p = math::ortho(-ratio, ratio, -1.0f, 1.0f, 0.1f, 1.0f);
-    sphere.mvp = math::dot(p, m);
+    mvp = math::dot(p, m);
 }
 
 /**
  * @brief Render the sphere.
  */
-void Sphere::Render(const Sphere &sphere)
+void Sphere::Render(void)
 {
     GLFWwindow *window = gl::Renderer::Window();
     if (window == nullptr) {
@@ -136,22 +136,21 @@ void Sphere::Render(const Sphere &sphere)
     glDepthFunc(GL_LESS);
 
     /* Bind the shader program object. */
-    glUseProgram(sphere.program);
+    glUseProgram(program);
 
     /* Set window dimensions. */
-    std::array<GLfloat,2> size = gl::Renderer::FramebufferSizef();
-    gl::SetUniform(sphere.program, "u_width", GL_FLOAT, &size[0]);
-    gl::SetUniform(sphere.program, "u_height", GL_FLOAT, &size[1]);
-    gl::SetUniformMatrix(sphere.program,
-        "u_mvp", GL_FLOAT_MAT4, true, sphere.mvp.data);
+    std::array<GLfloat,2> fsize = gl::Renderer::FramebufferSizef();
+    gl::SetUniform(program, "u_width", GL_FLOAT, &fsize[0]);
+    gl::SetUniform(program, "u_height", GL_FLOAT, &fsize[1]);
+    gl::SetUniformMatrix(program, "u_mvp", GL_FLOAT_MAT4, true, mvp.data);
 
     /* Set the sampler uniform with the texture unit and bind the texture */
     GLenum texunit = 0;
-    gl::SetUniform(sphere.program, "u_texsampler", GL_SAMPLER_2D, &texunit);
-    gl::ActiveBindTexture(GL_TEXTURE_2D, GL_TEXTURE0 + texunit, sphere.texture);
+    gl::SetUniform(program, "u_texsampler", GL_SAMPLER_2D, &texunit);
+    gl::ActiveBindTexture(GL_TEXTURE_2D, GL_TEXTURE0 + texunit, texture);
 
     /* Draw the mesh */
-    gl::Mesh::Render(sphere.mesh);
+    gl::Mesh::Render(mesh);
 
     /* Unbind the shader program object. */
     glUseProgram(0);

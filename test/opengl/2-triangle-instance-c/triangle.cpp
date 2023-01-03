@@ -149,7 +149,7 @@ Triangle Triangle::Create()
 }
 
 /**
- * @brief Destroy a triangle.
+ * @brief Destroy the triangle.
  */
 void Triangle::Destroy(Triangle &triangle)
 {
@@ -161,13 +161,13 @@ void Triangle::Destroy(Triangle &triangle)
 /**
  * @brief Handle the event in the triangle.
  */
-void Triangle::Handle(Triangle &triangle, gl::Renderer::Event &event)
+void Triangle::Handle(gl::Renderer::Event &event)
 {}
 
 /**
  * @brief Update the triangle.
  */
-void Triangle::Update(Triangle &triangle)
+void Triangle::Update(void)
 {
     /* Update the modelviewprojection matrix */
     float time = (float) glfwGetTime();
@@ -181,16 +181,16 @@ void Triangle::Update(Triangle &triangle)
     m = math::rotate(m, math::vec3f{1.0f, 0.0f, 0.0f}, ang_x);
     m = math::scale(m, math::vec3f::ones);
 
-    std::array<GLfloat,2> size = gl::Renderer::FramebufferSizef();
-    float ratio = size[0] / size[1];
+    std::array<GLfloat,2> fsize = gl::Renderer::FramebufferSizef();
+    float ratio = fsize[0] / fsize[1];
     math::mat4f p = math::ortho(-ratio, ratio, -1.0f, 1.0f, -1.0f, 1.0f);
-    triangle.mvp = math::dot(p, m);
+    mvp = math::dot(p, m);
 }
 
 /**
  * @brief Render the triangle.
  */
-void Triangle::Render(const Triangle &triangle)
+void Triangle::Render(void)
 {
     GLFWwindow *window = gl::Renderer::Window();
     if (window == nullptr) {
@@ -208,23 +208,14 @@ void Triangle::Render(const Triangle &triangle)
     glDepthFunc(GL_LESS);
 
     /* Bind the shader program object. */
-    glUseProgram(triangle.program);
+    glUseProgram(program);
 
     /* Get window dimensions and set corresponding uniforms. */
-    glBindVertexArray(triangle.vao);
-    gl::SetUniformMatrix(
-        triangle.program,
-        "u_mvp",
-        GL_FLOAT_MAT4,
-        true,
-        triangle.mvp.data);
+    glBindVertexArray(vao);
+    gl::SetUniformMatrix(program, "u_mvp", GL_FLOAT_MAT4, true, mvp.data);
 
     /* Draw multiple instances of a range of elements. */
-    glDrawArraysInstanced(
-        GL_TRIANGLES,
-        0,
-        3,
-        triangle.offset.data.size());
+    glDrawArraysInstanced(GL_TRIANGLES, 0, 3, offset.data.size());
     glBindVertexArray(0);
 
     /* Unbind the shader program object. */

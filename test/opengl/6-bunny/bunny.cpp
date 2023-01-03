@@ -45,7 +45,7 @@ Bunny Bunny::Create()
 }
 
 /**
- * @brief Destroy a bunny.
+ * @brief Destroy the bunny.
  */
 void Bunny::Destroy(Bunny &bunny)
 {
@@ -58,13 +58,13 @@ void Bunny::Destroy(Bunny &bunny)
 /**
  * @brief Handle the event in the bunny.
  */
-void Bunny::Handle(Bunny &bunny, gl::Renderer::Event &event)
+void Bunny::Handle(gl::Renderer::Event &event)
 {}
 
 /**
  * @brief Update the bunny.
  */
-void Bunny::Update(Bunny &bunny)
+void Bunny::Update(void)
 {
     /* Update the modelviewprojection matrix */
     float time = (float) glfwGetTime();
@@ -79,17 +79,17 @@ void Bunny::Update(Bunny &bunny)
     m = math::rotate(m, math::vec3f{1.0f, 0.0f, 0.0f}, ang_x);
     m = math::scale(m, math::vec3f{5.0f, 5.0f, 5.0f});
 
-    std::array<GLfloat,2> size = gl::Renderer::FramebufferSizef();
-    float ratio = size[0] / size[1];
+    std::array<GLfloat,2> fsize = gl::Renderer::FramebufferSizef();
+    float ratio = fsize[0] / fsize[1];
 
     math::mat4f p = math::ortho(-ratio, ratio, -1.0f, 1.0f, -1.0f, 1.0f);
-    bunny.mvp = math::dot(p, m);
+    mvp = math::dot(p, m);
 }
 
 /**
  * @brief Render the bunny.
  */
-void Bunny::Render(const Bunny &bunny)
+void Bunny::Render(void)
 {
     GLFWwindow *window = gl::Renderer::Window();
     if (window == nullptr) {
@@ -107,14 +107,13 @@ void Bunny::Render(const Bunny &bunny)
     glDepthFunc(GL_LESS);
 
     /* Bind the shader program object. */
-    glUseProgram(bunny.program);
+    glUseProgram(program);
 
     /* Set uniform and draw. */
-    gl::SetUniformMatrix(bunny.program,
-        "u_mvp", GL_FLOAT_MAT4, true, bunny.mvp.data);
+    gl::SetUniformMatrix(program, "u_mvp", GL_FLOAT_MAT4, true, mvp.data);
 
     /* Draw the mesh */
-    for (auto &mesh : bunny.model) {
+    for (auto &mesh : model) {
         gl::Mesh::Render(mesh);
     }
 

@@ -22,11 +22,12 @@ struct Triangle {
     std::vector<ito::math::vec3f> offset;   /* triangle offsets */
     ito::math::mat4f mvp;                   /* modelviewprojection */
 
+    void Handle(ito::gl::Renderer::Event &event);
+    void Update(void);
+    void Render(void);
+
     static Triangle Create(void);
     static void Destroy(Triangle &triangle);
-    static void Handle(Triangle &triangle, ito::gl::Renderer::Event &event);
-    static void Update(Triangle &triangle);
-    static void Render(const Triangle &triangle);
 };
 
 #endif /* TEST_ITO_OPENGL_TRIANGLE_H_ */

@@ -40,11 +40,12 @@ struct Map {
         ito::gl::Mesh quad;
     } end;
 
+    void Handle(ito::gl::Renderer::Event &event);
+    void Update(void);
+    void Render(void);
+
     static Map Create(void);
     static void Destroy(Map &map);
-    static void Handle(Map &map, ito::gl::Renderer::Event &event);
-    static void Update(Map &map);
-    static void Render(Map &map);
 };
 
 #endif /* TEST_ITO_OPENGL_MAP_H_ */

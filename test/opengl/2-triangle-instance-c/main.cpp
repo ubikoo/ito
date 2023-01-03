@@ -45,8 +45,7 @@ static void Handle(void)
             gl::Renderer::Close();
         }
 
-        /* Handle the input on the triangle */
-        Triangle::Handle(gTriangle, event);
+        gTriangle.Handle(event);
     }
 }
 
@@ -55,8 +54,7 @@ static void Handle(void)
  */
 static void Update(void)
 {
-    /* Update the triangle. */
-    Triangle::Update(gTriangle);
+    gTriangle.Update();
 }
 
 /** ---------------------------------------------------------------------------
@@ -65,7 +63,7 @@ static void Update(void)
 static void Render(void)
 {
     gl::Renderer::ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.0f);
-    Triangle::Render(gTriangle);
+    gTriangle.Render();
     gl::Renderer::SwapBuffers();
 }
 

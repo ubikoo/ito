@@ -132,7 +132,7 @@ Map Map::Create()
 }
 
 /**
- * @brief Destroy a map.
+ * @brief Destroy the map.
  */
 void Map::Destroy(Map &map)
 {
@@ -155,37 +155,33 @@ void Map::Destroy(Map &map)
 /**
  * @brief Handle the event in the map.
  */
-void Map::Handle(Map &map, gl::Renderer::Event &event)
+void Map::Handle(gl::Renderer::Event &event)
 {
     using gl::Renderer::Event;
 
     if (event.type == Event::Key && event.key.code == GLFW_KEY_UP) {
-        if (map.run.iterations <
-            static_cast<size_t>(kWidth * kHeight)) {
-            map.run.iterations++;
-        }
-        map.run.iterations++;
-        std::cout << "map.run.iterations " << map.run.iterations << "\n";
+        run.iterations++;
+        std::cout << "run.iterations " << run.iterations << "\n";
     }
 
     if (event.type == Event::Key && event.key.code == GLFW_KEY_DOWN) {
-        if (map.run.iterations > 0) {
-            map.run.iterations--;
+        if (run.iterations > 0) {
+            run.iterations--;
         }
-        std::cout << "map.run.iterations " << map.run.iterations << "\n";
+        std::cout << "run.iterations " << run.iterations << "\n";
     }
 }
 
 /**
  * @brief Update the map.
  */
-void Map::Update(Map &map)
+void Map::Update(void)
 {}
 
 /**
  * @brief Render the map.
  */
-void Map::Render(Map &map)
+void Map::Render(void)
 {
     GLFWwindow *window = gl::Renderer::Window();
     if (window == nullptr) {
@@ -207,31 +203,31 @@ void Map::Render(Map &map)
      */
     {
         /* Swap read/write buffer indices. */
-        std::swap(map.run.read_ix, map.run.write_ix);
+        std::swap(run.read_ix, run.write_ix);
 
         /* Bind the framebuffer for writing */
-        map.run.buffer[map.run.write_ix].bind();
+        run.buffer[run.write_ix].bind();
         auto viewport = gl::Renderer::Viewport();
         gl::Renderer::Viewport({0, 0, kWidth, kHeight});
         gl::Renderer::ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.0f);
 
         /* Bind the begin shader */
-        glUseProgram(map.begin.program);
+        glUseProgram(begin.program);
 
         /* Set the sampler uniform with the texture unit and bind the texture */
         GLenum texunit = 0;
-        gl::SetUniform(map.begin.program, "u_texsampler", GL_SAMPLER_2D, &texunit);
+        gl::SetUniform(begin.program, "u_texsampler", GL_SAMPLER_2D, &texunit);
         gl::ActiveBindTexture(GL_TEXTURE_2D, GL_TEXTURE0 + texunit,
-            map.begin.texture);
+            begin.texture);
 
         /* Draw the quad mesh */
-        gl::Mesh::Render(map.begin.quad);
+        gl::Mesh::Render(begin.quad);
 
         /* Unbind the shader program object. */
         glUseProgram(0);
 
         /* Unbind the framebuffer */
-        map.run.buffer[map.run.write_ix].unbind();
+        run.buffer[run.write_ix].unbind();
         gl::Renderer::Viewport(viewport);
         gl::Renderer::ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.0f);
     }
@@ -239,34 +235,33 @@ void Map::Render(Map &map)
     /*
      * Map run shader.
      */
-    for (size_t iter = 0; iter < map.run.iterations; ++iter) {
+    for (size_t iter = 0; iter < run.iterations; ++iter) {
         /* Swap read/write buffer indices. */
-        std::swap(map.run.read_ix, map.run.write_ix);
+        std::swap(run.read_ix, run.write_ix);
 
         /* Bind the framebuffer for writing */
-        map.run.buffer[map.run.write_ix].bind();
+        run.buffer[run.write_ix].bind();
         auto viewport = gl::Renderer::Viewport();
         gl::Renderer::Viewport({0, 0, kWidth, kHeight});
         gl::Renderer::ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.0f);
 
         /* Bind the begin shader */
-        glUseProgram(map.run.program);
+        glUseProgram(run.program);
 
         /* Set the sampler uniform with the texture unit and bind the texture */
         GLenum texunit = 0;
-        gl::SetUniform(map.run.program, "u_texsampler",  GL_SAMPLER_2D,
-            &texunit);
+        gl::SetUniform(run.program, "u_texsampler",  GL_SAMPLER_2D, &texunit);
         gl::ActiveBindTexture(GL_TEXTURE_2D, GL_TEXTURE0 + texunit,
-            map.run.buffer[map.run.read_ix].color_texture);
+            run.buffer[run.read_ix].color_texture);
 
         /* Draw the quad mesh */
-        gl::Mesh::Render(map.begin.quad);
+        gl::Mesh::Render(begin.quad);
 
         /* Unbind the shader program object. */
         glUseProgram(0);
 
         /* Unbind the framebuffer */
-        map.run.buffer[map.run.write_ix].unbind();
+        run.buffer[run.write_ix].unbind();
         gl::Renderer::Viewport(viewport);
         gl::Renderer::ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.0f);
     }
@@ -276,20 +271,19 @@ void Map::Render(Map &map)
      */
     {
         /* Swap read/write buffer indices. */
-        std::swap(map.run.read_ix, map.run.write_ix);
+        std::swap(run.read_ix, run.write_ix);
 
         /* Bind the begin shader */
-        glUseProgram(map.end.program);
+        glUseProgram(end.program);
 
         /* Set the sampler uniform with the texture unit and bind the texture */
         GLenum texunit = 0;
-        gl::SetUniform(map.end.program, "u_texsampler", GL_SAMPLER_2D,
-            &texunit);
+        gl::SetUniform(end.program, "u_texsampler", GL_SAMPLER_2D, &texunit);
         gl::ActiveBindTexture(GL_TEXTURE_2D, GL_TEXTURE0 + texunit,
-            map.run.buffer[map.run.read_ix].color_texture);
+            run.buffer[run.read_ix].color_texture);
 
         /* Draw the quad mesh */
-        gl::Mesh::Render(map.begin.quad);
+        gl::Mesh::Render(begin.quad);
 
         /* Unbind the shader program object. */
         glUseProgram(0);

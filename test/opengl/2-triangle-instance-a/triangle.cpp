@@ -115,7 +115,7 @@ Triangle Triangle::Create()
 }
 
 /**
- * @brief Destroy a triangle.
+ * @brief Destroy the triangle.
  */
 void Triangle::Destroy(Triangle &triangle)
 {
@@ -127,18 +127,18 @@ void Triangle::Destroy(Triangle &triangle)
 /**
  * @brief Handle the event in the triangle.
  */
-void Triangle::Handle(Triangle &triangle, gl::Renderer::Event &event)
+void Triangle::Handle(gl::Renderer::Event &event)
 {}
 
 /**
  * @brief Update the triangle.
  */
-void Triangle::Update(Triangle &triangle)
+void Triangle::Update(void)
 {
     /* Update the modelviewprojection matrix */
-    std::array<GLfloat,2> size = gl::Renderer::FramebufferSizef();
-    float ratio = size[0] / size[1];
-    float length = 0.5 * (float) triangle.mvp.size();
+    std::array<GLfloat,2> fsize = gl::Renderer::FramebufferSizef();
+    float ratio = fsize[0] / fsize[1];
+    float length = 0.5 * (float) mvp.size();
     math::mat4f project = math::ortho(
         -ratio*length, ratio*length,
         -length, length,
@@ -146,13 +146,13 @@ void Triangle::Update(Triangle &triangle)
 
     /* Update triangle modelviewprojection matrices */
     float time = (float) glfwGetTime();
-    for (size_t i = 0; i < triangle.mvp.size(); ++i) {
-        math::mat4f &m = triangle.mvp[i];
+    for (size_t i = 0; i < mvp.size(); ++i) {
+        math::mat4f &m = mvp[i];
 
         /* rotate the matrix */
-        float ang_x = 0.6 * time * (float) (i+1) / (float) triangle.mvp.size();
-        float ang_y = 0.4 * time * (float) (i+1) / (float) triangle.mvp.size();
-        float ang_z = 0.2 * time * (float) (i+1) / (float) triangle.mvp.size();
+        float ang_x = 0.6 * time * (float) (i+1) / (float) mvp.size();
+        float ang_y = 0.4 * time * (float) (i+1) / (float) mvp.size();
+        float ang_z = 0.2 * time * (float) (i+1) / (float) mvp.size();
 
         m = math::mat4f::eye;
         m = math::rotate(m, math::vec3f{0.0f, 0.0f, 1.0f}, ang_z);
@@ -160,9 +160,9 @@ void Triangle::Update(Triangle &triangle)
         m = math::rotate(m, math::vec3f{1.0f, 0.0f, 0.0f}, ang_x);
 
         /* translate the matrix */
-        float radius = std::cos(0.5*time) * (float) triangle.mvp.size() / M_PI;
-        float u1 = 2.0f * M_PI * (float) i / triangle.mvp.size();
-        float u2 = 2.0f * (float) i / triangle.mvp.size() - 1.0;
+        float radius = std::cos(0.5*time) * (float) mvp.size() / M_PI;
+        float u1 = 2.0f * M_PI * (float) i / mvp.size();
+        float u2 = 2.0f * (float) i / mvp.size() - 1.0;
         math::vec3f r_trans{radius * std::cos(u1), radius * std::sin(u1), u2};
 
         m = math::translate(m, r_trans);
@@ -171,9 +171,9 @@ void Triangle::Update(Triangle &triangle)
 }
 
 /**
- * @brief Render the triangle.
+ * @brief Render the
  */
-void Triangle::Render(const Triangle &triangle)
+void Triangle::Render(void)
 {
     GLFWwindow *window = gl::Renderer::Window();
     if (window == nullptr) {
@@ -191,22 +191,18 @@ void Triangle::Render(const Triangle &triangle)
     glDepthFunc(GL_LESS);
 
     /* Bind the shader program object. */
-    glUseProgram(triangle.program);
+    glUseProgram(program);
 
     /* Get window dimensions and set corresponding uniforms. */
-    glBindVertexArray(triangle.vao);
+    glBindVertexArray(vao);
 
     std::array<GLfloat,2> size = gl::Renderer::FramebufferSizef();
-    gl::SetUniform(triangle.program, "u_width", GL_FLOAT, &size[0]);
-    gl::SetUniform(triangle.program, "u_height", GL_FLOAT, &size[1]);
+    gl::SetUniform(program, "u_width", GL_FLOAT, &size[0]);
+    gl::SetUniform(program, "u_height", GL_FLOAT, &size[1]);
 
-    for (auto &m : triangle.mvp) {
-        gl::SetUniformMatrix(triangle.program,
-            "u_mvp", GL_FLOAT_MAT4, true, m.data);
-        glDrawArrays(
-            GL_TRIANGLES,           /* what kind of primitives to render */
-            0,                      /* starting index in the enabled arrays */
-            3);                     /* number of indices to be rendered */
+    for (auto &m : mvp) {
+        gl::SetUniformMatrix(program, "u_mvp", GL_FLOAT_MAT4, true, m.data);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
     }
 
     glBindVertexArray(0);

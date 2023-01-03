@@ -1,5 +1,5 @@
 /*
- * rop.cpp
+ * drawable.cpp
  *
  * Copyright (c) 2020 Carlos Braga
  *
@@ -11,20 +11,20 @@
 
 #include "ito/opengl.hpp"
 using namespace ito;
-#include "rop.hpp"
+#include "drawable.hpp"
 
 /**
- * @brief Rop constant parameters.
+ * @brief Drawable constant parameters.
  */
 static const std::string kImageFilename = "../common/equirectangular.png";
 static const size_t kMeshNodes = 1024;
 
 /**
- * @brief Create a new rop.
+ * @brief Create a new drawable.
  */
-Rop Rop::Create()
+Drawable Drawable::Create()
 {
-    Rop rop;
+    Drawable drawable;
 
     /*
      * Create the sphere drawable.
@@ -34,28 +34,28 @@ Rop Rop::Create()
         std::vector<GLuint> shaders{
             gl::CreateShader(GL_VERTEX_SHADER, "data/sphere.vert"),
             gl::CreateShader(GL_FRAGMENT_SHADER, "data/sphere.frag")};
-        rop.sphere.program = gl::CreateProgram(shaders);
+        drawable.sphere.program = gl::CreateProgram(shaders);
         gl::DestroyShader(shaders);
-        std::cout << gl::GetProgramInfoStr(rop.sphere.program) << "\n";
+        std::cout << gl::GetProgramInfoStr(drawable.sphere.program) << "\n";
 
         /* Load the 2d-image from the specified filename. */
         gl::Image image = gl::Image::Load(kImageFilename);
-        rop.sphere.texture = gl::CreateTexture2d(
+        drawable.sphere.texture = gl::CreateTexture2d(
             GL_RGBA,                    /* internal format */
             image.width,                /* texture width */
             image.height,               /* texture height */
             image.format,               /* pixel format */
             GL_UNSIGNED_BYTE,           /* pixel type */
             &image.bitmap[0]);          /* pixel data */
-        glBindTexture(GL_TEXTURE_2D, rop.sphere.texture);
+        glBindTexture(GL_TEXTURE_2D, drawable.sphere.texture);
         gl::SetTextureMipmap(GL_TEXTURE_2D);
         gl::SetTextureWrap(GL_TEXTURE_2D, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
         gl::SetTextureFilter(GL_TEXTURE_2D, GL_LINEAR, GL_LINEAR);
         glBindTexture(GL_TEXTURE_2D, 0);
 
         /* Create a mesh over a sphere. */
-        rop.sphere.mesh = gl::Mesh::Sphere(
-            rop.sphere.program,         /* shader program object */
+        drawable.sphere.mesh = gl::Mesh::Sphere(
+            drawable.sphere.program,         /* shader program object */
             "sphere",                   /* vertex attributes prefix */
             kMeshNodes,                 /* n1 vertices */
             kMeshNodes,                 /* n2 vertices */
@@ -66,7 +66,7 @@ Rop Rop::Create()
             M_PI);                      /* phi_hi */
 
         /* Initialize sphere view matrix. */
-        rop.sphere.mvp = math::mat4f::eye;
+        drawable.sphere.mvp = math::mat4f::eye;
     }
 
     /*
@@ -76,15 +76,15 @@ Rop Rop::Create()
         std::vector<GLuint> shaders{
             gl::CreateShader(GL_VERTEX_SHADER, "data/quad.vert"),
             gl::CreateShader(GL_FRAGMENT_SHADER, "data/quad.frag")};
-        rop.quad.program = gl::CreateProgram(shaders);
+        drawable.quad.program = gl::CreateProgram(shaders);
         gl::DestroyShader(shaders);
-        std::cout << gl::GetProgramInfoStr(rop.quad.program) << "\n";
+        std::cout << gl::GetProgramInfoStr(drawable.quad.program) << "\n";
 
         /*
          * Create a mesh over a rectangle.
          */
-        rop.quad.mesh = gl::Mesh::Plane(
-            rop.quad.program,           /* shader program object */
+        drawable.quad.mesh = gl::Mesh::Plane(
+            drawable.quad.program,           /* shader program object */
             "quad",                     /* vertex attributes prefix */
             kMeshNodes,                 /* n1 vertices */
             kMeshNodes,                 /* n2 vertices */
@@ -94,84 +94,74 @@ Rop Rop::Create()
             1.0);                       /* yhi */
 
         /* Initialize the quad view matrix */
-        rop.quad.mvp = math::mat4f::eye;
+        drawable.quad.mvp = math::mat4f::eye;
     }
 
     /*
      * Create a framebuffer with color and depth attachments.
      */
     {
-        /* Initialize the fbo mixing parameter. */
-        rop.fbo.mix = 0.0f;
-
         /* Set the fbo size equal to the sphere dimensions. */
-        glBindTexture(GL_TEXTURE_2D, rop.sphere.texture);
-        rop.fbo.width = gl::GetTextureWidth(GL_TEXTURE_2D);
-        rop.fbo.height = gl::GetTextureHeight(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, drawable.sphere.texture);
+        drawable.fbo.width = gl::GetTextureWidth(GL_TEXTURE_2D);
+        drawable.fbo.height = gl::GetTextureHeight(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, 0);
 
         /* Create the fbo with color and depth attachments. */
-        rop.fbo.id = gl::CreateFramebuffer(
-            rop.fbo.width,
-            rop.fbo.height,
+        drawable.fbo.id = gl::CreateFramebuffer(
+            drawable.fbo.width,
+            drawable.fbo.height,
             1,                      /* 1 color attachment */
             GL_RGBA,                /* color buffer internal format */
-            &rop.fbo.color_texture,
+            &drawable.fbo.color_texture,
             GL_DEPTH_COMPONENT24,   /* depth buffer internal format */
-            &rop.fbo.depth_texture,
+            &drawable.fbo.depth_texture,
             GL_LINEAR,
             GL_LINEAR_MIPMAP_LINEAR);
     }
 
-    return rop;
+    return drawable;
 }
 
 /**
- * @brief Destroy a rop.
+ * @brief Destroy the drawable.
  */
-void Rop::Destroy(Rop &rop)
+void Drawable::Destroy(Drawable &drawable)
 {
     /* Destroy sphere objects */
-    gl::Mesh::Destroy(rop.sphere.mesh);
-    gl::DestroyTexture(rop.sphere.texture);
-    gl::DestroyProgram(rop.sphere.program);
+    gl::Mesh::Destroy(drawable.sphere.mesh);
+    gl::DestroyTexture(drawable.sphere.texture);
+    gl::DestroyProgram(drawable.sphere.program);
 
     /* Destroy quad objects */
-    gl::Mesh::Destroy(rop.quad.mesh);
-    gl::DestroyProgram(rop.quad.program);
+    gl::Mesh::Destroy(drawable.quad.mesh);
+    gl::DestroyProgram(drawable.quad.program);
 
     /* Destroy fbo objects. */
-    gl::DestroyTexture(rop.fbo.color_texture);
-    gl::DestroyTexture(rop.fbo.depth_texture);
-    gl::DestroyFramebuffer(rop.fbo.id);
+    gl::DestroyTexture(drawable.fbo.color_texture);
+    gl::DestroyTexture(drawable.fbo.depth_texture);
+    gl::DestroyFramebuffer(drawable.fbo.id);
 }
 
 /**
- * @brief Handle the event in the rop.
+ * @brief Handle the event in the drawable.
  */
-void Rop::Handle(Rop &rop, gl::Renderer::Event &event)
-{
-    using gl::Renderer::Event;
-
-    if (event.type == Event::MouseScroll) {
-        rop.fbo.mix += 0.01f * event.mousescroll.yoffset;
-        rop.fbo.mix = std::min(std::max(rop.fbo.mix, 0.0f), 1.0f);
-    }
-}
+void Drawable::Handle(gl::Renderer::Event &event)
+{}
 
 /**
- * @brief Update the rop.
+ * @brief Update the drawable.
  */
-void Rop::Update(Rop &rop)
+void Drawable::Update(void)
 {
     /* Compute the orthographic projection matrix */
     float time = (float) glfwGetTime();
 
     /* Update the sphere modelviewprojection matrix */
     {
-        float ang_x = 1.2f * (float) M_PI;
-        float ang_y = 0.8f * time;
-        float ang_z = 0.6f * time;
+        float ang_x = 0.0f * time;
+        float ang_y = 2.0f * time;
+        float ang_z = 0.0f * time;
 
         math::mat4f m = math::mat4f::eye;
         m = math::rotate(m, math::vec3f{1.0f, 0.0f, 0.0f}, ang_x);
@@ -182,34 +172,34 @@ void Rop::Update(Rop &rop)
         math::vec4f dir_z = math::dot(m, math::vec4f{0.0f,0.0f,1.0f,1.0f});
         m = math::rotate(m, math::vec3f{dir_z.x, dir_z.y, dir_z.z}, ang_z);
 
-        std::array<GLfloat,2> size = gl::Renderer::FramebufferSizef();
-        float ratio = size[0] / size[1];
+        std::array<GLfloat,2> fsize = gl::Renderer::FramebufferSizef();
+        float ratio = fsize[0] / fsize[1];
 
         math::mat4f proj = math::ortho(-ratio, ratio, -1.0f, 1.0f, -1.0f, 1.0f);
-        rop.sphere.mvp = math::dot(proj, m);
+        sphere.mvp = math::dot(proj, m);
     }
 
     /* Update the quad modelviewprojection matrix */
     {
-        float ang_x = 0.2f * time;
-        float ang_y = 0.2f * time;
-        float ang_z = 0.2f * time;
+        float ang_x = 0.05f * time;
+        float ang_y = 0.05f * time;
+        float ang_z = 0.05f * time;
 
         math::mat4f m = math::mat4f::eye;
         m = math::rotate(m, math::vec3f{0.0f, 0.0f, 1.0f}, ang_z);
         m = math::rotate(m, math::vec3f{0.0f, 1.0f, 0.0f}, ang_y);
         m = math::rotate(m, math::vec3f{1.0f, 0.0f, 0.0f}, ang_x);
 
-        float ratio = (float) rop.fbo.width / rop.fbo.height;
+        float ratio = (float) fbo.width / fbo.height;
         math::mat4f proj = math::ortho(-ratio, ratio, -1.0f, 1.0f, -1.0f, 1.0f);
-        rop.quad.mvp = math::dot(proj, m);
+        quad.mvp = math::dot(proj, m);
     }
 }
 
 /**
- * @brief Render the rop.
+ * @brief Render the drawable.
  */
-void Rop::Render(const Rop &rop)
+void Drawable::Render(void)
 {
     GLFWwindow *window = gl::Renderer::Window();
     if (window == nullptr) {
@@ -229,33 +219,28 @@ void Rop::Render(const Rop &rop)
     /* Render into the framebuffer rendertexture */
     {
         /* Bind the framebuffer */
-        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, rop.fbo.id);
+        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo.id);
         auto viewport = gl::Renderer::Viewport();
-        gl::Renderer::Viewport({0, 0, rop.fbo.width, rop.fbo.height});
+        gl::Renderer::Viewport({0, 0, fbo.width, fbo.height});
         gl::Renderer::ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.0f);
 
         /* Bind the sphere shader */
-        glUseProgram(rop.sphere.program);
+        glUseProgram(sphere.program);
 
         /* Set window dimensions. */
-        gl::SetUniform(rop.sphere.program, "u_mix", GL_FLOAT,
-            &rop.fbo.mix);
-        gl::SetUniform(rop.sphere.program, "u_width", GL_FLOAT,
-            &rop.fbo.width);
-        gl::SetUniform(rop.sphere.program, "u_height", GL_FLOAT,
-            &rop.fbo.height);
-        gl::SetUniformMatrix(rop.sphere.program, "u_mvp", GL_FLOAT_MAT4, true,
-            rop.sphere.mvp.data);
+        // gl::SetUniform(sphere.program, "u_width", GL_FLOAT, &fbo.width);
+        // gl::SetUniform(sphere.program, "u_height", GL_FLOAT, &fbo.height);
+        gl::SetUniformMatrix(sphere.program, "u_mvp", GL_FLOAT_MAT4, true,
+            sphere.mvp.data);
 
         /* Set the sampler uniform with the texture unit and bind the texture */
         GLenum texunit = 0;
-        gl::SetUniform(rop.sphere.program, "u_texsampler", GL_SAMPLER_2D,
-            &texunit);
+        gl::SetUniform(sphere.program, "u_texsampler", GL_SAMPLER_2D, &texunit);
         gl::ActiveBindTexture(GL_TEXTURE_2D, GL_TEXTURE0 + texunit,
-            rop.sphere.texture);
+            sphere.texture);
 
         /* Draw the sphere mesh */
-        gl::Mesh::Render(rop.sphere.mesh);
+        gl::Mesh::Render(sphere.mesh);
 
         /* Unbind the shader program object. */
         glUseProgram(0);
@@ -271,23 +256,23 @@ void Rop::Render(const Rop &rop)
      */
     {
         /* Get window dimensions. */
-        std::array<GLfloat,2> sizef = gl::Renderer::FramebufferSizef();
+        std::array<GLfloat,2> fsize = gl::Renderer::FramebufferSizef();
 
         /* Bind the quad shader */
-        glUseProgram(rop.quad.program);
-        gl::SetUniform(rop.quad.program, "u_mix", GL_FLOAT, &rop.fbo.mix);
-        gl::SetUniform(rop.quad.program, "u_width", GL_FLOAT, &sizef[0]);
-        gl::SetUniform(rop.quad.program, "u_height", GL_FLOAT, &sizef[0]);
-        gl::SetUniformMatrix(rop.quad.program, "u_mvp", GL_FLOAT_MAT4, true,
-            rop.quad.mvp.data);
+        glUseProgram(quad.program);
+        // gl::SetUniform(quad.program, "u_width", GL_FLOAT, &fsize[0]);
+        // gl::SetUniform(quad.program, "u_height", GL_FLOAT, &fsize[0]);
+        gl::SetUniformMatrix(quad.program, "u_mvp", GL_FLOAT_MAT4, true,
+            quad.mvp.data);
 
         /* Set the sampler uniform with the texture unit and bind the texture */
         GLenum texunit = 0;
-        gl::SetUniform(rop.quad.program, "u_texsampler", GL_SAMPLER_2D, &texunit);
-        gl::ActiveBindTexture(GL_TEXTURE_2D, GL_TEXTURE0 + texunit, rop.fbo.color_texture);
+        gl::SetUniform(quad.program, "u_texsampler", GL_SAMPLER_2D, &texunit);
+        gl::ActiveBindTexture(GL_TEXTURE_2D, GL_TEXTURE0 + texunit,
+            fbo.color_texture);
 
         /* Draw the quad mesh */
-        gl::Mesh::Render(rop.quad.mesh);
+        gl::Mesh::Render(quad.mesh);
 
         /* Unbind the shader program object. */
         glUseProgram(0);

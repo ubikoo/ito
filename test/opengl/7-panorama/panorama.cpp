@@ -88,7 +88,7 @@ Panorama Panorama::Create()
 }
 
 /**
- * @brief Destroy a panorama.
+ * @brief Destroy the panorama.
  */
 void Panorama::Destroy(Panorama &panorama)
 {
@@ -100,65 +100,65 @@ void Panorama::Destroy(Panorama &panorama)
 /**
  * @brief Handle the event in the panorama.
  */
-void Panorama::Handle(Panorama &panorama, gl::Renderer::Event &event)
+void Panorama::Handle(gl::Renderer::Event &event)
 {
     using gl::Renderer::Event;
     static const float speed = 0.01f;
     static const float step = 10.0f;
 
     if (event.type == Event::Key && event.key.code == GLFW_KEY_W) {
-        panorama.camera.Move(speed * step);
+        camera.Move(speed * step);
     }
 
     if (event.type == Event::Key && event.key.code == GLFW_KEY_S) {
-        panorama.camera.Move(-speed * step);
+        camera.Move(-speed * step);
     }
 
     if (event.type == Event::Key && event.key.code == GLFW_KEY_A) {
-        panorama.camera.Strafe(-speed * step);
+        camera.Strafe(-speed * step);
     }
 
     if (event.type == Event::Key && event.key.code == GLFW_KEY_D) {
-        panorama.camera.Strafe(speed * step);
+        camera.Strafe(speed * step);
     }
 
     if (event.type == Event::Key && event.key.code == GLFW_KEY_UP) {
-        panorama.camera.Pitch(speed * M_PI);
+        camera.Pitch(speed * M_PI);
     }
 
     if (event.type == Event::Key && event.key.code == GLFW_KEY_DOWN) {
-        panorama.camera.Pitch(-speed * M_PI);
+        camera.Pitch(-speed * M_PI);
     }
 
     if (event.type == Event::Key && event.key.code == GLFW_KEY_LEFT) {
-        panorama.camera.Yaw(-2.0f * speed * M_PI);
+        camera.Yaw(-2.0f * speed * M_PI);
     }
 
     if (event.type == Event::Key && event.key.code == GLFW_KEY_RIGHT) {
-        panorama.camera.Yaw(2.0f * speed * M_PI);
+        camera.Yaw(2.0f * speed * M_PI);
     }
 }
 
 /**
  * @brief Update the panorama.
  */
-void Panorama::Update(Panorama &panorama)
+void Panorama::Update(void)
 {
     /* Update the panorama camera */
-    std::array<GLfloat,2> sizef = gl::Renderer::FramebufferSizef();
+    std::array<GLfloat,2> fsize = gl::Renderer::FramebufferSizef();
     const float fovy = 0.5*M_PI;
-    const float aspect = sizef[0] / sizef[1];
+    const float aspect = fsize[0] / fsize[1];
     const float znear = 0.1f;
     const float zfar = 10.0f;
     math::mat4f proj = math::perspective(fovy, aspect, znear, zfar);
-    math::mat4f view = panorama.camera.View();
-    panorama.mvp = math::dot(proj, view);
+    math::mat4f view = camera.View();
+    mvp = math::dot(proj, view);
 }
 
 /**
  * @brief Render the panorama.
  */
-void Panorama::Render(const Panorama &panorama)
+void Panorama::Render(void)
 {
     GLFWwindow *window = gl::Renderer::Window();
     if (window == nullptr) {
@@ -176,23 +176,21 @@ void Panorama::Render(const Panorama &panorama)
     glDepthFunc(GL_LESS);
 
     /* Bind the shader program object. */
-    glUseProgram(panorama.program);
+    glUseProgram(program);
 
     /* Set window dimensions. */
-    std::array<GLfloat,2> sizef = gl::Renderer::FramebufferSizef();
-    gl::SetUniform(panorama.program, "u_width", GL_FLOAT, &sizef[0]);
-    gl::SetUniform(panorama.program, "u_height", GL_FLOAT, &sizef[1]);
-    gl::SetUniformMatrix(panorama.program,
-        "u_mvp", GL_FLOAT_MAT4, true, panorama.mvp.data);
+    std::array<GLfloat,2> fsize = gl::Renderer::FramebufferSizef();
+    gl::SetUniform(program, "u_width", GL_FLOAT, &fsize[0]);
+    gl::SetUniform(program, "u_height", GL_FLOAT, &fsize[1]);
+    gl::SetUniformMatrix(program, "u_mvp", GL_FLOAT_MAT4, true, mvp.data);
 
     /* Set the sampler uniform with the texture unit and bind the texture */
     GLenum texunit = 0;
-    gl::SetUniform(panorama.program, "u_texsampler", GL_SAMPLER_2D, &texunit);
-    gl::ActiveBindTexture(GL_TEXTURE_2D,
-        GL_TEXTURE0 + texunit, panorama.texture);
+    gl::SetUniform(program, "u_texsampler", GL_SAMPLER_2D, &texunit);
+    gl::ActiveBindTexture(GL_TEXTURE_2D, GL_TEXTURE0 + texunit, texture);
 
     /* Draw the mesh */
-    gl::Mesh::Render(panorama.mesh);
+    gl::Mesh::Render(mesh);
 
     /* Unbind the shader program object. */
     glUseProgram(0);
