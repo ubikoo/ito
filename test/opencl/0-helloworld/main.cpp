@@ -17,7 +17,7 @@
 /**
  * Constants
  */
-static const size_t ARRAY_SIZE = 10000000;
+static const size_t kArraySize = 10000000;
 
 /**
  * @brief Create an OpenCL context on the first available platform using either
@@ -201,19 +201,19 @@ bool CreateMemObjects(
     memObjects[0] = clCreateBuffer(
         context,
         CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR,
-        sizeof(float) * ARRAY_SIZE,
+        sizeof(float) * kArraySize,
         a,
         NULL);
     memObjects[1] = clCreateBuffer(
         context,
         CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR,
-        sizeof(float) * ARRAY_SIZE,
+        sizeof(float) * kArraySize,
         b,
         NULL);
     memObjects[2] = clCreateBuffer(
         context,
         CL_MEM_READ_WRITE,
-        sizeof(float) * ARRAY_SIZE,
+        sizeof(float) * kArraySize,
         NULL,
         NULL);
 
@@ -301,17 +301,17 @@ int main(int argc, char const *argv[])
      * Create memory objects to be used as arguments to kernel. First, create
      * host memory arrays used to store the arguments to the kernel
      */
-    std::vector<float> result(ARRAY_SIZE, 0.0f);
-    std::vector<float> a(ARRAY_SIZE, 0.0f);
-    std::vector<float> b(ARRAY_SIZE, 0.0f);
+    std::vector<float> result(kArraySize, 0.0f);
+    std::vector<float> a(kArraySize, 0.0f);
+    std::vector<float> b(kArraySize, 0.0f);
     {
         /* Start time */
         auto tic = std::chrono::high_resolution_clock::now();
 
         /* Run */
-        for (size_t i = 0; i < ARRAY_SIZE; i++) {
-            a[i] = (float)i / (float) ARRAY_SIZE;
-            b[i] = (float)(i * 2) / (float) ARRAY_SIZE;
+        for (size_t i = 0; i < kArraySize; i++) {
+            a[i] = (float)i / (float) kArraySize;
+            b[i] = (float)(i * 2) / (float) kArraySize;
         }
 
         /* End time */
@@ -328,14 +328,14 @@ int main(int argc, char const *argv[])
     errNum  = clSetKernelArg(kernel, 0, sizeof(cl_mem), &memObjects[0]);
     errNum |= clSetKernelArg(kernel, 1, sizeof(cl_mem), &memObjects[1]);
     errNum |= clSetKernelArg(kernel, 2, sizeof(cl_mem), &memObjects[2]);
-    errNum |= clSetKernelArg(kernel, 3, sizeof(cl_ulong), &ARRAY_SIZE);
+    errNum |= clSetKernelArg(kernel, 3, sizeof(cl_ulong), &kArraySize);
     if (errNum != CL_SUCCESS) {
         std::cerr << "Error setting kernel arguments." << std::endl;
         Cleanup(context, commandQueue, program, kernel, memObjects);
         return 1;
     }
 
-    size_t globalWorkSize[1] = { ARRAY_SIZE };
+    size_t globalWorkSize[1] = { kArraySize };
     size_t localWorkSize[1] = { 1 };
 
     /* Queue the kernel up for execution across the array */
@@ -369,7 +369,7 @@ int main(int argc, char const *argv[])
         memObjects[2],              /* buffer */
         CL_TRUE,
         0,
-        ARRAY_SIZE * sizeof(float),
+        kArraySize * sizeof(float),
         result.data(),
         0,
         NULL,

@@ -22,31 +22,31 @@ struct Timer {
     size_t count;           /* framerate counter */
     double start;           /* starting time */
 
-    /* Return the elapsed time. */
+    /** Return the elapsed time. */
     double elapsed(void) const { return (glfwGetTime() - start); }
 
-    /* Increment the framerate count and return true if completed a period */
+    /** Increment the frame count and return true if a period is completed. */
     bool nextframe(void) { return (++count % period == 0); }
 
-    /* Return the framerate count. */
+    /** Return the framerate. */
     double framerate(void) const {
         return (static_cast<double>(count) / elapsed());
     }
 
-    /* Reset the framerate counter. */
+    /** Reset the framerate counter. */
     void reset(void) {
         count = 0;
         start = glfwGetTime();
     }
 
-    /* Print the framerate count. */
+    /** Print the framerate count. */
     std::string to_string(void) const {
         const double fps = framerate();
         return ito::str::format("%llu frames @ %.2lf ms/frame (%.1lf fps)",
             count, 1000.0 / fps, fps);
     }
 
-    /* Constructor/destructor. */
+    /** Constructor/destructor. */
     explicit Timer(const size_t period) : period(period) { reset(); }
     ~Timer() = default;
 }; /* Timer */

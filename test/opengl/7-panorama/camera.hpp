@@ -19,19 +19,20 @@ struct Camera {
     ito::math::vec3f look;      /* look direction */
     ito::math::vec3f up;        /* camera position */
 
-    void Move(float step);
-    void Strafe(float step);
-    void Pitch(float angle);
-    void Yaw(float angle);
-    void Rotate(const math::mat4f &rot);
+    void move(float step);
+    void strafe(float step);
 
-    ito::math::mat4f View(void);
+    void pitch(float angle);
+    void yaw(float angle);
+
+    void update(const math::mat4f &rot);
+
+    ito::math::mat4f view(void);
 
     static Camera Create(
         const ito::math::vec3f &eye,
         const ito::math::vec3f &ctr,
         const ito::math::vec3f &up);
-
 };
 
 #endif /* TEST_ITO_OPENGL_CAMERA_H_ */

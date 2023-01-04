@@ -16,11 +16,11 @@
 #include "camera.hpp"
 
 struct Panorama {
-    GLuint program;                 /* shader program object */
-    ito::gl::Mesh mesh;             /* panorama mesh image and texture */
-    ito::gl::Image image;
+    GLuint program;             /* shader program object */
+    ito::gl::Image image;       /* panoranam image, mesh and texture */
+    ito::gl::Mesh mesh;
     GLuint texture;
-    Camera camera;                  /* panorama camera and projection matrix */
+    Camera camera;              /* panorama camera and projection matrix */
     ito::math::mat4f mvp;
 
     void Handle(ito::gl::Renderer::Event &event);

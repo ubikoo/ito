@@ -46,7 +46,7 @@ void Create(
 {
     /* Create OpenCL context on the first available platform. */
     context = cl::CreateContext(CL_DEVICE_TYPE_GPU);
-    device = cl::GetContextDevice(context, Params::device_index);
+    device = cl::GetContextDevice(context, Params::kDeviceIndex);
     std::cout << cl::GetDeviceInfoStr(device) << "\n";
 
     /* Create a command queue on the specified device. */
@@ -168,9 +168,9 @@ int main(int argc, char const *argv[])
         auto tic = std::chrono::high_resolution_clock::now();
 
         /* Set the size of the NDRange workgroups */
-        cl::NDRange local_ws  = cl::NDRange::Make(Params::work_group_size_1d);
+        cl::NDRange local_ws  = cl::NDRange::Make(Params::kWorkGroupSize1d);
         cl::NDRange global_ws = cl::NDRange::Make(
-            cl::NDRange::Roundup(array_size, Params::work_group_size_1d));
+            cl::NDRange::Roundup(array_size, Params::kWorkGroupSize1d));
 
         /* Run the kernel */
         cl::EnqueueNDRangeKernel(

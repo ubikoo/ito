@@ -91,7 +91,7 @@ std::array<GLfloat,2> FramebufferSizef(void);
  * member results in undefined behaviour.
  */
 struct Event {
-    /* Event enumerated type. */
+    /** Event enumerated type. */
     enum : GLenum {
         /* Window events */
         FramebufferSize         = 1 << 0,
@@ -119,15 +119,15 @@ struct Event {
     };
     GLenum type;
 
-    /* Type assignment operator. */
+    /** Type assignment operator. */
     GLenum operator=(const GLenum value) { return (type = value); }
 
-    /* Bitwise type assignment AND, OR and XOR operators. */
+    /** Bitwise type assignment AND, OR and XOR operators. */
     GLenum operator&= (const GLenum &value) { return (type &= value); }
     GLenum operator|= (const GLenum &value) { return (type |= value); }
     GLenum operator^= (const GLenum &value) { return (type ^= value); }
 
-    /* Event data structs and corresponding union. */
+    /** Event data structs and corresponding union. */
     struct FramebufferSizeType {
         int width;
         int height;
@@ -186,11 +186,11 @@ struct Event {
         MouseScrollType mousescroll;
     };
 
-    /* Constructor/destructor.  */
+    /** Constructor/destructor.  */
     explicit Event(const GLenum value) : type(value) {}
     ~Event() = default;
 
-    /* Copy constructor/assignment. */
+    /** Copy constructor/assignment. */
     Event(const Event &other);
     Event &operator=(const Event &other);
 };

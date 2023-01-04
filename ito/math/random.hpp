@@ -315,7 +315,7 @@ struct random_gauss<float> {
                 x = urand(rng, -one, one);
                 y = urand(rng, -one, one);
                 r = x*x + y*y;
-            } while (math::iseq(r, zero) || !math::islt(r, one));
+            } while (iseq(r, zero) || !islt(r, one));
 
             float d = std::sqrt(-two * std::log(r) / r);
             value = x * d;      /* use first random deviate */
@@ -352,7 +352,7 @@ struct random_gauss<double> {
                 x = urand(rng, -one, one);
                 y = urand(rng, -one, one);
                 r = x*x + y*y;
-            } while (math::iseq(r, zero) || !math::islt(r, one));
+            } while (iseq(r, zero) || !islt(r, one));
 
             double d = std::sqrt(-two * std::log(r) / r);
             value = x * d;      /* use first random deviate */

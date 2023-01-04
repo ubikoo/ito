@@ -40,10 +40,11 @@ Panorama Panorama::Create()
     }
 
     /*
-     * Load the 2d-image from the specified filename
+     * Load the image from the file, store it on a texture and create mesh.
      */
     {
         panorama.image = gl::Image::Load(kImageFilename, true, 4);
+
         panorama.texture = gl::CreateTexture2d(
             GL_RGBA8,                           /* internal format */
             panorama.image.width,               /* texture width */
@@ -51,16 +52,12 @@ Panorama Panorama::Create()
             panorama.image.format,              /* pixel format */
             GL_UNSIGNED_BYTE,                   /* pixel type */
             &panorama.image.bitmap[0]);         /* pixel data */
-
         glBindTexture(GL_TEXTURE_2D, panorama.texture);
         gl::SetTextureMipmap(GL_TEXTURE_2D);
         gl::SetTextureWrap(GL_TEXTURE_2D, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
         gl::SetTextureFilter(GL_TEXTURE_2D, GL_LINEAR, GL_LINEAR);
         glBindTexture(GL_TEXTURE_2D, 0);
 
-        /*
-         * Create a mesh over a rectangle.
-         */
         panorama.mesh = gl::Mesh::Sphere(
             panorama.program,           /* shader program object */
             "sphere",                   /* vertex attributes prefix */
@@ -107,35 +104,35 @@ void Panorama::Handle(gl::Renderer::Event &event)
     static const float step = 10.0f;
 
     if (event.type == Event::Key && event.key.code == GLFW_KEY_W) {
-        camera.Move(speed * step);
+        camera.move(speed * step);
     }
 
     if (event.type == Event::Key && event.key.code == GLFW_KEY_S) {
-        camera.Move(-speed * step);
+        camera.move(-speed * step);
     }
 
     if (event.type == Event::Key && event.key.code == GLFW_KEY_A) {
-        camera.Strafe(-speed * step);
+        camera.strafe(-speed * step);
     }
 
     if (event.type == Event::Key && event.key.code == GLFW_KEY_D) {
-        camera.Strafe(speed * step);
+        camera.strafe(speed * step);
     }
 
     if (event.type == Event::Key && event.key.code == GLFW_KEY_UP) {
-        camera.Pitch(speed * M_PI);
+        camera.pitch(speed * M_PI);
     }
 
     if (event.type == Event::Key && event.key.code == GLFW_KEY_DOWN) {
-        camera.Pitch(-speed * M_PI);
+        camera.pitch(-speed * M_PI);
     }
 
     if (event.type == Event::Key && event.key.code == GLFW_KEY_LEFT) {
-        camera.Yaw(-2.0f * speed * M_PI);
+        camera.yaw(-2.0f * speed * M_PI);
     }
 
     if (event.type == Event::Key && event.key.code == GLFW_KEY_RIGHT) {
-        camera.Yaw(2.0f * speed * M_PI);
+        camera.yaw(2.0f * speed * M_PI);
     }
 }
 
@@ -151,7 +148,7 @@ void Panorama::Update(void)
     const float znear = 0.1f;
     const float zfar = 10.0f;
     math::mat4f proj = math::perspective(fovy, aspect, znear, zfar);
-    math::mat4f view = camera.View();
+    math::mat4f view = camera.view();
     mvp = math::dot(proj, view);
 }
 

@@ -14,11 +14,12 @@
 
 #include "ito/opencl.hpp"
 
-/** OpenCL GPU device index. */
 namespace Params {
-    static const cl_ulong device_index = 2;
-    static const cl_ulong work_group_size_1d = 256;
-    static const cl_ulong work_group_size_2d = 16;
+
+static const cl_ulong kDeviceIndex = 2;
+static const cl_ulong kWorkGroupSize1d = 256;
+static const cl_ulong kWorkGroupSize2d = 16;
+
 } /* Params */
 
 #endif /* TEST_OPENCL_BASE_H_ */

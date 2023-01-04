@@ -54,7 +54,7 @@ void Create(
 {
     /* Setup OpenCL context on the first available platform. */
     context = cl::CreateContext(CL_DEVICE_TYPE_GPU);
-    device = cl::GetContextDevice(context, Params::device_index);
+    device = cl::GetContextDevice(context, Params::kDeviceIndex);
     std::cout << cl::GetDeviceInfoStr(device) << "\n";
 
     /* Create a command queue on the specified device. */
@@ -213,8 +213,7 @@ int main(int argc, char const *argv[])
             /* Set the size of the NDRange workgroups */
             cl::NDRange global_ws = cl::NDRange::Make(dim_M, dim_N);
             cl::NDRange local_ws = cl::NDRange::Make(
-                Params::work_group_size_2d,
-                Params::work_group_size_2d);
+                Params::kWorkGroupSize2d, Params::kWorkGroupSize2d);
 
             /* Run the kernel */
             cl_event event_matmul;
