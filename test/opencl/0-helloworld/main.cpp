@@ -12,7 +12,7 @@
 #include <fstream>
 #include <chrono>
 
-#include "../base.hpp"
+#include "../params.hpp"
 
 /**
  * Constants

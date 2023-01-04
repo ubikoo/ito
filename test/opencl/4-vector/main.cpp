@@ -13,7 +13,7 @@
 #include <chrono>
 #include <numeric>
 
-#include "../base.hpp"
+#include "../params.hpp"
 using namespace ito;
 
 /** ---------------------------------------------------------------------------

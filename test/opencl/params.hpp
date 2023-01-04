@@ -1,5 +1,5 @@
 /*
- * base.hpp
+ * params.hpp
  *
  * Copyright (c) 2020 Carlos Braga
  *
@@ -9,8 +9,8 @@
  * See accompanying LICENSE.md or https://opensource.org/licenses/MIT.
  */
 
-#ifndef TEST_OPENCL_BASE_H_
-#define TEST_OPENCL_BASE_H_
+#ifndef TEST_OPENCL_PARAMS_H_
+#define TEST_OPENCL_PARAMS_H_
 
 #include "ito/opencl.hpp"
 
@@ -22,4 +22,4 @@ static const cl_ulong kWorkGroupSize2d = 16;
 
 } /* Params */
 
-#endif /* TEST_OPENCL_BASE_H_ */
+#endif /* TEST_OPENCL_PARAMS_H_ */

@@ -9,7 +9,7 @@
  * See accompanying LICENSE.md or https://opensource.org/licenses/MIT.
  */
 
-#include "../base.hpp"
+#include "../params.hpp"
 using namespace ito;
 
 /** ---------------------------------------------------------------------------
