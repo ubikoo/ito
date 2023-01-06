@@ -29,20 +29,20 @@ Sphere gSphere;
 static void Handle(void)
 {
     /* Poll events and handle. */
-    gl::Renderer::PollEvent(kTimeout);
-    while (gl::Renderer::HasEvent()) {
-        gl::Renderer::Event event = gl::Renderer::PopEvent();
+    glfw::PollEvent(kTimeout);
+    while (glfw::HasEvent()) {
+        glfw::Event event = glfw::PopEvent();
 
-        if (event.type == gl::Renderer::Event::FramebufferSize) {
+        if (event.type == glfw::Event::FramebufferSize) {
             int w = event.framebuffersize.width;
             int h = event.framebuffersize.height;
-            gl::Renderer::Viewport({0, 0, w, h});
+            glfw::SetViewport({0, 0, w, h});
         }
 
-        if ((event.type == gl::Renderer::Event::WindowClose) ||
-            (event.type == gl::Renderer::Event::Key &&
+        if ((event.type == glfw::Event::WindowClose) ||
+            (event.type == glfw::Event::Key &&
              event.key.code == GLFW_KEY_ESCAPE)) {
-            gl::Renderer::Close();
+            glfw::Close();
         }
 
         gSphere.Handle(event);
@@ -62,9 +62,9 @@ static void Update(void)
  */
 static void Render(void)
 {
-    gl::Renderer::ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.0f);
+    glfw::ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.0f);
     gSphere.Render();
-    gl::Renderer::SwapBuffers();
+    glfw::SwapBuffers();
 }
 
 /** ---------------------------------------------------------------------------
@@ -72,23 +72,20 @@ static void Render(void)
  */
 int main(int argc, char const *argv[])
 {
-    /* Setup OpenGL context and initialize the GLFW library. */
-    gl::Renderer::Init(kWidth, kHeight, kTitle);
-    gl::Renderer::EnableEvent(
-        gl::Renderer::Event::FramebufferSize |
-        gl::Renderer::Event::WindowClose     |
-        gl::Renderer::Event::Key);
+    /* Initalize GLFW library and create OpenGL context. */
+    glfw::Init(kWidth, kHeight, kTitle);
+    glfw::EnableEvent(
+        glfw::Event::FramebufferSize |
+        glfw::Event::WindowClose     |
+        glfw::Event::Key);
 
     /* Create the sphere object. */
     gSphere = Sphere::Create();
 
     /*
-     * Render loop:
-     *  handle events
-     *  update the state
-     *  draw and swap buffers
+     * Render loop: handle events, update state, and render.
      */
-    while (gl::Renderer::IsOpen()) {
+    while (glfw::IsOpen()) {
         Handle();
         Update();
         Render();

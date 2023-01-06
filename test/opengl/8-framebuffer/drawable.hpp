@@ -39,7 +39,7 @@ struct Drawable {
         GLuint id;                  /* framebuffer object id */
     } fbo;
 
-    void Handle(ito::gl::Renderer::Event &event);
+    void Handle(ito::glfw::Event &event);
     void Update(void);
     void Render(void);
 

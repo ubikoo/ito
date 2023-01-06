@@ -22,7 +22,7 @@ struct Triangle {
     std::vector<ito::math::vec3f> offset;   /* triangle offsets */
     ito::math::mat4f mvp;                   /* modelviewprojection */
 
-    void Handle(ito::gl::Renderer::Event &event);
+    void Handle(ito::glfw::Event &event);
     void Update(void);
     void Render(void);
 

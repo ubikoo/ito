@@ -40,7 +40,7 @@ struct Map {
         ito::gl::Mesh quad;
     } end;
 
-    void Handle(ito::gl::Renderer::Event &event);
+    void Handle(ito::glfw::Event &event);
     void Update(void);
     void Render(void);
 

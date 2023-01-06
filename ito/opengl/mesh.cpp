@@ -13,10 +13,10 @@
 #include <string>
 #include <vector>
 #include <cmath>       /* sin, cos */
-#include "../buffer.hpp"
-#include "../vertexarray.hpp"
-#include "../glsl/program.hpp"
-#include "../glsl/attribute.hpp"
+#include "buffer.hpp"
+#include "vertexarray.hpp"
+#include "glsl/program.hpp"
+#include "glsl/attribute.hpp"
 #include "mesh.hpp"
 
 namespace ito {

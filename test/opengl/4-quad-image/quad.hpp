@@ -21,7 +21,7 @@ struct Quad {
     GLuint texture;
     ito::math::mat4f mvp;           /* modelviewprojection */
 
-    void Handle(ito::gl::Renderer::Event &event);
+    void Handle(ito::glfw::Event &event);
     void Update(void);
     void Render(void);
 

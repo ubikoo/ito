@@ -146,7 +146,7 @@ void Drawable::Destroy(Drawable &drawable)
 /**
  * @brief Handle the event in the drawable.
  */
-void Drawable::Handle(gl::Renderer::Event &event)
+void Drawable::Handle(glfw::Event &event)
 {}
 
 /**
@@ -172,8 +172,9 @@ void Drawable::Update(void)
         math::vec4f dir_z = math::dot(m, math::vec4f{0.0f,0.0f,1.0f,1.0f});
         m = math::rotate(m, math::vec3f{dir_z.x, dir_z.y, dir_z.z}, ang_z);
 
-        std::array<GLfloat,2> fsize = gl::Renderer::FramebufferSizef();
-        float ratio = fsize[0] / fsize[1];
+        std::array<GLfloat,2> fbsize = {};
+        glfw::GetFramebufferSize(fbsize);
+        float ratio = fbsize[0] / fbsize[1];
 
         math::mat4f proj = math::ortho(-ratio, ratio, -1.0f, 1.0f, -1.0f, 1.0f);
         sphere.mvp = math::dot(proj, m);
@@ -201,7 +202,7 @@ void Drawable::Update(void)
  */
 void Drawable::Render(void)
 {
-    GLFWwindow *window = gl::Renderer::Window();
+    GLFWwindow *window = glfw::Window();
     if (window == nullptr) {
         return;
     }
@@ -220,9 +221,10 @@ void Drawable::Render(void)
     {
         /* Bind the framebuffer */
         glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo.id);
-        auto viewport = gl::Renderer::Viewport();
-        gl::Renderer::Viewport({0, 0, fbo.width, fbo.height});
-        gl::Renderer::ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.0f);
+        std::array<GLint, 4> viewport;
+        glfw::GetViewport(viewport);
+        glfw::SetViewport({0, 0, fbo.width, fbo.height});
+        glfw::ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.0f);
 
         /* Bind the sphere shader */
         glUseProgram(sphere.program);
@@ -247,21 +249,20 @@ void Drawable::Render(void)
 
         /* Unbind the framebuffer */
         glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
-        gl::Renderer::Viewport(viewport);
-        gl::Renderer::ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.0f);
+        glfw::SetViewport(viewport);
     }
 
     /*
      * Render into the window framebuffer
      */
     {
-        /* Get window dimensions. */
-        std::array<GLfloat,2> fsize = gl::Renderer::FramebufferSizef();
-
         /* Bind the quad shader */
         glUseProgram(quad.program);
-        // gl::SetUniform(quad.program, "u_width", GL_FLOAT, &fsize[0]);
-        // gl::SetUniform(quad.program, "u_height", GL_FLOAT, &fsize[0]);
+
+        // std::array<GLfloat,2> fbsize = {};
+        // glfw::GetFramebufferSize(fbsize);
+        // gl::SetUniform(quad.program, "u_width", GL_FLOAT, &fbsize[0]);
+        // gl::SetUniform(quad.program, "u_height", GL_FLOAT, &fbsize[0]);
         gl::SetUniformMatrix(quad.program, "u_mvp", GL_FLOAT_MAT4, true,
             quad.mvp.data);
 

@@ -12,6 +12,9 @@
 #ifndef ITO_OPENGL_BASE_H_
 #define ITO_OPENGL_BASE_H_
 
+#include "ito/core.hpp"
+#include "ito/math.hpp"
+
 /**
  * @brief Define GLFW_INCLUDE_NONE before the GLFW header to explicitly disable
  * inclusion of OpenGL environment header and use the header provided by glad.
@@ -20,18 +23,5 @@
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
-
-/**
- * @brief Asset importer interface, scene data structure and post process flags.
- */
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
-
-/**
- * @brief Core/Math interface.
- */
-#include "ito/core.hpp"
-#include "ito/math.hpp"
 
 #endif /* ITO_OPENGL_BASE_H_ */

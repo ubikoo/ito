@@ -127,7 +127,7 @@ void Triangle::Destroy(Triangle &triangle)
 /**
  * @brief Handle the event in the triangle.
  */
-void Triangle::Handle(gl::Renderer::Event &event)
+void Triangle::Handle(glfw::Event &event)
 {}
 
 /**
@@ -136,8 +136,9 @@ void Triangle::Handle(gl::Renderer::Event &event)
 void Triangle::Update(void)
 {
     /* Update the modelviewprojection matrix */
-    std::array<GLfloat,2> fsize = gl::Renderer::FramebufferSizef();
-    float ratio = fsize[0] / fsize[1];
+    std::array<GLfloat,2> fbsize = {};
+    glfw::GetFramebufferSize(fbsize);
+    float ratio = fbsize[0] / fbsize[1];
     float length = 0.5 * (float) mvp.size();
     math::mat4f project = math::ortho(
         -ratio*length, ratio*length,
@@ -175,7 +176,7 @@ void Triangle::Update(void)
  */
 void Triangle::Render(void)
 {
-    GLFWwindow *window = gl::Renderer::Window();
+    GLFWwindow *window = glfw::Window();
     if (window == nullptr) {
         return;
     }
@@ -196,9 +197,10 @@ void Triangle::Render(void)
     /* Get window dimensions and set corresponding uniforms. */
     glBindVertexArray(vao);
 
-    std::array<GLfloat,2> size = gl::Renderer::FramebufferSizef();
-    gl::SetUniform(program, "u_width", GL_FLOAT, &size[0]);
-    gl::SetUniform(program, "u_height", GL_FLOAT, &size[1]);
+    std::array<GLfloat,2> fbsize = {};
+    glfw::GetFramebufferSize(fbsize);
+    gl::SetUniform(program, "u_width", GL_FLOAT, &fbsize[0]);
+    gl::SetUniform(program, "u_height", GL_FLOAT, &fbsize[1]);
 
     for (auto &m : mvp) {
         gl::SetUniformMatrix(program, "u_mvp", GL_FLOAT_MAT4, true, m.data);

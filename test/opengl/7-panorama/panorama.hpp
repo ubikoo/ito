@@ -23,7 +23,7 @@ struct Panorama {
     Camera camera;              /* panorama camera and projection matrix */
     ito::math::mat4f mvp;
 
-    void Handle(ito::gl::Renderer::Event &event);
+    void Handle(ito::glfw::Event &event);
     void Update(void);
     void Render(void);
 

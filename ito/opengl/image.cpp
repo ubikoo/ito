@@ -18,7 +18,7 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb/stb_image_write.h"
 #include "image.hpp"
-#include "../texture.hpp"
+#include "texture.hpp"
 
 namespace ito {
 namespace gl {

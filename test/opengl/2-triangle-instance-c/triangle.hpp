@@ -26,7 +26,7 @@ struct Triangle {
         GLuint vbo;
     } offset;
 
-    void Handle(ito::gl::Renderer::Event &event);
+    void Handle(ito::glfw::Event &event);
     void Update(void);
     void Render(void);
 

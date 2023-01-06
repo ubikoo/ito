@@ -45,8 +45,13 @@
  *      https://www.khronos.org/opengl/wiki/Common_Mistakes
  */
 #include "opengl/base.hpp"
+#include "opengl/glfw.hpp"
 #include "opengl/error.hpp"
+#include "opengl/image.hpp"
 #include "opengl/imageformat.hpp"
+#include "opengl/mesh.hpp"
+#include "opengl/timer.hpp"
+
 #include "opengl/buffer.hpp"
 #include "opengl/framebuffer.hpp"
 #include "opengl/renderbuffer.hpp"
@@ -58,10 +63,5 @@
 #include "opengl/glsl/shader.hpp"
 #include "opengl/glsl/uniform.hpp"
 #include "opengl/glsl/variable.hpp"
-
-#include "opengl/graphics/renderer.hpp"
-#include "opengl/graphics/image.hpp"
-#include "opengl/graphics/mesh.hpp"
-#include "opengl/graphics/timer.hpp"
 
 #endif /* ITO_OPENGL_H_ */

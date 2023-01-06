@@ -26,58 +26,58 @@ static const double kTimeout = 0.001;
 static void Handle(void)
 {
     /* Poll events and handle. */
-    gl::Renderer::PollEvent(kTimeout);
-    while (gl::Renderer::HasEvent()) {
-        gl::Renderer::Event event = gl::Renderer::PopEvent();
+    glfw::PollEvent(kTimeout);
+    while (glfw::HasEvent()) {
+        glfw::Event event = glfw::PopEvent();
 
-        if (event.type == gl::Renderer::Event::FramebufferSize) {
+        if (event.type == glfw::Event::FramebufferSize) {
             int w = event.framebuffersize.width;
             int h = event.framebuffersize.height;
-            gl::Renderer::Viewport({0, 0, w, h});
+            glfw::SetViewport({0, 0, w, h});
         }
 
-        if ((event.type == gl::Renderer::Event::WindowClose) ||
-            (event.type == gl::Renderer::Event::Key &&
+        if ((event.type == glfw::Event::WindowClose) ||
+            (event.type == glfw::Event::Key &&
              event.key.code == GLFW_KEY_ESCAPE)) {
-            gl::Renderer::Close();
+            glfw::Close();
         }
 
-        if (event.type == gl::Renderer::Event::FramebufferSize) {
+        if (event.type == glfw::Event::FramebufferSize) {
             std::cout << ito::str::to_string(
                 "FramebufferSize ",
                 event.framebuffersize.width, " ",
                 event.framebuffersize.height, "\n");
             int w = event.framebuffersize.width;
             int h = event.framebuffersize.height;
-            gl::Renderer::Viewport({0, 0, w, h});
+            glfw::SetViewport({0, 0, w, h});
         }
 
-        if (event.type == gl::Renderer::Event::WindowPos) {
+        if (event.type == glfw::Event::WindowPos) {
             std::cout << ito::str::to_string(
                 "WindowPos ",
                 event.windowpos.xpos, " ",
                 event.windowpos.ypos, "\n");
         }
 
-        if (event.type == gl::Renderer::Event::WindowSize) {
+        if (event.type == glfw::Event::WindowSize) {
             std::cout << ito::str::to_string(
                 "WindowSize ",
                 event.windowsize.width, " ",
                 event.windowsize.height, "\n");
         }
 
-        if (event.type == gl::Renderer::Event::WindowClose) {
+        if (event.type == glfw::Event::WindowClose) {
             std::cout << ito::str::to_string(
                 "WindowClose\n");
         }
 
-        if (event.type == gl::Renderer::Event::WindowMaximize) {
+        if (event.type == glfw::Event::WindowMaximize) {
             std::cout << ito::str::to_string(
                 "WindowMaximize ",
                 event.windowmaximize.iconified, "\n");
         }
 
-        if (event.type == gl::Renderer::Event::Key) {
+        if (event.type == glfw::Event::Key) {
             std::cout << ito::str::to_string(
                 "Key ",
                 event.key.code, " ",
@@ -86,20 +86,20 @@ static void Handle(void)
                 event.key.mods, "\n");
         }
 
-        if (event.type == gl::Renderer::Event::CursorEnter) {
+        if (event.type == glfw::Event::CursorEnter) {
             std::cout << ito::str::to_string(
                 "CursorEnter ",
                 event.cursorenter.entered, "\n");
         }
 
-        if (event.type == gl::Renderer::Event::CursorPos) {
+        if (event.type == glfw::Event::CursorPos) {
             std::cout << ito::str::to_string(
                 "CursorPos ",
                 event.cursorpos.xpos, " ",
                 event.cursorpos.ypos, "\n");
         }
 
-        if (event.type == gl::Renderer::Event::MouseButton) {
+        if (event.type == glfw::Event::MouseButton) {
             std::cout << ito::str::to_string(
                 "MouseButton ",
                 event.mousebutton.button, " ",
@@ -107,7 +107,7 @@ static void Handle(void)
                 event.mousebutton.mods, "\n");
         }
 
-        if (event.type == gl::Renderer::Event::MouseScroll) {
+        if (event.type == glfw::Event::MouseScroll) {
             std::cout << ito::str::to_string(
                 "MouseScroll ",
                 event.mousescroll.xoffset, " ",
@@ -127,8 +127,8 @@ static void Update(void)
  */
 static void Render(void)
 {
-    gl::Renderer::ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.0f);
-    gl::Renderer::SwapBuffers();
+    glfw::ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.0f);
+    glfw::SwapBuffers();
 }
 
 /** ---------------------------------------------------------------------------
@@ -136,17 +136,14 @@ static void Render(void)
  */
 int main(int argc, char const *argv[])
 {
-    /* Setup OpenGL context and initialize the GLFW library. */
-    gl::Renderer::Init(kWidth, kHeight, kTitle);
-    gl::Renderer::EnableEvent(gl::Renderer::Event::All);
+    /* Initalize GLFW library and create OpenGL context. */
+    glfw::Init(kWidth, kHeight, kTitle);
+    glfw::EnableEvent(glfw::Event::All);
 
     /*
-     * Render loop:
-     *  handle events
-     *  update the state
-     *  draw and swap buffers
+     * Render loop: handle events, update state, and render.
      */
-    while (gl::Renderer::IsOpen()) {
+    while (glfw::IsOpen()) {
         Handle();
         Update();
         Render();

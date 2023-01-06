@@ -155,9 +155,9 @@ void Map::Destroy(Map &map)
 /**
  * @brief Handle the event in the map.
  */
-void Map::Handle(gl::Renderer::Event &event)
+void Map::Handle(glfw::Event &event)
 {
-    using gl::Renderer::Event;
+    using glfw::Event;
 
     if (event.type == Event::Key && event.key.code == GLFW_KEY_UP) {
         run.iterations++;
@@ -183,7 +183,7 @@ void Map::Update(void)
  */
 void Map::Render(void)
 {
-    GLFWwindow *window = gl::Renderer::Window();
+    GLFWwindow *window = glfw::Window();
     if (window == nullptr) {
         return;
     }
@@ -207,9 +207,10 @@ void Map::Render(void)
 
         /* Bind the framebuffer for writing */
         run.buffer[run.write_ix].bind();
-        auto viewport = gl::Renderer::Viewport();
-        gl::Renderer::Viewport({0, 0, kWidth, kHeight});
-        gl::Renderer::ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.0f);
+        std::array<GLint, 4> viewport;
+        glfw::GetViewport(viewport);
+        glfw::SetViewport({0, 0, kWidth, kHeight});
+        glfw::ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.0f);
 
         /* Bind the begin shader */
         glUseProgram(begin.program);
@@ -228,8 +229,7 @@ void Map::Render(void)
 
         /* Unbind the framebuffer */
         run.buffer[run.write_ix].unbind();
-        gl::Renderer::Viewport(viewport);
-        gl::Renderer::ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.0f);
+        glfw::SetViewport(viewport);
     }
 
     /*
@@ -241,9 +241,10 @@ void Map::Render(void)
 
         /* Bind the framebuffer for writing */
         run.buffer[run.write_ix].bind();
-        auto viewport = gl::Renderer::Viewport();
-        gl::Renderer::Viewport({0, 0, kWidth, kHeight});
-        gl::Renderer::ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.0f);
+        std::array<GLint, 4> viewport;
+        glfw::GetViewport(viewport);
+        glfw::SetViewport({0, 0, kWidth, kHeight});
+        glfw::ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.0f);
 
         /* Bind the begin shader */
         glUseProgram(run.program);
@@ -262,8 +263,7 @@ void Map::Render(void)
 
         /* Unbind the framebuffer */
         run.buffer[run.write_ix].unbind();
-        gl::Renderer::Viewport(viewport);
-        gl::Renderer::ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.0f);
+        glfw::SetViewport(viewport);
     }
 
     /*

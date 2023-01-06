@@ -20,7 +20,7 @@ struct Bunny {
     std::vector<ito::gl::Mesh> model;       /* bunny model */
     ito::math::mat4f mvp;                   /* modelviewprojection */
 
-    void Handle(ito::gl::Renderer::Event &event);
+    void Handle(ito::glfw::Event &event);
     void Update(void);
     void Render(void);
 

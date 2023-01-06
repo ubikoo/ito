@@ -19,7 +19,7 @@ struct Triangle {
     GLuint vao;           /* vertex array object */
     GLuint vbo;           /* vertex buffer object */
 
-    void Handle(ito::gl::Renderer::Event &event);
+    void Handle(ito::glfw::Event &event);
     void Update(void);
     void Render(void);
 

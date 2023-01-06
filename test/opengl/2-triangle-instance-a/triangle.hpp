@@ -21,7 +21,7 @@ struct Triangle {
     GLuint vbo;                         /* vertex buffer object */
     std::vector<ito::math::mat4f> mvp;  /* mvp matrices of each triangle */
 
-    void Handle(ito::gl::Renderer::Event &event);
+    void Handle(ito::glfw::Event &event);
     void Update(void);
     void Render(void);
 

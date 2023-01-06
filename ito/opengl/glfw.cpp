@@ -1,5 +1,5 @@
 /*
- * renderer.cpp
+ * glfw.cpp
  *
  * Copyright (c) 2020 Carlos Braga
  *
@@ -10,29 +10,29 @@
  */
 
 #include <queue>
-#include "renderer.hpp"
+#include "glfw.hpp"
 
 /** ---------------------------------------------------------------------------
- * @brief Interface to a static GLFWwindow and its associated OpenGL context.
- * It provides a means of issuing OpenGL commands and of handling GLFW events.
- * The renderer maintains the GLFWwindow object and its queue of events.
- * The GLFW library needs to be initialized and terminated using the renderer
- * corresponding functions.
+ * @brief Interface to the GLFW library and associated GL context. It maintains
+ * a GLFWwindow object and its queue of events. The GLFW library is initialized
+ * when GLFWwindow is created and terminated when GLFWwindow is destroyed.
  *
  * @see https://stackoverflow.com/questions/29617370
  *      https://stackoverflow.com/questions/35683334
  *      https://stackoverflow.com/questions/7676971
  *      https://discourse.glfw.org/t/what-is-a-possible-use-of-glfwgetwindowuserpointer/1294
- *      https://isocpp.org/wiki/faq/pointers-to-members#memfnptr-vs-fnptr
  */
+
 namespace ito {
-namespace gl {
-namespace Renderer {
+namespace glfw {
 
 static GLFWwindow *gWindow = nullptr;
 static std::queue<Event> gEventQueue;
+static int gWidth = 0;
+static int gHeight = 0;
+static std::string gInfoString;
 
-/**
+/** ---------------------------------------------------------------------------
  * @brief Error callback function:
  *  glfwSetErrorCallback(GLFWerrorfun cbfun)
  *  typedef void(* GLFWerrorfun)(int, const char *);
@@ -44,14 +44,11 @@ static void ErrorCallback(int code, const char *desc)
 
 /**
  * @brief Renderer framebuffer resize callback function:
- *  glfwSetFramebufferSizeCallback(
- *      GLFWwindow *window, GLFWframebuffersizefun cbfun)
+ *  glfwSetFramebufferSizeCallback(GLFWwindow *window,
+ *      GLFWframebuffersizefun cbfun)
  *  typedef void(* GLFWframebuffersizefun)(GLFWwindow *, int, int)
  */
-static void FramebufferSizeCallback(
-    GLFWwindow *window,
-    int width,
-    int height)
+static void FramebufferSizeCallback(GLFWwindow *window, int width, int height)
 {
     Event event(Event::FramebufferSize);
     event.framebuffersize = {width, height};
@@ -75,10 +72,7 @@ static void WindowPosCallback(GLFWwindow *window, int xpos, int ypos)
  *  glfwSetWindowSizeCallback(GLFWwindow *window, GLFWwindowsizefun cbfun)
  *  typedef void(* GLFWwindowsizefun)(GLFWwindow *, int, int)
  */
-static void WindowSizeCallback(
-    GLFWwindow *window,
-    int width,
-    int height)
+static void WindowSizeCallback(GLFWwindow *window, int width, int height)
 {
     Event event(Event::WindowSize);
     event.windowsize = {width, height};
@@ -98,8 +92,8 @@ static void WindowCloseCallback(GLFWwindow *window)
 
 /**
  * @brief Renderer maximize callback function:
- *  glfwSetWindowMaximizeCallback(
- *      GLFWwindow *window, GLFWwindowmaximizefun cbfun)
+ *  glfwSetWindowMaximizeCallback(GLFWwindow *window,
+ *      GLFWwindowmaximizefun cbfun)
  *  typedef void(* GLFWwindowmaximizefun)(GLFWwindow *, int)
  */
 static void WindowMaximizeCallback(GLFWwindow *window, int iconified)
@@ -114,12 +108,8 @@ static void WindowMaximizeCallback(GLFWwindow *window, int iconified)
  *  glfwSetKeyCallback(GLFWwindow *window, GLFWkeyfun cbfun)
  *  typedef void(* GLFWkeyfun)(GLFWwindow *, int, int, int, int)
  */
-static void KeyCallback(
-    GLFWwindow *window,
-    int code,
-    int scancode,
-    int action,
-    int mods)
+static void KeyCallback(GLFWwindow *window,
+    int code, int scancode, int action, int mods)
 {
     Event event(Event::Key);
     event.key = {code, scancode, action, mods};
@@ -143,10 +133,7 @@ static void CursorEnterCallback(GLFWwindow *window, int entered)
  *  glfwSetCursorPosCallback(GLFWwindow *window, GLFWcursorposfun cbfun)
  *  typedef void(* GLFWcursorposfun)(GLFWwindow *, double, double)
  */
-static void CursorPosCallback(
-    GLFWwindow *window,
-    double xpos,
-    double ypos)
+static void CursorPosCallback(GLFWwindow *window, double xpos, double ypos)
 {
     Event event(Event::CursorPos);
     event.cursorpos = {xpos, ypos};
@@ -158,11 +145,8 @@ static void CursorPosCallback(
  *  glfwSetMouseButtonCallback(GLFWwindow *window, GLFWmousebuttonfun cbfun)
  *  typedef void(* GLFWmousebuttonfun)(GLFWwindow *, int, int, int)
  */
-static void MouseButtonCallback(
-    GLFWwindow *window,
-    int button,
-    int action,
-    int mods)
+static void MouseButtonCallback(GLFWwindow *window,
+    int button, int action, int mods)
 {
     Event event(Event::MouseButton);
     event.mousebutton = {button, action, mods};
@@ -174,17 +158,15 @@ static void MouseButtonCallback(
  *  glfwSetScrollCallback(GLFWwindow *window, GLFWscrollfun cbfun)
  *  typedef void(* GLFWscrollfun)(GLFWwindow *, double, double)
  */
-static void MouseScrollCallback(
-    GLFWwindow *window,
-    double xoffset,
-    double yoffset)
+static void MouseScrollCallback(GLFWwindow *window,
+    double xoffset, double yoffset)
 {
     Event event(Event::MouseScroll);
     event.mousescroll = {xoffset, yoffset};
     gEventQueue.push(event);
 }
 
-/**
+/** ---------------------------------------------------------------------------
  * @brief Initialize the GLFW library and create a GLFW window.
  */
 void Init(
@@ -253,38 +235,40 @@ void Init(
     glfwSwapInterval(1);
 
     /*
-     * Set OpenGL viewport defined as the affine transform from normalized
-     * device coordinates to screen coordinate space.
+     * Set OpenGL viewport.
      */
-    int w, h;
-    glfwGetFramebufferSize(gWindow, &w, &h);
-    glViewport(0, 0, w, h);
+    glfwGetFramebufferSize(gWindow, &gWidth, &gHeight);
+    glViewport(0, 0, gWidth, gHeight);
 
     /*
-     * Return a string with the following format:
+     * Store a info string with the following format:
      *  the version of GLFW,
      *  the name of the renderer system API,
      *  the name of the context creation API,
      *  any additional options or APIs.
      */
-    std::cout << ito::str::format(
-        "GLFW version: %s\nOpenGL renderer: %s\nOpenGL version: %s\n",
+    gInfoString = ito::str::format(
+        "GLFW version: %s\nOpenGL Renderer: %s\nOpenGL Version: %s\n",
         glfwGetVersionString(),
         glGetString(GL_RENDERER),
         glGetString(GL_VERSION));
 }
 
 /**
- * @brief Destroy the renderer and terminate the GLFW library.
+ * @brief Destroy the GLFWwindow object and terminate the GLFW library.
  */
 void Terminate(void)
 {
     glfwDestroyWindow(gWindow);
     glfwTerminate();
+    gWindow = nullptr;
+    gWidth = 0;
+    gHeight = 0;
+    gInfoString = {};
 }
 
 /**
- * @brief Return a const pointer to the renderer GLFWwindow object.
+ * @brief Return a pointer to the GLFWwindow object.
  */
 GLFWwindow *Window(void)
 {
@@ -292,7 +276,7 @@ GLFWwindow *Window(void)
 }
 
 /**
- * @brief Is the closed status flag of the renderer window false?
+ * @brief Return true GLFWwindow should stay open, false otherwise.
  */
 bool IsOpen(void)
 {
@@ -300,7 +284,7 @@ bool IsOpen(void)
 }
 
 /**
- * @brief Set the closed status flag of the renderer window.
+ * @brief Set the closed status flag of the GLFWwindow.
  */
 void Close(void)
 {
@@ -308,9 +292,7 @@ void Close(void)
 }
 
 /**
- * @brief Swap the front and back buffers of the renderer window. If the swap
- * interval is greater than zero, the GPU driver waits the specified number of
- * screen updates before swapping the buffers.
+ * @brief Swap the front and back buffers of the GLFWwindow.
  */
 void SwapBuffers(void)
 {
@@ -333,22 +315,20 @@ void ClearBuffers(
 }
 
 /**
- * @brief Get the renderer viewport position, width and height.
+ * @brief Get the window viewport position, width and height.
  */
-std::array<GLint, 4> Viewport(void)
+void GetViewport(std::array<GLint, 4> &viewport)
 {
-    std::array<GLint, 4> viewport;
     glGetIntegerv(GL_VIEWPORT, viewport.data());
-    return viewport;
 }
 
 /**
- * @brief Set the renderer viewport x-position, y-position, width and height.
- * @param viewport: array specifying the elements (x, y, w, h); (x, y) specify
- * the lower left corner of the viewport rectangle, initial value is (0, 0);
- * (w, h) specify the rectangle size, initial value is the window size.
+ * @brief Set the window viewport position, width and height.
+ * @param viewport: array specifying the elements (x, y, w, h).
+ * (x, y) specify the lower left corner of the viewport rectangle.
+ * (w, h) specify the viewport rectangle size.
  */
-void Viewport(const std::array<GLint, 4> &viewport)
+void SetViewport(const std::array<GLint, 4> &viewport)
 {
     glViewport(viewport[0], viewport[1], viewport[2], viewport[3]);
 }
@@ -356,23 +336,20 @@ void Viewport(const std::array<GLint, 4> &viewport)
 /**
  * @brief Get the renderer framebuffer size.
  */
-std::array<GLint,2> FramebufferSizei(void)
+void GetFramebufferSize(std::array<GLint,2> &size)
+{
+    glfwGetFramebufferSize(gWindow, &size[0], &size[1]);
+}
+
+void GetFramebufferSize(std::array<GLfloat,2> &size)
 {
     int width, height;
     glfwGetFramebufferSize(gWindow, &width, &height);
-    return std::array<GLint,2>{width, height};
+    size[0] = width;
+    size[1] = height;
 }
 
-/**
- * @brief Get the renderer framebuffer size.
- */
-std::array<GLfloat,2> FramebufferSizef(void)
-{
-    std::array<GLint,2> sizei = FramebufferSizei();
-    return std::array<GLfloat,2>{(GLfloat) sizei[0], (GLfloat) sizei[1]};
-}
-
-/** ---- Renderer event API ---------------------------------------------------
+/** ---------------------------------------------------------------------------
  * @brief Does the queue have any events to be processed?
  */
 bool HasEvent(void)
@@ -409,10 +386,10 @@ Event PopEvent(void)
 }
 
 /**
- * @brief Define the renderer event callback static functions. For each event
- * enabled in the renderer, there is an associated static callback function.
- * The callback is responsible to store the event data in the renderer event
- * queue. Two types of events are recognised here:
+ * @brief Define the event callback functions. For each event enabled in the
+ * GLFWwindow, there is an associated static callback function. The callback
+ * is responsible to store the event data in the renderer event* queue.
+ * There are two types of events recognised here:
  *  - window events(position, size, etc)
  *  - input events(key, cursor movement, mouse buttons, etc)
  *
@@ -660,6 +637,5 @@ void DisableEvent(const GLenum mask)
 #undef GlfwVersionError
 #endif
 
-} /* Renderer */
-} /* gl */
+} /* glfw */
 } /* ito */

@@ -88,7 +88,7 @@ void Sphere::Destroy(Sphere &sphere)
 /**
  * @brief Handle the event in the sphere.
  */
-void Sphere::Handle(gl::Renderer::Event &event)
+void Sphere::Handle(glfw::Event &event)
 {}
 
 /**
@@ -108,8 +108,9 @@ void Sphere::Update(void)
     math::vec4f dir_z = math::dot(m, math::vec4f{0.0, 0.0, 1.0, 1.0});
     m = math::rotate(m, math::vec3f{dir_z.x, dir_z.y, dir_z.z}, 0.8f*time);
 
-    std::array<GLfloat,2> fsize = gl::Renderer::FramebufferSizef();
-    float ratio = fsize[0] / fsize[1];
+    std::array<GLfloat,2> fbsize = {};
+    glfw::GetFramebufferSize(fbsize);
+    float ratio = fbsize[0] / fbsize[1];
 
     math::mat4f p = math::ortho(-ratio, ratio, -1.0f, 1.0f, 0.1f, 1.0f);
     mvp = math::dot(p, m);
@@ -120,7 +121,7 @@ void Sphere::Update(void)
  */
 void Sphere::Render(void)
 {
-    GLFWwindow *window = gl::Renderer::Window();
+    GLFWwindow *window = glfw::Window();
     if (window == nullptr) {
         return;
     }
@@ -139,9 +140,10 @@ void Sphere::Render(void)
     glUseProgram(program);
 
     /* Set window dimensions. */
-    std::array<GLfloat,2> fsize = gl::Renderer::FramebufferSizef();
-    gl::SetUniform(program, "u_width", GL_FLOAT, &fsize[0]);
-    gl::SetUniform(program, "u_height", GL_FLOAT, &fsize[1]);
+    std::array<GLfloat,2> fbsize = {};
+    glfw::GetFramebufferSize(fbsize);
+    gl::SetUniform(program, "u_width", GL_FLOAT, &fbsize[0]);
+    gl::SetUniform(program, "u_height", GL_FLOAT, &fbsize[1]);
     gl::SetUniformMatrix(program, "u_mvp", GL_FLOAT_MAT4, true, mvp.data);
 
     /* Set the sampler uniform with the texture unit and bind the texture */

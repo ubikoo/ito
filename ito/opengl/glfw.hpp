@@ -1,5 +1,5 @@
 /*
- * renderer.hpp
+ * glfw.hpp
  *
  * Copyright (c) 2020 Carlos Braga
  *
@@ -9,15 +9,14 @@
  * See accompanying LICENSE.md or https://opensource.org/licenses/MIT.
  */
 
-#ifndef ITO_OPENGL_GRAPHICS_RENDERER_H_
-#define ITO_OPENGL_GRAPHICS_RENDERER_H_
+#ifndef ITO_OPENGL_GLFW_H_
+#define ITO_OPENGL_GLFW_H_
 
 #include <array>
-#include "../base.hpp"
+#include "base.hpp"
 
 namespace ito {
-namespace gl {
-namespace Renderer {
+namespace glfw {
 
 /** ---------------------------------------------------------------------------
  * @brief Initialize the GLFW library and create a GLFW window.
@@ -29,34 +28,22 @@ void Init(
     const int major = 3,
     const int minor = 3);
 
-/**
- * @brief Destroy the renderer and terminate the GLFW library.
- */
+/** @brief Destroy the GLFWwindow object and terminate the GLFW library. */
 void Terminate(void);
 
-/**
- * @brief Return a pointer to the GLFWwindow object.
- */
+/** @brief Return a const pointer to the GLFWwindow. */
 GLFWwindow *Window(void);
 
-/**
- * @brief Is the closed flag of the renderer window false?
- */
+/** @brief Return true GLFWwindow should stay open, false otherwise. */
 bool IsOpen(void);
 
-/**
- * @brief Set the closed flag of the renderer window.
- */
+/** @brief Set the closed status flag of the GLFWwindow. */
 void Close(void);
 
-/**
- * @brief Swap the front and back buffers of the renderer window.
- */
+/** @brief Swap the front and back buffers of the GLFWwindow. */
 void SwapBuffers(void);
 
-/**
- * @brief Clear OpenGL color and depth buffers.
- */
+/** @brief Clear OpenGL color and depth buffers. */
 void ClearBuffers(
     GLfloat red,
     GLfloat green,
@@ -64,31 +51,21 @@ void ClearBuffers(
     GLfloat alpha,
     GLdouble depth);
 
-/**
- * @brief Get the renderer viewport position, width and height.
- */
-std::array<GLint, 4> Viewport(void);
+/** @brief Get the window viewport position, width and height. */
+void GetViewport(std::array<GLint, 4> &viewport);
 
-/**
- * @brief Set the renderer viewport x-position, y-position, width and height.
- */
-void Viewport(const std::array<GLint, 4> &viewport);
+/** @brief Set the window viewport position, width and height. */
+void SetViewport(const std::array<GLint, 4> &viewport);
 
-/**
- * @brief Get the renderer framebuffer size.
- */
-std::array<GLint,2> FramebufferSizei(void);
+/** @brief Get the renderer framebuffer size. */
+void GetFramebufferSize(std::array<GLint,2> &size);
+void GetFramebufferSize(std::array<GLfloat,2> &size);
 
-/**
- * @brief Get the renderer framebuffer size.
- */
-std::array<GLfloat,2> FramebufferSizef(void);
-
-/** ----- Renderer Event API --------------------------------------------------
+/** -------------------------------------------------------------------------
  * @brief Event is a union of structs representing different renderer events.
- * Given an Event object, the valid member struct is the one that corresponds
- * to the event specified by the type member variable. Trying to read another
- * member results in undefined behaviour.
+ * Given an Event object, the valid struct is the one that corresponds to the
+ * type member variable. Trying to read another struct results iin undefined
+ * behaviour.
  */
 struct Event {
     /** Event enumerated type. */
@@ -195,9 +172,7 @@ struct Event {
     Event &operator=(const Event &other);
 };
 
-/**
- * @brief Event copy constructor.
- */
+/** @brief Event copy constructor. */
 inline Event::Event(const Event &other)
 {
     /* Copy event type and event data. */
@@ -236,9 +211,7 @@ inline Event::Event(const Event &other)
     }
 }
 
-/**
- * @brief Event copy assignment.
- */
+/** @brief Event copy assignment. */
 inline Event &Event::operator=(const Event &other)
 {
     if (this == &other) {
@@ -283,9 +256,7 @@ inline Event &Event::operator=(const Event &other)
     return *this;
 }
 
-/**
- * @brief Event bitwise unary NOT and binary AND, OR and XOR operators.
- */
+/** @brief Event bitwise unary NOT and binary AND, OR and XOR operators. */
 inline GLenum operator~(Event lhs) { return ~(lhs.type); }
 
 inline GLenum operator&(Event lhs, const GLenum &rhs) { return (lhs &= rhs); }
@@ -296,38 +267,25 @@ inline GLenum operator&(Event lhs, const Event &rhs) { return (lhs &= rhs.type);
 inline GLenum operator|(Event lhs, const Event &rhs) { return (lhs |= rhs.type); }
 inline GLenum operator^(Event lhs, const Event &rhs) { return (lhs ^= rhs.type); }
 
-/**
- * @brief Does the queue have any events to be processed?
- */
+/** @brief Does the queue have any events to be processed? */
 bool HasEvent(void);
 
-/**
- * @brief Poll events until the specified timeout is reached.
- */
+/** @brief Poll events until the specified timeout is reached. */
 void PollEvent(double timeout);
 
-/**
- * @brief Add an event to the renderer event queue.
- */
+/** @brief Add an event to the renderer event queue. */
 void PushEvent(const Event &event);
 
-/**
- * @brief Get the top event from the renderer event queue.
- */
+/** @brief Get the top event from the renderer event queue. */
 Event PopEvent(void);
 
-/**
- * @brief Enable a collection of events in the renderer.
- */
+/** @brief Enable a collection of events in the renderer. */
 void EnableEvent(const GLenum mask);
 
-/**
- * @brief Disable a collection of events in the renderer.
- */
+/** @brief Disable a collection of events in the renderer. */
 void DisableEvent(const GLenum mask);
 
-} /* Renderer */
-} /* gl */
+} /* glfw */
 } /* ito */
 
-#endif /* ITO_OPENGL_GRAPHICS_RENDERER_H_ */
+#endif /* ITO_OPENGL_GLFW_H_ */

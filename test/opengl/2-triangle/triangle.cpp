@@ -115,7 +115,7 @@ void Triangle::Destroy(Triangle &triangle)
 /**
  * @brief Handle the event in the triangle.
  */
-void Triangle::Handle(gl::Renderer::Event &event)
+void Triangle::Handle(glfw::Event &event)
 {}
 
 /**
@@ -129,7 +129,7 @@ void Triangle::Update(void)
  */
 void Triangle::Render(void)
 {
-    GLFWwindow *window = gl::Renderer::Window();
+    GLFWwindow *window = glfw::Window();
     if (window == nullptr) {
         return;
     }
@@ -150,9 +150,10 @@ void Triangle::Render(void)
     /* Get window dimensions and set corresponding uniforms. */
     glBindVertexArray(vao);
 
-    std::array<GLfloat,2> fsize = gl::Renderer::FramebufferSizef();
-    gl::SetUniform(program, "u_width", GL_FLOAT, &fsize[0]);
-    gl::SetUniform(program, "u_height", GL_FLOAT, &fsize[1]);
+    std::array<GLfloat,2> fbsize = {};
+    glfw::GetFramebufferSize(fbsize);
+    gl::SetUniform(program, "u_width", GL_FLOAT, &fbsize[0]);
+    gl::SetUniform(program, "u_height", GL_FLOAT, &fbsize[1]);
 
     glDrawArrays(
         GL_TRIANGLES,           /* what kind of primitives to render */

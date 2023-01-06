@@ -97,9 +97,9 @@ void Panorama::Destroy(Panorama &panorama)
 /**
  * @brief Handle the event in the panorama.
  */
-void Panorama::Handle(gl::Renderer::Event &event)
+void Panorama::Handle(glfw::Event &event)
 {
-    using gl::Renderer::Event;
+    using glfw::Event;
     static const float speed = 0.01f;
     static const float step = 10.0f;
 
@@ -142,9 +142,10 @@ void Panorama::Handle(gl::Renderer::Event &event)
 void Panorama::Update(void)
 {
     /* Update the panorama camera */
-    std::array<GLfloat,2> fsize = gl::Renderer::FramebufferSizef();
+    std::array<GLfloat,2> fbsize = {};
+    glfw::GetFramebufferSize(fbsize);
     const float fovy = 0.5*M_PI;
-    const float aspect = fsize[0] / fsize[1];
+    const float aspect = fbsize[0] / fbsize[1];
     const float znear = 0.1f;
     const float zfar = 10.0f;
     math::mat4f proj = math::perspective(fovy, aspect, znear, zfar);
@@ -157,7 +158,7 @@ void Panorama::Update(void)
  */
 void Panorama::Render(void)
 {
-    GLFWwindow *window = gl::Renderer::Window();
+    GLFWwindow *window = glfw::Window();
     if (window == nullptr) {
         return;
     }
@@ -176,9 +177,10 @@ void Panorama::Render(void)
     glUseProgram(program);
 
     /* Set window dimensions. */
-    std::array<GLfloat,2> fsize = gl::Renderer::FramebufferSizef();
-    gl::SetUniform(program, "u_width", GL_FLOAT, &fsize[0]);
-    gl::SetUniform(program, "u_height", GL_FLOAT, &fsize[1]);
+    std::array<GLfloat,2> fbsize = {};
+    glfw::GetFramebufferSize(fbsize);
+    gl::SetUniform(program, "u_width", GL_FLOAT, &fbsize[0]);
+    gl::SetUniform(program, "u_height", GL_FLOAT, &fbsize[1]);
     gl::SetUniformMatrix(program, "u_mvp", GL_FLOAT_MAT4, true, mvp.data);
 
     /* Set the sampler uniform with the texture unit and bind the texture */

@@ -161,7 +161,7 @@ void Triangle::Destroy(Triangle &triangle)
 /**
  * @brief Handle the event in the triangle.
  */
-void Triangle::Handle(gl::Renderer::Event &event)
+void Triangle::Handle(glfw::Event &event)
 {}
 
 /**
@@ -181,8 +181,9 @@ void Triangle::Update(void)
     m = math::rotate(m, math::vec3f{1.0f, 0.0f, 0.0f}, ang_x);
     m = math::scale(m, math::vec3f::ones);
 
-    std::array<GLfloat,2> fsize = gl::Renderer::FramebufferSizef();
-    float ratio = fsize[0] / fsize[1];
+    std::array<GLfloat,2> fbsize = {};
+    glfw::GetFramebufferSize(fbsize);
+    float ratio = fbsize[0] / fbsize[1];
     math::mat4f p = math::ortho(-ratio, ratio, -1.0f, 1.0f, -1.0f, 1.0f);
     mvp = math::dot(p, m);
 }
@@ -192,7 +193,7 @@ void Triangle::Update(void)
  */
 void Triangle::Render(void)
 {
-    GLFWwindow *window = gl::Renderer::Window();
+    GLFWwindow *window = glfw::Window();
     if (window == nullptr) {
         return;
     }

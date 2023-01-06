@@ -9,12 +9,17 @@
  * See accompanying LICENSE.md or https://opensource.org/licenses/MIT.
  */
 
-#ifndef ITO_OPENGL_GRAPHICS_MESH_H_
-#define ITO_OPENGL_GRAPHICS_MESH_H_
+#ifndef ITO_OPENGL_MESH_H_
+#define ITO_OPENGL_MESH_H_
+
+/** Assimp interface, scene data structure and post process flags. */
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
 
 #include <string>
 #include <vector>
-#include "../base.hpp"
+#include "base.hpp"
 
 namespace ito {
 namespace gl {
@@ -180,4 +185,4 @@ struct Mesh {
 } /* gl */
 } /* ito */
 
-#endif /* ITO_OPENGL_GRAPHICS_MESH_H_ */
+#endif /* ITO_OPENGL_MESH_H_ */

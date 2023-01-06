@@ -9,10 +9,11 @@
  * See accompanying LICENSE.md or https://opensource.org/licenses/MIT.
  */
 
-#ifndef ITO_OPENGL_GRAPHICS_TIMER_H_
-#define ITO_OPENGL_GRAPHICS_TIMER_H_
+#ifndef ITO_OPENGL_TIMER_H_
+#define ITO_OPENGL_TIMER_H_
 
-#include "../base.hpp"
+#include "base.hpp"
+#include "glfw.hpp"
 
 namespace ito {
 namespace gl {
@@ -54,4 +55,4 @@ struct Timer {
 } /* gl */
 } /* ito */
 
-#endif /* ITO_OPENGL_GRAPHICS_TIMER_H_ */
+#endif /* ITO_OPENGL_TIMER_H_ */

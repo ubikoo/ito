@@ -83,7 +83,7 @@ void Quad::Destroy(Quad &quad)
 /**
  * @brief Handle the event in the quad.
  */
-void Quad::Handle(gl::Renderer::Event &event)
+void Quad::Handle(glfw::Event &event)
 {}
 
 /**
@@ -103,8 +103,9 @@ void Quad::Update(void)
     m = math::rotate(m, math::vec3f{0.0f, 1.0f, 0.0f}, ang_y);
     m = math::rotate(m, math::vec3f{1.0f, 0.0f, 0.0f}, ang_x);
 
-    std::array<GLfloat,2> fsize = gl::Renderer::FramebufferSizef();
-    float ratio = fsize[0] / fsize[1];
+    std::array<GLfloat,2> fbsize = {};
+    glfw::GetFramebufferSize(fbsize);
+    float ratio = fbsize[0] / fbsize[1];
 
     math::mat4f p = math::ortho(-ratio, ratio, -1.0f, 1.0f, -1.0f, 1.0f);
     mvp = math::dot(p, m);
@@ -115,7 +116,7 @@ void Quad::Update(void)
  */
 void Quad::Render(void)
 {
-    GLFWwindow *window = gl::Renderer::Window();
+    GLFWwindow *window = glfw::Window();
     if (window == nullptr) {
         return;
     }
@@ -134,9 +135,10 @@ void Quad::Render(void)
     glUseProgram(program);
 
     /* Set window dimensions. */
-    std::array<GLfloat,2> size = gl::Renderer::FramebufferSizef();
-    gl::SetUniform(program, "u_width", GL_FLOAT, &size[0]);
-    gl::SetUniform(program, "u_height", GL_FLOAT, &size[1]);
+    std::array<GLfloat,2> fbsize = {};
+    glfw::GetFramebufferSize(fbsize);
+    gl::SetUniform(program, "u_width", GL_FLOAT, &fbsize[0]);
+    gl::SetUniform(program, "u_height", GL_FLOAT, &fbsize[1]);
     gl::SetUniformMatrix(program, "u_mvp", GL_FLOAT_MAT4, true, mvp.data);
 
     /* Set the sampler uniform with the texture unit and bind the texture */
