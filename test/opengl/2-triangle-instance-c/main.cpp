@@ -92,5 +92,8 @@ int main(int argc, char const *argv[])
     /* Destroy the triangle object. */
     Triangle::Destroy(gTriangle);
 
+    /* Terminate GLFW library and destroy OpenGL context. */
+    glfw::Terminate();
+
     exit(EXIT_SUCCESS);
 }

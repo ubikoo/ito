@@ -147,5 +147,8 @@ int main(int argc, char const *argv[])
         Render();
     }
 
+    /* Terminate GLFW library and destroy OpenGL context. */
+    glfw::Terminate();
+
     exit(EXIT_SUCCESS);
 }

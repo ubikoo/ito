@@ -79,15 +79,17 @@ int main(int argc, char const *argv[])
         glfw::Event::WindowClose     |
         glfw::Event::Key);
 
-    /* Render loop: handle events, update state, and render. */
+    /* Create the panorama object. */
     gPanorama = Panorama::Create();
 
+    /* Render loop: handle events, update state, and render. */
     while (glfw::IsOpen()) {
         Handle();
         Update();
         Render();
     }
 
+    /* Destroy the panorama object. */
     Panorama::Destroy(gPanorama);
 
     /* Initalize GLFW library and destroy OpenGL context. */

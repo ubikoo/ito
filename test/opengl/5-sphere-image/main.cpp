@@ -89,8 +89,11 @@ int main(int argc, char const *argv[])
         Render();
     }
 
-    /* Create the sphere object. */
+    /* Destroy the sphere object. */
     Sphere::Destroy(gSphere);
+
+    /* Terminate GLFW library and destroy OpenGL context. */
+    glfw::Terminate();
 
     exit(EXIT_SUCCESS);
 }

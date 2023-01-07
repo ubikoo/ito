@@ -79,7 +79,7 @@ int main(int argc, char const *argv[])
         glfw::Event::WindowClose     |
         glfw::Event::Key);
 
-    /* Create the rop object. */
+    /* Create the drawable object. */
     gDrawable = Drawable::Create();
 
     /* Render loop: handle events, update state, and render. */
@@ -89,8 +89,11 @@ int main(int argc, char const *argv[])
         Render();
     }
 
-    /* Create the rop object. */
+    /* Destroy the drawable object. */
     Drawable::Destroy(gDrawable);
+
+    /* Terminate GLFW library and destroy OpenGL context. */
+    glfw::Terminate();
 
     exit(EXIT_SUCCESS);
 }

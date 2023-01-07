@@ -89,8 +89,11 @@ int main(int argc, char const *argv[])
         Render();
     }
 
-    /* Create the quad object. */
+    /* Destroy the quad object. */
     Quad::Destroy(gQuad);
+
+    /* Terminate GLFW library and destroy OpenGL context. */
+    glfw::Terminate();
 
     exit(EXIT_SUCCESS);
 }

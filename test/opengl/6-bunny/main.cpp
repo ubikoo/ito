@@ -89,8 +89,11 @@ int main(int argc, char const *argv[])
         Render();
     }
 
-    /* Create the bunny object. */
+    /* Destroy the bunny object. */
     Bunny::Destroy(gBunny);
+
+    /* Terminate GLFW library and destroy OpenGL context. */
+    glfw::Terminate();
 
     exit(EXIT_SUCCESS);
 }

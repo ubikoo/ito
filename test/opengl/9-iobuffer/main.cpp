@@ -92,5 +92,8 @@ int main(int argc, char const *argv[])
     /* Create the map object. */
     Map::Destroy(gMap);
 
+    /* Terminate GLFW library and destroy OpenGL context. */
+    glfw::Terminate();
+
     exit(EXIT_SUCCESS);
 }
