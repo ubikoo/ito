@@ -32,16 +32,12 @@ cl_kernel CreateKernel(
 }
 
 /**
- * @brief Decrements the kernel reference count.
+ * @brief Release the kernel and decrement its reference count.
  */
-cl_int ReleaseKernel(const cl_kernel &kernel)
+void ReleaseKernel(const cl_kernel &kernel)
 {
-    cl_int err = CL_INVALID_VALUE;
-    if (kernel != NULL) {
-        err = clReleaseKernel(kernel);
-        ito_assert(err == CL_SUCCESS, "clReleaseKernel");
-    }
-    return err;
+    cl_int err = clReleaseKernel(kernel);
+    ito_assert(err == CL_SUCCESS, "clReleaseKernel");
 }
 
 /**

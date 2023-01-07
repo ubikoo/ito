@@ -34,7 +34,7 @@ Bunny Bunny::Create()
         gl::CreateShader(GL_FRAGMENT_SHADER, "data/bunny.frag")};
     bunny.program = gl::CreateProgram(shaders);
     gl::DestroyShader(shaders);
-    std::cout << gl::GetProgramInfoStr(bunny.program) << "\n";
+    std::cout << gl::GetProgramInfoString(bunny.program) << "\n";
 
     /*
      * Load the bunny model meshes.

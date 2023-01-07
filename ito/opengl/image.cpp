@@ -26,7 +26,7 @@ namespace gl {
 /** ---------------------------------------------------------------------------
  * @brief Return a string with image information.
  */
-std::string Image::InfoStr(const Image &image, const char *comment)
+std::string Image::InfoString(const Image &image, const char *comment)
 {
     std::ostringstream ss;
     if (comment != nullptr) {

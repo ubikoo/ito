@@ -158,7 +158,7 @@ void DestroyProgram(const GLuint &program)
  * 4. Number of active attribute variables and the name, location,
  *    count and type of each active attribute stored in the map.
  */
-std::string GetProgramInfoStr(const GLuint &program)
+std::string GetProgramInfoString(const GLuint &program)
 {
     /*
      * Return an empty vector if program is invalid

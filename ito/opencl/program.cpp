@@ -65,16 +65,12 @@ cl_program CreateProgramFromFile(
 }
 
 /**
- * @brief Decrement the program reference count.
+ * @brief Release the program object and decrement its reference count.
  */
-cl_int ReleaseProgram(const cl_program &program)
+void ReleaseProgram(const cl_program &program)
 {
-    cl_int err = CL_INVALID_VALUE;
-    if (program != NULL) {
-        err = clReleaseProgram(program);
-        ito_assert(err == CL_SUCCESS, "clReleaseProgram");
-    }
-    return err;
+    cl_int err = clReleaseProgram(program);
+    ito_assert(err == CL_SUCCESS, "clReleaseProgram");
 }
 
 /**

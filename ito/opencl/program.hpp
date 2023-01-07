@@ -39,9 +39,9 @@ cl_program CreateProgramFromFile(
     const std::string &filename);
 
 /**
- * @brief Decrement the program reference count.
+ * @brief Release the program object and decrement its reference count.
  */
-cl_int ReleaseProgram(const cl_program &program);
+void ReleaseProgram(const cl_program &program);
 
 /**
  * @brief Build the program object for the specified device. Options parameter

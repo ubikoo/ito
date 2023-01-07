@@ -274,16 +274,12 @@ cl_mem CreateImage3d(
 }
 
 /**
- * @brief Decrement the memory object reference count.
+ * @brief Release the memory object and decrement its reference count.
  */
-cl_int ReleaseMemObject(const cl_mem &memobj)
+void ReleaseMemObject(const cl_mem &memobj)
 {
-    cl_int err = CL_INVALID_VALUE;
-    if (memobj != NULL) {
-        err = clReleaseMemObject(memobj);
-        ito_assert(err == CL_SUCCESS, "clReleaseMemObject");
-    }
-    return err;
+    cl_int err = clReleaseMemObject(memobj);
+    ito_assert(err == CL_SUCCESS, "clReleaseMemObject");
 }
 
 } /* cl */

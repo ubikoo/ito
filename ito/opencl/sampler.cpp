@@ -46,16 +46,12 @@ cl_sampler CreateSampler(
 }
 
 /**
- * @brief Decrement the sampler reference count.
+ * @brief Release the sampler object and decrement its reference count.
  */
-cl_int ReleaseSampler(const cl_sampler &sampler)
+void ReleaseSampler(const cl_sampler &sampler)
 {
-    cl_int err = CL_INVALID_VALUE;
-    if (sampler != NULL) {
-        err = clReleaseSampler(sampler);
-        ito_assert(err == CL_SUCCESS, " clReleaseSampler");
-    }
-    return err;
+    cl_int err = clReleaseSampler(sampler);
+    ito_assert(err == CL_SUCCESS, " clReleaseSampler");
 }
 
 } /* cl */

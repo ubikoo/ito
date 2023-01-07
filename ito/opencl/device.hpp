@@ -33,14 +33,14 @@ std::vector<cl_device_id> GetDeviceIDs(
 std::vector<cl_device_id> GetDeviceIDs(cl_device_type type);
 
 /**
- * @brief Decrement the device reference count.
+ * @brief Release the device and decrement its reference count.
  */
-cl_int ReleaseDevice(const cl_device_id &device);
+void ReleaseDevice(const cl_device_id &device);
 
 /**
  * @brief Return a string with device information.
  */
-std::string GetDeviceInfoStr(const cl_device_id &device);
+std::string GetDeviceInfoString(const cl_device_id &device);
 
 } /* cl */
 } /* ito */

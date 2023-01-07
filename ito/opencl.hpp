@@ -32,6 +32,8 @@
  *      Enqueue read buffer data
  */
 #include "opencl/base.hpp"
+#include "opencl/clfw.hpp"
+
 #include "opencl/platform.hpp"
 #include "opencl/device.hpp"
 #include "opencl/context.hpp"

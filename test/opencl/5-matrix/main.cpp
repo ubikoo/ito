@@ -41,40 +41,26 @@ __kernel void matmul(
 });
 
 /** ---------------------------------------------------------------------------
- * Create OpenCL context.
+ * Create OpenCL program.
  */
 void Create(
-    cl_context &context,
-    cl_device_id &device,
-    cl_command_queue &queue,
     cl_program &program,
     cl_kernel &kernel,
     std::vector<cl_mem> &buffers,
     std::vector<cl_mem> &images)
 {
-    /* Setup OpenCL context on the first available platform. */
-    context = cl::CreateContext(CL_DEVICE_TYPE_GPU);
-    device = cl::GetContextDevice(context, Params::kDeviceIndex);
-    std::cout << cl::GetDeviceInfoStr(device) << "\n";
-
-    /* Create a command queue on the specified device. */
-    queue = cl::CreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE);
-
     /* Create a OpenCL program for the kernel source. */
-    program = cl::CreateProgramWithSource(context, matmul_source);
-    cl::BuildProgram(program, device, "");
+    program = cl::CreateProgramWithSource(clfw::Context(), matmul_source);
+    cl::BuildProgram(program, clfw::Device());
 
     /* Create the OpenCL kernel. */
     kernel = cl::CreateKernel(program, "matmul");
 }
 
 /** ---------------------------------------------------------------------------
- * Destroy OpenCL context.
+ * Destroy OpenCL program.
  */
 void Destroy(
-    cl_context &context,
-    cl_device_id &device,
-    cl_command_queue &queue,
     cl_program &program,
     cl_kernel &kernel,
     std::vector<cl_mem> &buffers,
@@ -88,28 +74,23 @@ void Destroy(
     }
     cl::ReleaseKernel(kernel);
     cl::ReleaseProgram(program);
-    cl::ReleaseCommandQueue(queue);
-    cl::ReleaseDevice(device);
-    cl::ReleaseContext(context);
 }
 
 /** ---------------------------------------------------------------------------
- * main
+ * Execute OpenCL program.
  */
-int main(int argc, char const *argv[])
+void Execute(
+    cl_program &program,
+    cl_kernel &kernel,
+    std::vector<cl_mem> &buffers,
+    std::vector<cl_mem> &images)
 {
-    cl_context context = NULL;
-    cl_device_id device = NULL;
-    cl_command_queue queue = NULL;
-    cl_program program = NULL;
-    cl_kernel kernel = NULL;
-    std::vector<cl_mem> buffers;
-    std::vector<cl_mem> images;
-
     /*
-     * Create OpenCL context.
+     * Get references to the OpenCL context, device and command queue.
      */
-    Create(context, device, queue, program, kernel, buffers, images);
+    cl_context context = clfw::Context();
+    // cl_device_id device = clfw::Device();
+    cl_command_queue queue = clfw::Queue();
 
     /*
      * Create memory objects for the kernel arguments. First create host memory
@@ -314,11 +295,32 @@ int main(int argc, char const *argv[])
             std::printf("|arr_c - arr_d| = %lf\n", err);
         }
     }
+}
 
-    /*
-     * Destroy OpenCL context.
-     */
-    Destroy(context, device, queue, program, kernel, buffers, images);
+/** ---------------------------------------------------------------------------
+ * main
+ */
+int main(int argc, char const *argv[])
+{
+    cl_program program = NULL;
+    cl_kernel kernel = NULL;
+    std::vector<cl_mem> buffers;
+    std::vector<cl_mem> images;
+
+    /* Initialize OpenCL context on the specified device. */
+    clfw::Init(
+        CL_DEVICE_TYPE_GPU,
+        Params::kDeviceIndex,
+        CL_QUEUE_PROFILING_ENABLE);
+    std::cout << clfw::InfoString() << "\n";
+
+    /* Run OpenCL program. */
+    Create(program, kernel, buffers, images);
+    Execute(program, kernel, buffers, images);
+    Destroy(program, kernel, buffers, images);
+
+    /* Terminate OpenCL context. */
+    clfw::Terminate();
 
     exit(EXIT_SUCCESS);
 }

@@ -27,9 +27,9 @@ cl_sampler CreateSampler(
     cl_filter_mode filter_mode);
 
 /**
- * @brief Decrement the sampler reference count.
+ * @brief Release the sampler object and decrement its reference count.
  */
-cl_int ReleaseSampler(const cl_sampler &sampler);
+void ReleaseSampler(const cl_sampler &sampler);
 
 } /* cl */
 } /* ito */

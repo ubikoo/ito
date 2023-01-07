@@ -61,7 +61,7 @@ Triangle Triangle::Create()
         gl::CreateShader(GL_FRAGMENT_SHADER, "data/triangle.frag")};
     triangle.program = gl::CreateProgram(shaders);
     gl::DestroyShader(shaders);
-    std::cout << gl::GetProgramInfoStr(triangle.program) << "\n";
+    std::cout << gl::GetProgramInfoString(triangle.program) << "\n";
 
     /*
      * Create vertex array object.

@@ -100,9 +100,9 @@ cl_mem CreateImage3d(
     void *host_ptr);
 
 /**
- * @brief Decrement the memory object reference count.
+ * @brief Release the memory object and decrement its reference count.
  */
-cl_int ReleaseMemObject(const cl_mem &memobj);
+void ReleaseMemObject(const cl_mem &memobj);
 
 } /* cl */
 } /* ito */

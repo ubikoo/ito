@@ -15,7 +15,7 @@ namespace ito {
 namespace cl {
 
 /** ---------------------------------------------------------------------------
- * @brief Create a command_queue on the specified device. properties argument
+ * @brief Create a command queue on the specified device. properties argument
  * specifies execution order. If set to CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE,
  * there is no guarantee kernel A finishes before kernel B starts execution.
  */
@@ -41,16 +41,12 @@ cl_command_queue CreateCommandQueue(
 }
 
 /**
- * @brief Decrement the queue reference count.
+ * @brief Release the command queue and decrement its reference count.
  */
-cl_int ReleaseCommandQueue(const cl_command_queue &queue)
+void ReleaseCommandQueue(const cl_command_queue &queue)
 {
-    cl_int err = CL_INVALID_VALUE;
-    if (queue != NULL) {
-        err = clReleaseCommandQueue(queue);
-        ito_assert(err == CL_SUCCESS, "clReleaseCommandQueue");
-    }
-    return err;
+    cl_int err = clReleaseCommandQueue(queue);
+    ito_assert(err == CL_SUCCESS, "clReleaseCommandQueue");
 }
 
 /** ---------------------------------------------------------------------------

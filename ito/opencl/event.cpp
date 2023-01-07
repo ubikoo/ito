@@ -35,16 +35,12 @@ cl_event CreateUserEvent(const cl_context &context)
 }
 
 /**
- * @brief Decrement the event reference count.
+ * @brief Release the event and decrement its reference count.
  */
-cl_int ReleaseEvent(const cl_event &event)
+void ReleaseEvent(const cl_event &event)
 {
-    cl_int err = CL_INVALID_VALUE;
-    if (event != NULL) {
-        err = clReleaseEvent(event);
-        ito_assert(err == CL_SUCCESS, "clReleaseEvent");
-    }
-    return err;
+    cl_int err = clReleaseEvent(event);
+    ito_assert(err == CL_SUCCESS, "clReleaseEvent");;
 }
 
 /**

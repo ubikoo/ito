@@ -176,7 +176,7 @@ void Init(
     const int major,
     const int minor)
 {
-    ito_assert(gWindow == nullptr, "GLFW library already initialized");
+    ito_assert(!IsInit(), "GLFW library already initialized");
     ito_assert(width > 0 && height > 0, "invalid window dimensions");
     ito_assert(title != nullptr, "invalid window title");
     ito_assert(major >= 3, "client API major version number < 3");
@@ -259,12 +259,23 @@ void Init(
  */
 void Terminate(void)
 {
+    ito_assert(IsInit(), "GLFW library is not initialized");
+
     glfwDestroyWindow(gWindow);
     glfwTerminate();
+
     gWindow = nullptr;
     gWidth = 0;
     gHeight = 0;
     gInfoString = {};
+}
+
+/**
+ * @brief Is GLFW library initialized?
+ */
+bool IsInit(void)
+{
+    return gWindow != nullptr;
 }
 
 /**
@@ -273,6 +284,14 @@ void Terminate(void)
 GLFWwindow *Window(void)
 {
     return gWindow;
+}
+
+/**
+ * @brief Return a string with OpenGL information.
+ */
+const std::string &InfoString()
+{
+    return gInfoString;
 }
 
 /**

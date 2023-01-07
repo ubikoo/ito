@@ -36,7 +36,7 @@ std::vector<cl_platform_id> GetPlatformIDs(void)
 /**
  * @brief Return a string with basic platform information.
  */
-std::string GetPlatformInfoStr(const cl_platform_id &platform)
+std::string GetPlatformInfoString(const cl_platform_id &platform)
 {
     /**
      * get_platform_info

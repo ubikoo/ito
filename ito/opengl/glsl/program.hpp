@@ -32,7 +32,7 @@ void DestroyProgram(const GLuint &program);
 /**
  * @brief Return an string containing the shader program object info.
  */
-std::string GetProgramInfoStr(const GLuint &program);
+std::string GetProgramInfoString(const GLuint &program);
 
 } /* gl */
 } /* ito */

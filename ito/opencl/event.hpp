@@ -29,9 +29,9 @@ cl_event CreateEvent(void);
 cl_event CreateUserEvent(const cl_context &context);
 
 /**
- * @brief Decrement the event reference count.
+ * @brief Release the event and decrement its reference count.
  */
-cl_int ReleaseEvent(const cl_event &event);
+void ReleaseEvent(const cl_event &event);
 
 /**
  * @brief Wait for commands identified by all event objects to complete.

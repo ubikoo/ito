@@ -36,7 +36,7 @@ Panorama Panorama::Create()
             gl::CreateShader(GL_FRAGMENT_SHADER, "data/panorama.frag")};
         panorama.program = gl::CreateProgram(shaders);
         gl::DestroyShader(shaders);
-        std::cout << gl::GetProgramInfoStr(panorama.program) << "\n";
+        std::cout << gl::GetProgramInfoString(panorama.program) << "\n";
     }
 
     /*

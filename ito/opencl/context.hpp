@@ -33,9 +33,9 @@ cl_context CreateContext(
 cl_context CreateContext(cl_device_type type);
 
 /**
- * @brief Decrement the context reference count.
+ * @brief Release the context and decrement its reference count.
  */
-cl_int ReleaseContext(const cl_context &context);
+void ReleaseContext(const cl_context &context);
 
 /**
  * @brief Return a list of devices in the context.
@@ -43,7 +43,7 @@ cl_int ReleaseContext(const cl_context &context);
 std::vector<cl_device_id> GetContextDevices(const cl_context &context);
 
 /**
- * @brief Return the device with the specfied index in the context.
+ * @brief Return the device with the specified index in the context.
  */
 cl_device_id GetContextDevice(const cl_context &context, const size_t index);
 

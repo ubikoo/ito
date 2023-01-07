@@ -43,16 +43,16 @@ int main(int argc, char const *argv[])
      */
     {
         gl::Image img8  = gl::Image::Create(kWidth, kHeight, 8);
-        std::cout << gl::Image::InfoStr(img8, "bpp = 8") << "\n";
+        std::cout << gl::Image::InfoString(img8, "bpp = 8") << "\n";
 
         gl::Image img16 = gl::Image::Create(kWidth, kHeight, 16);
-        std::cout << gl::Image::InfoStr(img16, "bpp = 16") << "\n";
+        std::cout << gl::Image::InfoString(img16, "bpp = 16") << "\n";
 
         gl::Image img24 = gl::Image::Create(kWidth, kHeight, 24);
-        std::cout << gl::Image::InfoStr(img24, "bpp = 24") << "\n";
+        std::cout << gl::Image::InfoString(img24, "bpp = 24") << "\n";
 
         gl::Image img32 = gl::Image::Create(kWidth, kHeight, 32);
-        std::cout << gl::Image::InfoStr(img32, "bpp = 32") << "\n";
+        std::cout << gl::Image::InfoString(img32, "bpp = 32") << "\n";
     }
 
     /* ---- Test red images ---------------------------------------------------
@@ -64,7 +64,7 @@ int main(int argc, char const *argv[])
         std::string out_ppmb("out.color-wheel-80x80-red_p6.ppm");
 
         gl::Image image = gl::Image::Load(kReadPrefix + filename);
-        std::cout << gl::Image::InfoStr(image, "color-wheel-80x80-red") << "\n";
+        std::cout << gl::Image::InfoString(image, "color-wheel-80x80-red") << "\n";
         gl::Image::SavePng(image, kWritePrefix + out_png);
         gl::Image::SavePpma(image, kWritePrefix + out_ppma);
         gl::Image::SavePpmb(image, kWritePrefix + out_ppmb);
@@ -77,7 +77,7 @@ int main(int argc, char const *argv[])
         std::string out_ppmb("out.color-wheel-80x80-reda-reda_p6.ppm");
 
         gl::Image image = gl::Image::Load(kReadPrefix + filename);
-        std::cout << gl::Image::InfoStr(image, "color-wheel-80x80-reda") << "\n";
+        std::cout << gl::Image::InfoString(image, "color-wheel-80x80-reda") << "\n";
         gl::Image::SavePng(image, kWritePrefix + out_png);
         gl::Image::SavePpma(image, kWritePrefix + out_ppma);
         gl::Image::SavePpmb(image, kWritePrefix + out_ppmb);
@@ -93,7 +93,7 @@ int main(int argc, char const *argv[])
         std::string out_ppmb("out.color-wheel-80x80-blue_p6.ppm");
 
         gl::Image image = gl::Image::Load(kReadPrefix + filename);
-        std::cout << gl::Image::InfoStr(image, "color-wheel-80x80-blue") << "\n";
+        std::cout << gl::Image::InfoString(image, "color-wheel-80x80-blue") << "\n";
         gl::Image::SavePng(image, kWritePrefix + out_png);
         gl::Image::SavePpma(image, kWritePrefix + out_ppma);
         gl::Image::SavePpmb(image, kWritePrefix + out_ppmb);
@@ -106,7 +106,7 @@ int main(int argc, char const *argv[])
         std::string out_ppmb("out.color-wheel-80x80-bluea-bluea_p6.ppm");
 
         gl::Image image = gl::Image::Load(kReadPrefix + filename);
-        std::cout << gl::Image::InfoStr(image, "color-wheel-80x80-bluea") << "\n";
+        std::cout << gl::Image::InfoString(image, "color-wheel-80x80-bluea") << "\n";
         gl::Image::SavePng(image, kWritePrefix + out_png);
         gl::Image::SavePpma(image, kWritePrefix + out_ppma);
         gl::Image::SavePpmb(image, kWritePrefix + out_ppmb);
@@ -123,7 +123,7 @@ int main(int argc, char const *argv[])
 
             gl::Image image = gl::Image::Load(kReadPrefix + filename);
 
-            std::cout << gl::Image::InfoStr(image, filename.c_str()) << "\n";
+            std::cout << gl::Image::InfoString(image, filename.c_str()) << "\n";
             gl::Image::SavePng(image, kWritePrefix + out_png);
             gl::Image::SavePpma(image, kWritePrefix + out_ppma);
             gl::Image::SavePpmb(image, kWritePrefix + out_ppmb);

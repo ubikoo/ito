@@ -31,8 +31,14 @@ void Init(
 /** @brief Destroy the GLFWwindow object and terminate the GLFW library. */
 void Terminate(void);
 
+/** @brief Is GLFW library initialized? */
+bool IsInit(void);
+
 /** @brief Return a const pointer to the GLFWwindow. */
 GLFWwindow *Window(void);
+
+/** @brief Return a string with OpenGL information. */
+const std::string &InfoString();
 
 /** @brief Return true GLFWwindow should stay open, false otherwise. */
 bool IsOpen(void);

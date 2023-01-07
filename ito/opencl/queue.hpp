@@ -22,7 +22,7 @@ namespace ito {
 namespace cl {
 
 /** ---------------------------------------------------------------------------
- * @brief Create a command_queue on the specified device.
+ * @brief Create a command queue on the specified device.
  */
 cl_command_queue CreateCommandQueue(
     const cl_context &context,
@@ -30,9 +30,9 @@ cl_command_queue CreateCommandQueue(
     cl_command_queue_properties properties = 0);
 
 /**
- * @brief Decrement the queue reference count.
+ * @brief Release the command queue and decrement its reference count.
  */
-cl_int ReleaseCommandQueue(const cl_command_queue &queue);
+void ReleaseCommandQueue(const cl_command_queue &queue);
 
 /** ---------------------------------------------------------------------------
  * @brief Read from a buffer object to host memory.

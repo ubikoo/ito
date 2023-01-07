@@ -20,7 +20,7 @@ int main(int argc, char const *argv[])
     /* Create a OpenCL context with all devices in the first platform. */
     cl_context context = cl::CreateContext(CL_DEVICE_TYPE_ALL);
     for (auto &it : cl::GetContextDevices(context)) {
-        std::cout << cl::GetDeviceInfoStr(it) << "\n";
+        std::cout << cl::GetDeviceInfoString(it) << "\n";
     }
 
     /* Release the context before exit. */

@@ -50,22 +50,18 @@ std::vector<cl_device_id> GetDeviceIDs(cl_device_type type)
 }
 
 /**
- * @brief Decrement the device reference count.
+ * @brief Release the device and decrement its reference count.
  */
-cl_int ReleaseDevice(const cl_device_id &device)
+void ReleaseDevice(const cl_device_id &device)
 {
-    cl_int err = CL_INVALID_VALUE;
-    if (device != NULL) {
-        err = clReleaseDevice(device);
-        ito_assert(err == CL_SUCCESS, "clReleaseDevice");
-    }
-    return err;
+    cl_int err = clReleaseDevice(device);
+    ito_assert(err == CL_SUCCESS, "clReleaseDevice");
 }
 
 /**
  * @brief Return a string with device information.
  */
-std::string GetDeviceInfoStr(const cl_device_id &device)
+std::string GetDeviceInfoString(const cl_device_id &device)
 {
     std::ostringstream ss;
     cl_int err;

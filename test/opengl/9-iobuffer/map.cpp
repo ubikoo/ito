@@ -43,7 +43,7 @@ Map Map::Create()
             gl::CreateShader(GL_FRAGMENT_SHADER, "data/map-begin.frag")};
         map.begin.program = gl::CreateProgram(shaders);
         gl::DestroyShader(shaders);
-        std::cout << gl::GetProgramInfoStr(map.begin.program) << "\n";
+        std::cout << gl::GetProgramInfoString(map.begin.program) << "\n";
 
         /* Load the 2d-image from the specified filename. */
         gl::Image image = gl::Image::Load(kImageFilename, true);
@@ -83,7 +83,7 @@ Map Map::Create()
             gl::CreateShader(GL_FRAGMENT_SHADER, "data/map-run.frag")};
         map.run.program = gl::CreateProgram(shaders);
         gl::DestroyShader(shaders);
-        std::cout << gl::GetProgramInfoStr(map.run.program) << "\n";
+        std::cout << gl::GetProgramInfoString(map.run.program) << "\n";
 
         /* Create a mesh over a quad. */
         map.run.quad = gl::Mesh::Plane(
@@ -114,7 +114,7 @@ Map Map::Create()
             gl::CreateShader(GL_FRAGMENT_SHADER, "data/map-end.frag")};
         map.end.program = gl::CreateProgram(shaders);
         gl::DestroyShader(shaders);
-        std::cout << gl::GetProgramInfoStr(map.end.program) << "\n";
+        std::cout << gl::GetProgramInfoString(map.end.program) << "\n";
 
         /* Create a mesh over a quad. */
         map.end.quad = gl::Mesh::Plane(

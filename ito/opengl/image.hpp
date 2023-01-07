@@ -52,7 +52,7 @@ struct Image {
     const uint8_t *operator()(const uint32_t, const uint32_t y) const;
 
     /** Return a string with image information. */
-    static std::string InfoStr(
+    static std::string InfoString(
         const Image &image,
         const char *comment = nullptr);
 

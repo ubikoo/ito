@@ -26,9 +26,9 @@ cl_kernel CreateKernel(
     const std::string &kernel_name);
 
 /**
- * @brief Decrements the kernel reference count.
+ * @brief Release the kernel and decrement its reference count.
  */
-cl_int ReleaseKernel(const cl_kernel &kernel);
+void ReleaseKernel(const cl_kernel &kernel);
 
 /**
  * @brief Set the value for a specific argument of the kernel.

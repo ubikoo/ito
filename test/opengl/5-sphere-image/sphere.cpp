@@ -35,7 +35,7 @@ Sphere Sphere::Create()
             gl::CreateShader(GL_FRAGMENT_SHADER, "data/sphere.frag")};
         sphere.program = gl::CreateProgram(shaders);
         gl::DestroyShader(shaders);
-        std::cout << gl::GetProgramInfoStr(sphere.program) << "\n";
+        std::cout << gl::GetProgramInfoString(sphere.program) << "\n";
     }
 
     /*

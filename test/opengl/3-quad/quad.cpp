@@ -57,7 +57,7 @@ Quad Quad::Create()
         gl::CreateShader(GL_FRAGMENT_SHADER, "data/quad.frag")};
     quad.program = gl::CreateProgram(shaders);
     gl::DestroyShader(shaders);
-    std::cout << gl::GetProgramInfoStr(quad.program) << "\n";
+    std::cout << gl::GetProgramInfoString(quad.program) << "\n";
 
     /*
      * Create vertex array object.

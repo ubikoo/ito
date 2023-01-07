@@ -36,7 +36,7 @@ Drawable Drawable::Create()
             gl::CreateShader(GL_FRAGMENT_SHADER, "data/sphere.frag")};
         drawable.sphere.program = gl::CreateProgram(shaders);
         gl::DestroyShader(shaders);
-        std::cout << gl::GetProgramInfoStr(drawable.sphere.program) << "\n";
+        std::cout << gl::GetProgramInfoString(drawable.sphere.program) << "\n";
 
         /* Load the 2d-image from the specified filename. */
         gl::Image image = gl::Image::Load(kImageFilename);
@@ -78,7 +78,7 @@ Drawable Drawable::Create()
             gl::CreateShader(GL_FRAGMENT_SHADER, "data/quad.frag")};
         drawable.quad.program = gl::CreateProgram(shaders);
         gl::DestroyShader(shaders);
-        std::cout << gl::GetProgramInfoStr(drawable.quad.program) << "\n";
+        std::cout << gl::GetProgramInfoString(drawable.quad.program) << "\n";
 
         /*
          * Create a mesh over a rectangle.
