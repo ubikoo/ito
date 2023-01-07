@@ -140,9 +140,7 @@ int main(int argc, char const *argv[])
     glfw::Init(kWidth, kHeight, kTitle);
     glfw::EnableEvent(glfw::Event::All);
 
-    /*
-     * Render loop: handle events, update state, and render.
-     */
+    /* Render loop: handle events, update state, and render. */
     while (glfw::IsOpen()) {
         Handle();
         Update();

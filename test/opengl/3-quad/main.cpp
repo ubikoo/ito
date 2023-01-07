@@ -82,9 +82,7 @@ int main(int argc, char const *argv[])
     /* Create the quad object. */
     gQuad = Quad::Create();
 
-    /*
-     * Render loop: handle events, update state, and render.
-     */
+    /* Render loop: handle events, update state, and render. */
     while (glfw::IsOpen()) {
         Handle();
         Update();

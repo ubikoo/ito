@@ -82,9 +82,7 @@ int main(int argc, char const *argv[])
     /* Create the sphere object. */
     gSphere = Sphere::Create();
 
-    /*
-     * Render loop: handle events, update state, and render.
-     */
+    /* Render loop: handle events, update state, and render. */
     while (glfw::IsOpen()) {
         Handle();
         Update();

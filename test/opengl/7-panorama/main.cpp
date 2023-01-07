@@ -79,9 +79,7 @@ int main(int argc, char const *argv[])
         glfw::Event::WindowClose     |
         glfw::Event::Key);
 
-    /*
-     * Render loop: handle events, update state, and render.
-     */
+    /* Render loop: handle events, update state, and render. */
     gPanorama = Panorama::Create();
 
     while (glfw::IsOpen()) {
