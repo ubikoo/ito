@@ -14,8 +14,8 @@
 #include <numeric>
 #include <random>
 #include <algorithm>
-
 #include "../params.hpp"
+
 using namespace ito;
 
 /** ---------------------------------------------------------------------------

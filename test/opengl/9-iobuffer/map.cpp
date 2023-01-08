@@ -12,9 +12,10 @@
 #include <string>
 #include <vector>
 #include "ito/opengl.hpp"
-using namespace ito;
 #include "iobuffer.hpp"
 #include "map.hpp"
+
+using namespace ito;
 
 /**
  * @brief Map constant parameters.

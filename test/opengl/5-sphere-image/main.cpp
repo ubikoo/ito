@@ -10,8 +10,9 @@
  */
 
 #include "ito/opengl.hpp"
-using namespace ito;
 #include "sphere.hpp"
+
+using namespace ito;
 
 /** ---------------------------------------------------------------------------
  * @brief Constants and globals.

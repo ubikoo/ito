@@ -10,8 +10,9 @@
  */
 
 #include "ito/opengl.hpp"
-using namespace ito;
 #include "triangle.hpp"
+
+using namespace ito;
 
 /**
  * @brief Create a new triangle.

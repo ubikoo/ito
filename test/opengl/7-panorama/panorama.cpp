@@ -10,9 +10,10 @@
  */
 
 #include "ito/opengl.hpp"
-using namespace ito;
 #include "panorama.hpp"
 #include "camera.hpp"
+
+using namespace ito;
 
 /**
  * @brief Panorama constant parameters.

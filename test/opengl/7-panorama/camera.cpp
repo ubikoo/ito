@@ -10,8 +10,9 @@
  */
 
 #include "ito/opengl.hpp"
-using namespace ito;
 #include "camera.hpp"
+
+using namespace ito;
 
 /**
  * @brief Move the camera forward and backward along its look vector.

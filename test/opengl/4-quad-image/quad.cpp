@@ -10,8 +10,9 @@
  */
 
 #include "ito/opengl.hpp"
-using namespace ito;
 #include "quad.hpp"
+
+using namespace ito;
 
 /**
  * @brief Quad constant parameters.

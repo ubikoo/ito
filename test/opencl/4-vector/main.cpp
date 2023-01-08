@@ -12,8 +12,8 @@
 #include <vector>
 #include <chrono>
 #include <numeric>
-
 #include "../params.hpp"
+
 using namespace ito;
 
 /** ---------------------------------------------------------------------------

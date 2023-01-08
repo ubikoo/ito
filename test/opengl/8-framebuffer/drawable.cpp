@@ -10,8 +10,9 @@
  */
 
 #include "ito/opengl.hpp"
-using namespace ito;
 #include "drawable.hpp"
+
+using namespace ito;
 
 /**
  * @brief Drawable constant parameters.

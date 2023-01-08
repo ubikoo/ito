@@ -10,8 +10,9 @@
  */
 
 #include "ito/opengl.hpp"
-using namespace ito;
 #include "iobuffer.hpp"
+
+using namespace ito;
 
 /**
  * @brief Create a IOBuffer with specified width and internal format.

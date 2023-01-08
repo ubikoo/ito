@@ -10,8 +10,9 @@
  */
 
 #include "ito/opengl.hpp"
-using namespace ito;
 #include "bunny.hpp"
+
+using namespace ito;
 
 /**
  * @brief Bunny constant parameters.
