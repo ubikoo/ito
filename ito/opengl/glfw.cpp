@@ -174,7 +174,8 @@ void Init(
     const int height,
     const char *title,
     const int major,
-    const int minor)
+    const int minor,
+    const bool offscreen)
 {
     ito_assert(!IsInit(), "GLFW library already initialized");
     ito_assert(width > 0 && height > 0, "invalid window dimensions");
@@ -183,27 +184,37 @@ void Init(
     ito_assert(minor >= 3, "client API minor version number < 3");
 
     /*
-     * Initialize the GLFW library.
+     * Initialize the GLFW library. If offscreen is enabled, create a context
+     * with hidden windows using the GLFW_VISIBLE window creation hint.
+     * macOS: The first time a window is created the menu bar is created.
+     * Menu bar creation can be disabled with the GLFW_COCOA_MENUBAR init hint.
      */
     glfwSetErrorCallback(ErrorCallback);
+#ifdef __APPLE__
+    if (offscreen) {
+        glfwInitHint(GLFW_COCOA_MENUBAR, GLFW_FALSE);
+    }
+#endif
     if (glfwInit() != GLFW_TRUE) {
         ito_throw("failed to initialise GLFW library");
     }
 
     /*
      * Set OpenGL context and renderer related hints.
-     * macOS only supports forward-compatible core profile contexts for OpenGL
-     * versions 3.2 and later. Set context hints GLFW_OPENGL_FORWARD_COMPAT and
-     * and GLFW_OPENGL_PROFILE before creation.
-     * A forward-compatible context is one where all functionality deprecated
-     * in the requested version of OpenGL is removed.
+     * macOS: Only forward compatible core profile contexts for GL versions 3.2
+     * and later are supported. Set context hints GLFW_OPENGL_FORWARD_COMPAT and
+     * GLFW_OPENGL_PROFILE before creation. A forward-compatible context is one
+     * where all functionality deprecated in the requested version is removed.
      */
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 #ifdef __APPLE__
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 #endif
+    if (offscreen) {
+        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+    }
 
     /*
      * Create a new GLFWwindow object.

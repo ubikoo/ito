@@ -25,7 +25,7 @@ struct Camera {
     void pitch(float angle);
     void yaw(float angle);
 
-    void update(const math::mat4f &rot);
+    void update(const ito::math::mat4f &rot);
 
     ito::math::mat4f view(void);
 

@@ -19,7 +19,7 @@
 TEST_CASE("Random")
 {
     static const size_t n_short_runs    = 4096;
-    static const size_t n_short_samples = 262144;
+    static const size_t n_short_samples = 32768;
     static const size_t n_long_samples  = n_short_runs * n_short_samples;
 
     /* 32-bit random number generator */

@@ -26,7 +26,8 @@ void Init(
     const int height,
     const char *title,
     const int major = 3,
-    const int minor = 3);
+    const int minor = 3,
+    const bool offscreen = false);
 
 /** @brief Destroy the GLFWwindow object and terminate the GLFW library. */
 void Terminate(void);
